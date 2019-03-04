@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private Button buttons;
+    private Button direct_button; // invisible_calendar_button, invisible_profile_button;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -44,20 +44,48 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        buttons = findViewById(R.id.Direct);
-        buttons.setOnClickListener(new View.OnClickListener() {
+        direct_button = findViewById(R.id.Direct);
+        direct_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                calendarScreen();
+                directMessageScreen();
             }
         });
+//        invisible_calendar_button = findViewById(R.id.invisibleCalBtn);
+//        invisible_calendar_button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v)
+//            {
+//                calendarScreen();
+//            }
+//        });
+//        invisible_profile_button = findViewById(R.id.invisibleProfileBtn);
+//        invisible_profile_button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v)
+//            {
+//                profileScreen();
+//            }
+//        });
     }
 
-    public void calendarScreen()
+    public void directMessageScreen()
     {
         //startActivity(new Intent(MainActivity.this,Login.class));
-        Intent intent = new Intent(this, Calendar.class);
+        Intent intent = new Intent(this, CreatingTask.class);
         startActivity(intent);
     }
+
+//    public void calendarScreen()
+//    {
+//        //startActivity(new Intent(MainActivity.this,Login.class));
+//        Intent intent2 = new Intent(this, Calendar.class);
+//        startActivity(intent2);
+//    }
+//
+//    public void profileScreen()
+//    {
+//        //startActivity(new Intent(MainActivity.this,Login.class));
+//        Intent intent3 = new Intent(this, Calendar.class);
+//        startActivity(intent3);
+//    }
 
 }
