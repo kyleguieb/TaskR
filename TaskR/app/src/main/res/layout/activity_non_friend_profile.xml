@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary2"
+    tools:context=".NonFriendProfile">
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="127dp"
+        android:layout_height="43dp"
+        android:text="Add Friend"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="280dp" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="85dp"
+        android:layout_height="43dp"
+        android:text="Friends"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="280dp" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="372dp"
+        android:layout_height="71dp"
+        android:background="@android:color/white"
+        android:text="Bio"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="208dp" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="256dp"
+        android:layout_height="29dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:text="FirstName LastName"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="72dp"
+        tools:srcCompat="@tools:sample/avatars[14]" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="181dp"
+        android:layout_height="19dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@username"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="45dp" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="410dp"
+        android:layout_height="215dp"
+        android:background="@color/colorPrimary2"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="323dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                tools:itemCount="1"
+                tools:listitem="@layout/recycler_view_item_4">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <View
+                android:id="@+id/divider17"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:background="@android:color/white"
+                tools:itemCount="1"
+                tools:listitem="@layout/recycler_view_item_4">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <View
+                android:id="@+id/divider14"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:background="@android:color/white"
+                tools:itemCount="1"
+                tools:listitem="@layout/recycler_view_item_4">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <View
+                android:id="@+id/divider13"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                tools:itemCount="1"
+                tools:listitem="@layout/recycler_view_item_4" />
+
+            <View
+                android:id="@+id/divider12"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                tools:itemCount="1"
+                tools:listitem="@layout/recycler_view_item_4">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <View
+                android:id="@+id/divider16"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                tools:itemCount="1"
+                tools:listitem="@layout/recycler_view_item_4" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightGray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation" />
+
+</android.support.constraint.ConstraintLayout>
