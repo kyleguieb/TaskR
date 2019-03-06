@@ -8,11 +8,12 @@
     tools:context=".FriendList">
 
     <ScrollView
-        android:id="@+id/scrollView3"
+        android:id="@+id/scrollView9"
         android:layout_width="395dp"
-        android:layout_height="435dp"
+        android:layout_height="570dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
@@ -20,22 +21,52 @@
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <View
+                android:id="@+id/divider11"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/friendRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
+                tools:listitem="@layout/recycler_view_item_8" />
 
-            </android.support.v7.widget.RecyclerView>
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                tools:itemCount="1"
+                tools:listitem="@layout/recycler_view_item_8" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                tools:itemCount="1"
+                tools:listitem="@layout/recycler_view_item_8" />
 
             <View
                 android:id="@+id/divider2"
@@ -44,14 +75,11 @@
                 android:background="?android:attr/listDivider" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/friendRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_8" />
 
             <View
                 android:id="@+id/divider"
@@ -60,14 +88,11 @@
                 android:background="?android:attr/listDivider" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/friendRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_8" />
 
             <View
                 android:id="@+id/divider17"
@@ -76,14 +101,11 @@
                 android:background="?android:attr/listDivider" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/friendRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_8" />
 
             <View
                 android:id="@+id/divider14"
@@ -92,14 +114,11 @@
                 android:background="?android:attr/listDivider" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/friendRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_8" />
 
             <View
                 android:id="@+id/divider13"
@@ -108,12 +127,11 @@
                 android:background="?android:attr/listDivider" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/friendRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4" />
+                tools:listitem="@layout/recycler_view_item_8" />
 
             <View
                 android:id="@+id/divider12"
@@ -122,28 +140,17 @@
                 android:background="?android:attr/listDivider" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/friendRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_8" />
 
             <View
                 android:id="@+id/divider16"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/friendRecycler"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4" />
 
         </LinearLayout>
     </ScrollView>
@@ -161,7 +168,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/back"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView9"
         app:layout_constraintEnd_toStartOf="@+id/searchView3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -194,15 +201,14 @@
 
     <TextView
         android:id="@+id/textView17"
-        android:layout_width="409dp"
-        android:layout_height="39dp"
+        android:layout_width="431dp"
+        android:layout_height="34dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:text="Friend's List"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="14sp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="56dp" />
 </android.support.constraint.ConstraintLayout>

@@ -18,9 +18,9 @@
         app:menu="@menu/navigation" />
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/scrollView5"
         android:layout_width="410dp"
-        android:layout_height="215dp"
+        android:layout_height="346dp"
         android:background="@color/colorPrimary2"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="323dp">
@@ -28,6 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
@@ -35,9 +36,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_5" />
 
             <View
                 android:id="@+id/divider17"
@@ -47,12 +46,10 @@
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="81dp"
+                android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_5" />
 
             <View
                 android:id="@+id/divider14"
@@ -62,12 +59,10 @@
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="94dp"
+                android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_5" />
 
             <View
                 android:id="@+id/divider13"
@@ -80,7 +75,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4" />
+                tools:listitem="@layout/recycler_view_item_5" />
 
             <View
                 android:id="@+id/divider12"
@@ -93,22 +88,13 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_5" />
 
             <View
                 android:id="@+id/divider16"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4" />
 
         </LinearLayout>
     </ScrollView>

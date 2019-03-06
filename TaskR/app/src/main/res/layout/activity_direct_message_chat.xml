@@ -50,12 +50,19 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
-        android:id="@+id/scrollView4"
+        android:id="@+id/scrollView7"
         android:layout_width="395dp"
-        android:layout_height="427dp"
+        android:layout_height="558dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="64dp">
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -175,14 +182,6 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="314dp"
-        tools:layout_editor_absoluteY="657dp" />
-
-    <Button
         android:id="@+id/button2"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="100dp"
@@ -194,7 +193,7 @@
         android:layout_marginRight="8dp"
         android:text="@string/back"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView7"
         app:layout_constraintEnd_toStartOf="@+id/textView4"
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
@@ -215,7 +214,7 @@
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

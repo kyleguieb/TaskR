@@ -54,9 +54,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/scrollView3"
+        android:id="@+id/scrollView9"
         android:layout_width="395dp"
-        android:layout_height="469dp"
+        android:layout_height="558dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -68,7 +68,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView3">
+        app:layout_constraintTop_toBottomOf="@+id/searchView3"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,10 +103,27 @@
         android:layout_marginBottom="8dp"
         android:text="@string/back"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView9"
         app:layout_constraintEnd_toStartOf="@+id/searchView3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="431dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Direct Messages"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="65dp" />
 
 </android.support.constraint.ConstraintLayout>
