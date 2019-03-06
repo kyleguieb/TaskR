@@ -15,7 +15,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="132dp"
+        android:layout_marginBottom="148dp"
         android:background="@android:color/white"
         android:ems="10"
         android:hint="Title"
@@ -83,14 +83,14 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.025" />
 
     <EditText
         android:id="@+id/editText3"
-        android:layout_width="62dp"
+        android:layout_width="63dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -133,7 +133,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.944"
+        app:layout_constraintVertical_bias="0.965"
         tools:text="@tools:sample/date/hhmm" />
 
     <EditText
@@ -154,18 +154,18 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/editText5"
         app:layout_constraintEnd_toStartOf="@+id/editText3"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.982"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/switch1"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/editText5"
-        android:layout_width="141dp"
+        android:layout_width="142dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="204dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@android:color/white"
@@ -239,7 +239,7 @@
         app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.944" />
+        app:layout_constraintVertical_bias="0.965" />
 
     <TextView
         android:id="@+id/textView12"
@@ -266,7 +266,7 @@
     <EditText
         android:id="@+id/editText7"
         android:layout_width="390dp"
-        android:layout_height="238dp"
+        android:layout_height="339dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -283,7 +283,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.616" />
+        app:layout_constraintVertical_bias="0.64" />
 
     <EditText
         android:id="@+id/editText8"
