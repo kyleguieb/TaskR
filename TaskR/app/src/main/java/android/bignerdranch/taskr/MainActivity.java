@@ -8,12 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private Button button; // invisible_calendar_button, invisible_profile_button;
+    private ImageButton button; // invisible_calendar_button, invisible_profile_button;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        button = findViewById(R.id.Direct);
+        button = (ImageButton) findViewById(R.id.Direct);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
