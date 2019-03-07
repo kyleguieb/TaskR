@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private ImageButton buttons; // invisible_calendar_button, invisible_profile_button;
+    //private ImageButton direct_messages; // invisible_calendar_button, invisible_profile_button;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -26,10 +26,12 @@ public class MainActivity extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    //mTextMessage.setText(R.string.title_dashboard);
+                    startActivity(new Intent(MainActivity.this, Calendar.class));
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    //mTextMessage.setText(R.string.title_notifications);
+                    startActivity(new Intent(MainActivity.this, Profile.class));
                     return true;
             }
             return false;
@@ -45,20 +47,41 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        buttons = findViewById(R.id.DirectBtn);
-        buttons.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                directMessageScreen();
-            }
-        });
+
+        defineButtons();
+
+//        direct_messages = findViewById(R.id.DirectBtn);
+//        direct_messages.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v)
+//            {
+//                directMessageScreen();
+//            }
+//        });
     }
 
-    public void directMessageScreen()
-    {
-        //startActivity(new Intent(MainActivity.this,Login.class));
-        Intent intent = new Intent(this, DirectMessagesList.class);
-        startActivity(intent);
+    public void defineButtons() {
+        findViewById(R.id.DirectBtn).setOnClickListener(buttonClickListener);
+        findViewById(R.id.New_Task_floatingActionButton).setOnClickListener(buttonClickListener);
     }
+
+    private View.OnClickListener buttonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()) {
+                case R.id.DirectBtn:
+                    startActivity(new Intent(MainActivity.this, DirectMessagesList.class));
+                    break;
+                case R.id.New_Task_floatingActionButton:
+                    startActivity(new Intent(MainActivity.this, CreatingTask.class));
+            }
+        }
+    };
+
+//    public void directMessageScreen()
+//    {
+//        //startActivity(new Intent(MainActivity.this,DirectMessagesList.class));
+//        Intent intent = new Intent(this, DirectMessagesList.class);
+//        startActivity(intent);
+//    }
 
 }
