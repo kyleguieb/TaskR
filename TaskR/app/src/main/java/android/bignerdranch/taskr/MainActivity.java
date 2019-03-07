@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private Button direct_button; // invisible_calendar_button, invisible_profile_button;
+    private Button button; // invisible_calendar_button, invisible_profile_button;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        direct_button = findViewById(R.id.Direct);
-        direct_button.setOnClickListener(new View.OnClickListener() {
+        button = findViewById(R.id.Direct);
+        button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 directMessageScreen();
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     public void directMessageScreen()
     {
         //startActivity(new Intent(MainActivity.this,Login.class));
-        Intent intent = new Intent(this, CreatingTask.class);
+        Intent intent = new Intent(this, DirectMessageChat.class);
         startActivity(intent);
     }
 
