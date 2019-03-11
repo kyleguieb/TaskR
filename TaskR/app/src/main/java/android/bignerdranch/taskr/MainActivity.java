@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.New_Task_floatingActionButton:
                     startActivity(new Intent(MainActivity.this, CreatingTask.class));
+                    break;
             }
         }
     };

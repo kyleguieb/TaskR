@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 public class DirectMessagesList extends AppCompatActivity {
 
@@ -36,5 +37,23 @@ public class DirectMessagesList extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        defineButtons();
     }
+
+    public void defineButtons()
+    {
+        findViewById(R.id.example_button).setOnClickListener(buttonClickListener);
+    }
+
+    private View.OnClickListener buttonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()) {
+                case R.id.example_button:
+                    startActivity(new Intent(DirectMessagesList.this, DirectMessageChat.class));
+                    break;
+            }
+        }
+    };
 }
