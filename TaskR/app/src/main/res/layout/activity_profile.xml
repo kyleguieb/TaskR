@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary2"
+    android:background="@color/colorTest"
     tools:context=".Profile">
 
     <android.support.design.widget.BottomNavigationView
@@ -23,7 +23,6 @@
         android:layout_height="218dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
@@ -31,8 +30,7 @@
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.578"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Friends_List_Button">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,32 +72,6 @@
                 tools:listitem="@layout/recycler_view_item_5" />
 
             <View
-                android:id="@+id/divider13"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_5" />
-
-            <View
-                android:id="@+id/divider12"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_5" />
-
-            <View
                 android:id="@+id/divider16"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
@@ -129,22 +101,21 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="111dp"
+        android:layout_height="99dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/textView14"
+        android:background="@drawable/textview_border"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:srcCompat="@tools:sample/avatars[14]" />
+        app:layout_constraintVertical_bias="0.316" />
 
     <TextView
         android:id="@+id/textView8"
@@ -164,40 +135,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="372dp"
-        android:layout_height="71dp"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="271dp"
+        android:layout_height="34dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/white"
-        android:text="Bio"
-        app:layout_constraintBottom_toTopOf="@+id/Friends_List_Button"
+        android:progressBackgroundTint="@android:color/darker_gray"
+        android:progressTint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.072" />
 
-    <Button
-        android:id="@+id/Friends_List_Button"
-        android:layout_width="88dp"
-        android:layout_height="37dp"
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="151dp"
+        android:layout_height="59dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Friends"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/textview_border"
+        android:gravity="center"
+        android:text="123456"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
 </android.support.constraint.ConstraintLayout>

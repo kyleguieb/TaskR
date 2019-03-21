@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary2"
+    android:background="@color/colorTest"
     tools:context=".MainActivity">
 
     <android.support.design.widget.FloatingActionButton
@@ -18,9 +18,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@android:color/black"
         android:clickable="true"
-        app:backgroundTint="@color/colorPrimaryDark"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.949"
@@ -28,26 +28,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.858"
         app:srcCompat="@android:drawable/ic_menu_add" />
-
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/title_home"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/DirectBtn"
-        app:layout_constraintHorizontal_bias="0.314"
-        app:layout_constraintStart_toEndOf="@+id/searchView3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -62,55 +42,34 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="410dp"
-        android:layout_height="470dp"
+        android:layout_height="508dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorTest"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message"
-        app:layout_constraintVertical_bias="0.256">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.355">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
+            <TextView
+                android:id="@+id/textView20"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:id="@+id/divider4"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:id="@+id/divider3"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="TODAY"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -125,7 +84,7 @@
                 android:id="@+id/divider17"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
+                android:background="@color/colorPrimary2" />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -136,89 +95,31 @@
 
             </android.support.v7.widget.RecyclerView>
 
-            <View
-                android:id="@+id/divider14"
+            <TextView
+                android:id="@+id/textView19"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="MON, JANUARY 5"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:id="@+id/divider13"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4" />
-
-            <View
-                android:id="@+id/divider12"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:id="@+id/divider16"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
+                tools:listitem="@layout/recycler_view_item_10" />
 
         </LinearLayout>
     </ScrollView>
 
-    <SearchView
-        android:id="@+id/searchView3"
-        android:layout_width="138dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="224dp"
-        android:layout_marginRight="224dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorLightGray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.195"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageButton
-        android:id="@+id/DirectBtn"
-        android:layout_width="58dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="3dp" />
 
 </android.support.constraint.ConstraintLayout>
