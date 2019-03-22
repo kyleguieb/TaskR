@@ -41,8 +41,8 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="410dp"
-        android:layout_height="508dp"
+        android:layout_width="0dp"
+        android:layout_height="485dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -52,10 +52,10 @@
         android:background="@color/colorTest"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.355">
+        app:layout_constraintTop_toBottomOf="@+id/spinner3"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,12 +64,26 @@
 
             <TextView
                 android:id="@+id/textView20"
-                android:layout_width="match_parent"
+                android:layout_width="410dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:text="TODAY"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:text="@string/example"
+                android:textColor="@android:color/black" />
+
+            <View
+                android:id="@+id/divider18"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorPrimary" />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -84,7 +98,7 @@
                 android:id="@+id/divider17"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
-                android:background="@color/colorPrimary2" />
+                android:background="@color/colorPrimary" />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -97,7 +111,7 @@
 
             <TextView
                 android:id="@+id/textView19"
-                android:layout_width="match_parent"
+                android:layout_width="410dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:text="MON, JANUARY 5"
@@ -116,10 +130,20 @@
 
     <Spinner
         android:id="@+id/spinner3"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:spinnerMode="dropdown"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="3dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

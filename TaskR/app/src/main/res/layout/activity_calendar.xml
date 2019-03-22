@@ -9,7 +9,7 @@
 
     <CalendarView
         android:id="@+id/calendarView2"
-        android:layout_width="377dp"
+        android:layout_width="0dp"
         android:layout_height="315dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -37,7 +37,7 @@
 
     <ScrollView
         android:id="@+id/scrollView7"
-        android:layout_width="396dp"
+        android:layout_width="0dp"
         android:layout_height="197dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -57,12 +57,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/colorPrimary" />
+
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/textview_border"
+                android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_7" >
+                tools:listitem="@layout/recycler_view_item_7">
 
             </android.support.v7.widget.RecyclerView>
 
@@ -70,14 +76,20 @@
                 android:id="@+id/divider3"
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
-                android:background="@color/colorTest" />
+                android:background="@color/colorPrimary" />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/textview_border"
+                android:background="@android:color/white"
                 tools:itemCount="1"
                 tools:listitem="@layout/recycler_view_item_7" />
+
+            <View
+                android:id="@+id/divider15"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/colorPrimary" />
 
         </LinearLayout>
     </ScrollView>
