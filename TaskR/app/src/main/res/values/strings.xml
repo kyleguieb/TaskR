@@ -4,4 +4,11 @@
     <string name="title_dashboard">Calendar</string>
     <string name="title_notifications">Profile</string>
     <string name="back">Back</string>
+    <string-array name="sort">
+        <item>Most Recent</item>
+        <item>Latest</item>
+        <item>Completed</item>
+        <item>Date</item>
+    </string-array>
+    <string name="example">Finish design of new screens \nSunday, January 4 12:00pm</string>
 </resources>
