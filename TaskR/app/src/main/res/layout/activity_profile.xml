@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary2"
+    android:background="@color/colorTest"
     tools:context=".Profile">
 
     <android.support.design.widget.BottomNavigationView
@@ -18,16 +18,24 @@
         app:menu="@menu/navigation" />
 
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="410dp"
-        android:layout_height="215dp"
-        android:background="@color/colorPrimary2"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="323dp">
+        android:id="@+id/scrollView5"
+        android:layout_width="0dp"
+        android:layout_height="218dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorTest"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
@@ -35,9 +43,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_5" />
 
             <View
                 android:id="@+id/divider17"
@@ -47,12 +53,10 @@
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="81dp"
+                android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_5" />
 
             <View
                 android:id="@+id/divider14"
@@ -62,53 +66,16 @@
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="94dp"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:id="@+id/divider13"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4" />
-
-            <View
-                android:id="@+id/divider12"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/recycler_view_item_5" />
 
             <View
                 android:id="@+id/divider16"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4" />
 
         </LinearLayout>
     </ScrollView>
@@ -117,46 +84,95 @@
         android:id="@+id/textView13"
         android:layout_width="181dp"
         android:layout_height="19dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
-        android:text="@username"
+        android:text="username"
         android:textColor="@android:color/white"
-        tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="45dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="72dp"
-        tools:srcCompat="@tools:sample/avatars[14]" />
+        android:layout_width="111dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/textview_border"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="256dp"
         android:layout_height="29dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:text="FirstName LastName"
         android:textColor="@android:color/white"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="271dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorTest"
+        android:progressBackgroundTint="@color/colorRed"
+        android:progressTint="@color/colorBlue"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.072" />
 
     <TextView
-        android:id="@+id/textView14"
-        android:layout_width="372dp"
-        android:layout_height="71dp"
-        android:background="@android:color/white"
-        android:text="Bio"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="208dp" />
+        android:id="@+id/textView7"
+        android:layout_width="151dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/textview_border"
+        android:gravity="center"
+        android:text="123456"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="85dp"
-        android:layout_height="43dp"
-        android:text="Friends"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="280dp" />
 </android.support.constraint.ConstraintLayout>

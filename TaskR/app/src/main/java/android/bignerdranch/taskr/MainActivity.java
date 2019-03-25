@@ -7,13 +7,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private Button direct_button; // invisible_calendar_button, invisible_profile_button;
+    //private ImageButton direct_messages; // invisible_calendar_button, invisible_profile_button;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -22,13 +25,15 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    //mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    //mTextMessage.setText(R.string.title_dashboard);
+                    startActivity(new Intent(MainActivity.this, Calendar.class));
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    //mTextMessage.setText(R.string.title_notifications);
+                    startActivity(new Intent(MainActivity.this, Profile.class));
                     return true;
             }
             return false;
@@ -44,48 +49,47 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        direct_button = findViewById(R.id.Direct);
-        direct_button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                directMessageScreen();
+        Spinner spinner = findViewById(R.id.spinner3);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sort, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        //spinner.setOnItemSelectedListener(this);
+
+        defineButtons();
+
+//        direct_messages = findViewById(R.id.DirectBtn);
+//        direct_messages.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v)
+//            {
+//                directMessageScreen();
+//            }
+//        });
+    }
+
+    public void defineButtons() {
+        //findViewById(R.id.DirectBtn).setOnClickListener(buttonClickListener);
+        findViewById(R.id.New_Task_floatingActionButton).setOnClickListener(buttonClickListener);
+    }
+
+    private View.OnClickListener buttonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()) {
+//                case R.id.DirectBtn:
+//                    startActivity(new Intent(MainActivity.this, DirectMessagesList.class));
+//                    break;
+                case R.id.New_Task_floatingActionButton:
+                    startActivity(new Intent(MainActivity.this, CreatingTask.class));
+                    break;
             }
-        });
-//        invisible_calendar_button = findViewById(R.id.invisibleCalBtn);
-//        invisible_calendar_button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v)
-//            {
-//                calendarScreen();
-//            }
-//        });
-//        invisible_profile_button = findViewById(R.id.invisibleProfileBtn);
-//        invisible_profile_button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v)
-//            {
-//                profileScreen();
-//            }
-//        });
-    }
+        }
+    };
 
-    public void directMessageScreen()
-    {
-        //startActivity(new Intent(MainActivity.this,Login.class));
-        Intent intent = new Intent(this, CreatingTask.class);
-        startActivity(intent);
-    }
-
-//    public void calendarScreen()
+//    public void directMessageScreen()
 //    {
-//        //startActivity(new Intent(MainActivity.this,Login.class));
-//        Intent intent2 = new Intent(this, Calendar.class);
-//        startActivity(intent2);
-//    }
-//
-//    public void profileScreen()
-//    {
-//        //startActivity(new Intent(MainActivity.this,Login.class));
-//        Intent intent3 = new Intent(this, Calendar.class);
-//        startActivity(intent3);
+//        //startActivity(new Intent(MainActivity.this,DirectMessagesList.class));
+//        Intent intent = new Intent(this, DirectMessagesList.class);
+//        startActivity(intent);
 //    }
 
 }

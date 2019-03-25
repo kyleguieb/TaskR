@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary2"
+    android:background="@color/colorTest"
     tools:context=".Calendar">
 
     <CalendarView
         android:id="@+id/calendarView2"
-        android:layout_width="377dp"
+        android:layout_width="0dp"
         android:layout_height="315dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -17,7 +17,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/white"
+        android:background="@drawable/textview_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
@@ -36,129 +36,62 @@
         app:menu="@menu/navigation" />
 
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="396dp"
-        android:layout_height="289dp"
+        android:id="@+id/scrollView7"
+        android:layout_width="0dp"
+        android:layout_height="197dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/calendarView2"
+        app:layout_constraintVertical_bias="0.073">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
-
             <View
-                android:id="@+id/divider17"
+                android:id="@+id/divider4"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="81dp"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:id="@+id/divider14"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="94dp"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:id="@+id/divider13"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
+                android:layout_height="4dp"
+                android:background="@color/colorPrimary" />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4" />
-
-            <View
-                android:id="@+id/divider12"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
+                tools:listitem="@layout/recycler_view_item_7">
 
             </android.support.v7.widget.RecyclerView>
 
             <View
-                android:id="@+id/divider16"
+                android:id="@+id/divider3"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
+                android:layout_height="4dp"
+                android:background="@color/colorPrimary" />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4" />
+                tools:listitem="@layout/recycler_view_item_7" />
+
+            <View
+                android:id="@+id/divider15"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/colorPrimary" />
 
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="216dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="SUN, JANUARY 4"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView2"
-        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

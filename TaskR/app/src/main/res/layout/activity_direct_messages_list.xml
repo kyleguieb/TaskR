@@ -40,23 +40,25 @@
 
     <SearchView
         android:id="@+id/searchView3"
-        android:layout_width="257dp"
+        android:layout_width="384dp"
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorLightGray"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.968"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ScrollView
-        android:id="@+id/scrollView3"
+        android:id="@+id/scrollView9"
         android:layout_width="395dp"
-        android:layout_height="469dp"
+        android:layout_height="426dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -68,12 +70,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView3">
+        app:layout_constraintTop_toBottomOf="@+id/searchView3"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+                <Button
+                    android:id="@+id/example_button"
+                    android:layout_width="323dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:gravity="left"
+                    android:text="Mr. Android"
+                    android:textSize="18sp" />
+            </TableRow>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/messages"
@@ -89,23 +113,26 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/button3"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="431dp"
+        android:layout_height="34dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/back"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Direct Messages"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-        app:layout_constraintEnd_toStartOf="@+id/searchView3"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView3"
+        app:layout_constraintVertical_bias="0.017" />
 
 </android.support.constraint.ConstraintLayout>
