@@ -1,6 +1,12 @@
 package android.bignerdranch.taskr;
 
+import android.bignerdranch.taskr.database.TaskBaseHelper;
+import android.bignerdranch.taskr.database.TaskDbSchema;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,6 +20,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Context mContext;
+    private SQLiteDatabase mDatabase;
 
     private TextView mTextMessage;
     //private ImageButton direct_messages; // invisible_calendar_button, invisible_profile_button;
@@ -44,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mContext = getApplicationContext();         //this line is super iffy, ask team members if problem persists
+        mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();         //initialization of the database using SQLiteOpenHelper
+        //see page 272 of big nerd ranch textbook for clarification
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -84,6 +97,44 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    private static ContentValues getContentValues(Task task)    {
+        ContentValues values = new ContentValues();
+        values.put(TaskDbSchema.TaskTable.Cols.NAME, task.getmName());
+        values.put(TaskDbSchema.TaskTable.Cols.DESCRIPTION, task.getmDescription());
+        values.put(TaskDbSchema.TaskTable.Cols.DATE_AND_TIME_DUE, task.getmDateAndTimeDue().toString());
+        //again, can modify if LocalDateAndTime gives us trouble
+
+        return values;
+    }
+
+    public void addTask(Task c) {
+        ContentValues values = getContentValues(c);
+
+        mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
+    }
+
+    public void updateTask(Task task)   {
+        String nameString = task.getmName();
+        ContentValues values = getContentValues(task);
+
+        mDatabase.update(TaskDbSchema.TaskTable.NAME, values, TaskDbSchema.TaskTable.Cols.NAME
+                            + " = ?", new String[] { nameString });
+    }
+
+    private Cursor queryTasks(String whereClause, String[] whereArgs)   {   //reading from database using query
+        Cursor cursor = mDatabase.query(
+                TaskDbSchema.TaskTable.NAME,
+                null,    //columns - null selects all columns
+                whereClause,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+
+        return cursor;
+    }
 
 //    public void directMessageScreen()
 //    {
