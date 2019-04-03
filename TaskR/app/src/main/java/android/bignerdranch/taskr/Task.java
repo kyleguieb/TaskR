@@ -10,6 +10,8 @@ public class Task {
     //private LocalDateTime dateAndTimeForNotification;   //this is the date and time before the task's due time that sends a popup notification to the user's phone
     //To be figured out later
 
+
+
     public Task(String taskName, String taskDescription, LocalDateTime taskDateAndTimeDue)
     {
         mName = taskName;
