@@ -22,14 +22,20 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> Dev
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
     private TextView mTextMessage;
     //private ImageButton direct_messages; // invisible_calendar_button, invisible_profile_button;
 
+<<<<<<< HEAD
 >>>>>>> Tyler
+=======
+>>>>>>> Dev
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -55,13 +61,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> Dev
         mContext = getApplicationContext();         //this line is super iffy, ask team members if problem persists
         mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();         //initialization of the database using SQLiteOpenHelper
         //see page 272 of big nerd ranch textbook for clarification
 
         mTextMessage = (TextView) findViewById(R.id.message);
+<<<<<<< HEAD
 >>>>>>> Tyler
+=======
+
+>>>>>>> Dev
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
