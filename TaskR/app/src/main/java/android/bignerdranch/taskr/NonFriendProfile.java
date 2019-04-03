@@ -6,9 +6,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-public class Calendar extends AppCompatActivity {
+public class NonFriendProfile extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -17,13 +16,13 @@ public class Calendar extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    startActivity(new Intent(Calendar.this, MainActivity.class));
+                    startActivity(new Intent(NonFriendProfile.this, MainActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
-                    //startActivity(new Intent(Calendar.this, Calendar.class));
+                    startActivity(new Intent(NonFriendProfile.this, Calendar.class));
                     return true;
                 case R.id.navigation_notifications:
-                    startActivity(new Intent(Calendar.this, Profile.class));
+                    startActivity(new Intent(NonFriendProfile.this, Profile.class));
                     return true;
             }
             return false;
@@ -33,10 +32,9 @@ public class Calendar extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
+        setContentView(R.layout.activity_non_friend_profile);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
     }
 }
