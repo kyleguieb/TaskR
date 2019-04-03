@@ -2,14 +2,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/ConstraintLayoutHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorTest"
     tools:context=".MainActivity">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/New_Task_floatingActionButton"
+        android:id="@+id/NewTask_floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -40,7 +40,7 @@
         app:menu="@menu/navigation" />
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/scrollViewHome"
         android:layout_width="0dp"
         android:layout_height="485dp"
         android:layout_marginStart="8dp"
@@ -48,7 +48,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="68dp"
         android:background="@color/colorTest"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/textViewToday"
                 android:layout_width="410dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
@@ -72,35 +72,15 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/textViewExample"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:text="@string/example"
                 android:textColor="@android:color/black" />
 
-            <View
-                android:id="@+id/divider18"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/colorPrimary" />
-
             <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_4">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:id="@+id/divider17"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/colorPrimary" />
-
-            <android.support.v7.widget.RecyclerView
+                android:id="@+id/RecyclerViewHome"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
@@ -129,7 +109,7 @@
     </ScrollView>
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/filterHomeSpinner"
         android:layout_width="0dp"
         android:layout_height="32dp"
         android:layout_marginStart="8dp"

@@ -15,9 +15,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
-    //private ImageButton direct_messages; // invisible_calendar_button, invisible_profile_button;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -25,14 +22,11 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    //mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    //mTextMessage.setText(R.string.title_dashboard);
                     startActivity(new Intent(MainActivity.this, Calendar.class));
                     return true;
                 case R.id.navigation_notifications:
-                    //mTextMessage.setText(R.string.title_notifications);
                     startActivity(new Intent(MainActivity.this, Profile.class));
                     return true;
             }
@@ -45,11 +39,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Spinner spinner = findViewById(R.id.spinner3);
+        Spinner spinner = findViewById(R.id.filterHomeSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sort, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -68,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void defineButtons() {
         //findViewById(R.id.DirectBtn).setOnClickListener(buttonClickListener);
-        findViewById(R.id.New_Task_floatingActionButton).setOnClickListener(buttonClickListener);
+        findViewById(R.id.NewTask_floatingActionButton).setOnClickListener(buttonClickListener);
     }
 
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
@@ -78,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 //                case R.id.DirectBtn:
 //                    startActivity(new Intent(MainActivity.this, DirectMessagesList.class));
 //                    break;
-                case R.id.New_Task_floatingActionButton:
+                case R.id.NewTask_floatingActionButton:
                     startActivity(new Intent(MainActivity.this, CreatingTask.class));
                     break;
             }
