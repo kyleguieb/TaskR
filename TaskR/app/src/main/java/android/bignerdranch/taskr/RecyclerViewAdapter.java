@@ -1,5 +1,7 @@
 package android.bignerdranch.taskr;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,12 +17,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private ArrayList<String> mTitles = new ArrayList<>();
     private ArrayList<String> mDates = new ArrayList<>();
-    private ArrayList<String> mTimes = new ArrayList<>();
+    private Context mContext;
 
-    public RecyclerViewAdapter(ArrayList<String> mTitles, ArrayList<String> mDates, ArrayList<String> mTimes) {
-        this.mTitles = mTitles;
-        this.mDates = mDates;
-        this.mTimes = mTimes;
+    public RecyclerViewAdapter(Context context, ArrayList<String> titles, ArrayList<String> dates) {
+        mTitles = titles;
+        mDates = dates;
+        mContext = context;
     }
 
     @NonNull
@@ -31,11 +34,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.tasks_title.setText(mTitles.get(position));
         holder.tasks_date.setText(mDates.get(position));
-        holder.tasks_time.setText(mTimes.get(position));
+
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                // if clicked on then should go to view task... IT WORKS! There is better way apparently
+                mContext.startActivity(new Intent(mContext, TaskView.class));
+
+                //TO BE REMOVED - Just a test
+                //Toast.makeText(mContext, mTitles.get(position), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 
@@ -48,14 +63,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         TextView tasks_title;
         TextView tasks_date;
-        TextView tasks_time;
         RelativeLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tasks_title = itemView.findViewById(R.id.task_title);
             tasks_date = itemView.findViewById(R.id.task_date);
-            tasks_time = itemView.findViewById(R.id.task_time);
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
         }
