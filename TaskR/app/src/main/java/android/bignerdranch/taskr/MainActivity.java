@@ -1,6 +1,7 @@
 package android.bignerdranch.taskr;
 
 import android.bignerdranch.taskr.database.TaskBaseHelper;
+import android.bignerdranch.taskr.database.TaskCursorWrapper;
 import android.bignerdranch.taskr.database.TaskDbSchema;
 import android.content.ContentValues;
 import android.content.Context;
@@ -19,10 +20,13 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private Context mContext;
-    private SQLiteDatabase mDatabase;
+    private static SQLiteDatabase mDatabase;
 
     private TextView mTextMessage;
     //private ImageButton direct_messages; // invisible_calendar_button, invisible_profile_button;
@@ -96,23 +100,39 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private static ContentValues getContentValues(Task task)    {
+    private static ContentValues getContentValues(Task task)    {   //adds new task (should be in CreatingTask.java)
         ContentValues values = new ContentValues();
         values.put(TaskDbSchema.TaskTable.Cols.NAME, task.getmName());
         values.put(TaskDbSchema.TaskTable.Cols.DESCRIPTION, task.getmDescription());
-        values.put(TaskDbSchema.TaskTable.Cols.DATE_AND_TIME_DUE, task.getmDateAndTimeDue().toString());
+        values.put(TaskDbSchema.TaskTable.Cols.DATE_AND_TIME_DUE, task.getmDateAndTimeDue());
         //again, can modify if LocalDateAndTime gives us trouble
 
         return values;
     }
 
-    public void addTask(Task c) {
+    public static void addTask(Task c) {       //adds new task (should be in CreatingTask.java)
         ContentValues values = getContentValues(c);
 
         mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
     }
 
-    public void updateTask(Task task)   {
+    public Task getTask(String name)    {
+        TaskCursorWrapper cursor = queryTasks(TaskDbSchema.TaskTable.Cols.NAME +
+                " = ?", new String[] {name});
+
+        try {
+            if (cursor.getCount() == 0) {
+                return null;
+            }
+
+            cursor.moveToFirst();
+            return cursor.getTask();
+        } finally {
+            cursor.close();
+        }
+    }
+
+    public void updateTask(Task task)   {   //edits task accordingly, should be in TaskView.java
         String nameString = task.getmName();
         ContentValues values = getContentValues(task);
 
@@ -120,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                             + " = ?", new String[] { nameString });
     }
 
-    private Cursor queryTasks(String whereClause, String[] whereArgs)   {   //reading from database using query
+    private TaskCursorWrapper queryTasks(String whereClause, String[] whereArgs)   {   //reading from database using query
         Cursor cursor = mDatabase.query(
                 TaskDbSchema.TaskTable.NAME,
                 null,    //columns - null selects all columns
@@ -131,7 +151,24 @@ public class MainActivity extends AppCompatActivity {
                 null
         );
 
-        return cursor;
+        return new TaskCursorWrapper(cursor);
+    }
+
+    public List<Task> getTasks()    {       //get all tasks in the database and put them in an ArrayList
+        List<Task> tasks = new ArrayList<>();
+
+        TaskCursorWrapper cursor = queryTasks(null,null);
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast())   {
+                tasks.add(cursor.getTask());
+                cursor.moveToNext();
+            }
+        }   finally {
+            cursor.close();
+        }
+        return tasks;
     }
 
 //    public void directMessageScreen()
