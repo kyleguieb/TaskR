@@ -192,17 +192,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void updateTask(Task task)   {   //edits task accordingly, should be in TaskView.java
-        String nameString = task.getmName();
+    public static void updateTask(String originalTaskName, Task task)   {   //edits task accordingly, should be in TaskView.java
+
+        //new task that will replace old task
         ContentValues values = getContentValues(task);
 
         mDatabase.update(TaskDbSchema.TaskTable.NAME, values, TaskDbSchema.TaskTable.Cols.NAME
-                            + " = ?", new String[] { nameString });
+                            + " = ?", new String[] { originalTaskName });
     }
 
-    public static void deleteTask(Task task)    {
+    public static void deleteTask(String taskName)    {
         mDatabase.delete(TaskDbSchema.TaskTable.NAME, TaskDbSchema.TaskTable.Cols.NAME
-                            + " = ?", new String[] {task.getmName()});
+                            + " = ?", new String[] {taskName});
         //deletes tasks by searching by name (should change in the future, could accidentally delete a different task)
     }
 
