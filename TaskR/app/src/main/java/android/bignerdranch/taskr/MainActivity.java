@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
     }
 
-    public Task getTask(String name)    {
+    public Task getTask(String name)    {       //get specific task by name
         TaskCursorWrapper cursor = queryTasks(TaskDbSchema.TaskTable.Cols.NAME +
                 " = ?", new String[] {name});
 
@@ -192,12 +192,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void updateTask(Task task)   {   //edits task accordingly, should be in TaskView.java
+    public static void updateTask(Task task)   {   //edits task accordingly, should be in TaskView.java
         String nameString = task.getmName();
         ContentValues values = getContentValues(task);
 
         mDatabase.update(TaskDbSchema.TaskTable.NAME, values, TaskDbSchema.TaskTable.Cols.NAME
                             + " = ?", new String[] { nameString });
+    }
+
+    public static void deleteTask(Task task)    {
+        mDatabase.delete(TaskDbSchema.TaskTable.NAME, TaskDbSchema.TaskTable.Cols.NAME
+                            + " = ?", new String[] {task.getmName()});
+        //deletes tasks by searching by name (should change in the future, could accidentally delete a different task)
     }
 
     private TaskCursorWrapper queryTasks(String whereClause, String[] whereArgs)   {   //reading from database using query

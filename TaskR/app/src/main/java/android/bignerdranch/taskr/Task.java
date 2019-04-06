@@ -8,6 +8,7 @@ public class Task {
     private String mName;
     private String mDescription;
     private String mDateAndTimeDue;
+    private boolean mCompleted;
     //private LocalDateTime dateAndTimeForNotification;   //this is the date and time before the task's due time that sends a popup notification to the user's phone
     //To be figured out later
 
@@ -17,6 +18,7 @@ public class Task {
         mName = taskName;
         mDescription = taskDescription;
         mDateAndTimeDue = taskDateAndTimeDue;
+        mCompleted = false;     //starts off not completed
     }
 
     public Task(String taskName)
@@ -46,5 +48,13 @@ public class Task {
 
     public void setmDateAndTimeDue(String mDateAndTimeDue) {
         this.mDateAndTimeDue = mDateAndTimeDue;
+    }
+
+    public boolean isCompleted() {
+        return mCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        mCompleted = completed;
     }
 }
