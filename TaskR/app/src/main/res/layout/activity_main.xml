@@ -42,20 +42,19 @@
     <ScrollView
         android:id="@+id/scrollViewHome"
         android:layout_width="0dp"
-        android:layout_height="485dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorTest"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/filterHomeSpinner">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,14 +70,6 @@
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/textViewExample"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:text="@string/example"
-                android:textColor="@android:color/black" />
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/RecyclerViewHome"
                 android:layout_width="match_parent"
@@ -88,22 +79,6 @@
                 tools:listitem="@layout/recycler_view_item_4">
 
             </android.support.v7.widget.RecyclerView>
-
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="410dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:text="MON, JANUARY 5"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                tools:itemCount="1"
-                tools:listitem="@layout/recycler_view_item_10" />
 
         </LinearLayout>
     </ScrollView>
@@ -119,9 +94,9 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />

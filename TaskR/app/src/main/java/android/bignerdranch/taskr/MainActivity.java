@@ -1,6 +1,7 @@
 package android.bignerdranch.taskr;
 
 import android.bignerdranch.taskr.database.TaskBaseHelper;
+import android.bignerdranch.taskr.database.TaskCursorWrapper;
 import android.bignerdranch.taskr.database.TaskDbSchema;
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,6 +12,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,6 +21,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +33,11 @@ public class MainActivity extends AppCompatActivity {
 =======
 >>>>>>> Dev
     private Context mContext;
-    private SQLiteDatabase mDatabase;
+    private static SQLiteDatabase mDatabase;
+
+    // Vars for RecyclerView
+    private ArrayList<String> mTaskTitles = new ArrayList<>();
+    private ArrayList<String> mDatesNTimes = new ArrayList<>();
 
     private TextView mTextMessage;
     //private ImageButton direct_messages; // invisible_calendar_button, invisible_profile_button;
@@ -86,13 +96,70 @@ public class MainActivity extends AppCompatActivity {
 
         defineButtons();
 
-//        direct_messages = findViewById(R.id.DirectBtn);
-//        direct_messages.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v)
-//            {
-//                directMessageScreen();
-//            }
-//        });
+        initTasks();
+
+    }
+
+    private void initTasks() { //Gotta figure this out, should be where it pulls from Database?
+        mTaskTitles.add("Figure out if recyclerView scroll on its on or actually " +
+                "needs the scrollView, The app seems to be stuttering");
+        mDatesNTimes.add("April 3, 2019 11:25 PM");
+
+        mTaskTitles.add("Figure out how to connect this to database information");
+        mDatesNTimes.add("April 3, 2019 10:58 AM");
+
+        mTaskTitles.add("Test a really really really really really really really really really " +
+                "really really really really really really long title to make sure the text wrapping works");
+        mDatesNTimes.add("April 3, 2019 11:38 PM");
+
+        mTaskTitles.add("Test more");
+        mDatesNTimes.add("April 3, 2019 11:39 PM");
+
+        mTaskTitles.add("Test even more");
+        mDatesNTimes.add("April 3, 2019 11:39 PM");
+
+        mTaskTitles.add("Test some more");
+        mDatesNTimes.add("April 3, 2019 11:39 PM");
+
+        mTaskTitles.add("Test even more more");
+        mDatesNTimes.add("April 3, 2019 11:41 PM");
+
+        mTaskTitles.add("Testing");
+        mDatesNTimes.add("April 3, 2019 11:41 PM");
+
+        mTaskTitles.add("If");
+        mDatesNTimes.add("April 3, 2019 11:41 PM");
+
+        mTaskTitles.add("The");
+        mDatesNTimes.add("April 3, 2019 11:41 PM");
+
+        mTaskTitles.add("Scrolling");
+        mDatesNTimes.add("April 3, 2019 11:41 PM");
+
+        mTaskTitles.add("Also");
+        mDatesNTimes.add("April 3, 2019 11:41 PM");
+
+        mTaskTitles.add("Works");
+        mDatesNTimes.add("April 3, 2019 11:41 PM");
+
+        ArrayList<Task> listOfTasks = getTasks();
+
+        for(int i = 0; i < listOfTasks.size(); i++)
+        {
+            mTaskTitles.add(listOfTasks.get(i).getmName());
+            mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+        }
+
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.RecyclerViewHome);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mTaskTitles, mDatesNTimes);
+
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     public void defineButtons() {
@@ -104,9 +171,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
-//                case R.id.DirectBtn:
-//                    startActivity(new Intent(MainActivity.this, DirectMessagesList.class));
-//                    break;
                 case R.id.NewTask_floatingActionButton:
                     startActivity(new Intent(MainActivity.this, CreatingTask.class));
                     break;
@@ -114,23 +178,39 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private static ContentValues getContentValues(Task task)    {
+    private static ContentValues getContentValues(Task task)    {   //adds new task (should be in CreatingTask.java)
         ContentValues values = new ContentValues();
         values.put(TaskDbSchema.TaskTable.Cols.NAME, task.getmName());
         values.put(TaskDbSchema.TaskTable.Cols.DESCRIPTION, task.getmDescription());
-        values.put(TaskDbSchema.TaskTable.Cols.DATE_AND_TIME_DUE, task.getmDateAndTimeDue().toString());
+        values.put(TaskDbSchema.TaskTable.Cols.DATE_AND_TIME_DUE, task.getmDateAndTimeDue());
         //again, can modify if LocalDateAndTime gives us trouble
 
         return values;
     }
 
-    public void addTask(Task c) {
+    public static void addTask(Task c) {       //adds new task (should be in CreatingTask.java)
         ContentValues values = getContentValues(c);
 
         mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
     }
 
-    public void updateTask(Task task)   {
+    public Task getTask(String name)    {
+        TaskCursorWrapper cursor = queryTasks(TaskDbSchema.TaskTable.Cols.NAME +
+                " = ?", new String[] {name});
+
+        try {
+            if (cursor.getCount() == 0) {
+                return null;
+            }
+
+            cursor.moveToFirst();
+            return cursor.getTask();
+        } finally {
+            cursor.close();
+        }
+    }
+
+    public void updateTask(Task task)   {   //edits task accordingly, should be in TaskView.java
         String nameString = task.getmName();
         ContentValues values = getContentValues(task);
 
@@ -138,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                             + " = ?", new String[] { nameString });
     }
 
-    private Cursor queryTasks(String whereClause, String[] whereArgs)   {   //reading from database using query
+    private TaskCursorWrapper queryTasks(String whereClause, String[] whereArgs)   {   //reading from database using query
         Cursor cursor = mDatabase.query(
                 TaskDbSchema.TaskTable.NAME,
                 null,    //columns - null selects all columns
@@ -149,14 +229,24 @@ public class MainActivity extends AppCompatActivity {
                 null
         );
 
-        return cursor;
+        return new TaskCursorWrapper(cursor);
     }
 
-//    public void directMessageScreen()
-//    {
-//        //startActivity(new Intent(MainActivity.this,DirectMessagesList.class));
-//        Intent intent = new Intent(this, DirectMessagesList.class);
-//        startActivity(intent);
-//    }
+    public ArrayList<Task> getTasks()    {       //get all tasks in the database and put them in an ArrayList
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        TaskCursorWrapper cursor = queryTasks(null,null);
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast())   {
+                tasks.add(cursor.getTask());
+                cursor.moveToNext();
+            }
+        }   finally {
+            cursor.close();
+        }
+        return tasks;
+    }
 
 }
