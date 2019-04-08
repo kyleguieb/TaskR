@@ -46,7 +46,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 // if clicked on then should go to view task... IT WORKS! There is better way apparently
 
                 //first, we have to specify which task in the recycler view we are selecting via the task name
-                Intent intent = TaskView.newIntent(mContext, mTitles.get(position));
+                Intent intent = TaskView.newIntent(mContext, mTitles.get(position),
+                                                    MainActivity.getTask(mTitles.get(position)).getmDescription(),
+                                                    MainActivity.getTask(mTitles.get(position)).getmDateAndTimeDue());
                 mContext.startActivity(intent);
 
                 //mContext.startActivity(new Intent(mContext, TaskView.class));

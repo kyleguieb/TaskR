@@ -13,7 +13,7 @@ public class TaskView extends AppCompatActivity {
     private String mTaskName;
     private static final String EXTRA_TASK_NAME = "com.bignerdranch.android.taskr.extra_task_name";
 
-    public static Intent newIntent(Context packageContext, String taskName) {
+    public static Intent newIntent(Context packageContext, String taskName, String taskDescription, String taskDateAndTime) {
         Intent intent = new Intent(packageContext, TaskView.class); //for retrieving task name
         intent.putExtra(EXTRA_TASK_NAME, taskName);
         return intent;

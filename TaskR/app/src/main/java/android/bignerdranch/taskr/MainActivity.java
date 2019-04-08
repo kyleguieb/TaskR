@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
     }
 
-    public Task getTask(String name)    {       //get specific task by name
+    public static Task getTask(String name)    {       //get specific task by name
         TaskCursorWrapper cursor = queryTasks(TaskDbSchema.TaskTable.Cols.NAME +
                 " = ?", new String[] {name});
 
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         //deletes tasks by searching by name (should change in the future, could accidentally delete a different task)
     }
 
-    private TaskCursorWrapper queryTasks(String whereClause, String[] whereArgs)   {   //reading from database using query
+    private static TaskCursorWrapper queryTasks(String whereClause, String[] whereArgs)   {   //reading from database using query
         Cursor cursor = mDatabase.query(
                 TaskDbSchema.TaskTable.NAME,
                 null,    //columns - null selects all columns
