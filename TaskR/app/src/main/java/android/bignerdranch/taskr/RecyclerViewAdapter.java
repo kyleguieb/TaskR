@@ -44,10 +44,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
 
                 // if clicked on then should go to view task... IT WORKS! There is better way apparently
-                mContext.startActivity(new Intent(mContext, TaskView.class));
+
+                //first, we have to specify which task in the recycler view we are selecting via the task name
+                Intent intent = TaskView.newIntent(mContext, mTitles.get(position));
+                mContext.startActivity(intent);
+
+                //mContext.startActivity(new Intent(mContext, TaskView.class));
 
                 //TO BE REMOVED - Just a test
-                //Toast.makeText(mContext, mTitles.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, mTitles.get(position), Toast.LENGTH_SHORT).show();
 
             }
         });
