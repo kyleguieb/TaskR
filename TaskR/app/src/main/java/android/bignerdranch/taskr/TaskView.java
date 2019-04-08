@@ -53,19 +53,19 @@ public class TaskView extends AppCompatActivity {
                             inputDescription.getText().toString().equals("") &&
                             inputTime.getText().toString().equals("") &&
                             inputDate.getText().toString().equals("")) {
-<<<<<<< HEAD
+
                         Toast.makeText(TaskView.this, "Please fill in all fields!",
                                 Toast.LENGTH_SHORT).show();
                         break;
                         //shouldn't go back to main activity if all fields aren't completed
                         //startActivity(new Intent(TaskView.this, MainActivity.class));
                         //if not all fields are filled, restart TaskView activity
-=======
+
                                 Toast.makeText(TaskView.this, "Please fill in at least one field!",
                                 Toast.LENGTH_SHORT).show();
                                 break;
                                 //if not all fields are filled, restart TaskView activity
->>>>>>> Dev
+
                     }
 
                     Task alteredTask = new Task(inputName.getText().toString(), inputDescription.getText().toString(),
@@ -75,14 +75,13 @@ public class TaskView extends AppCompatActivity {
                     startActivity(new Intent(TaskView.this, MainActivity.class));
 
                     break;
-<<<<<<< HEAD
-=======
+
                 case R.id.deleteBtn:
                     //delete from the database using method defined in Main Activity
                     MainActivity.deleteTask(mTaskName);
                     startActivity(new Intent(TaskView.this, MainActivity.class));
                     break;
->>>>>>> Dev
+
             }
         }
     };
