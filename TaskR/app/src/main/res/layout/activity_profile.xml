@@ -52,12 +52,6 @@
                 tools:itemCount="1"
                 tools:listitem="@layout/recycler_view_item_5" />
 
-            <View
-                android:id="@+id/divider14"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="?android:attr/listDivider" />
-
         </LinearLayout>
     </ScrollView>
 
@@ -147,7 +141,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/textview_border"
         android:gravity="center"
-        android:text="123456"
+        android:text="0 points"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"

@@ -83,46 +83,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initTasks() { //Gotta figure this out, should be where it pulls from Database?
-        mTaskTitles.add("Figure out if recyclerView scroll on its on or actually " +
-                "needs the scrollView, The app seems to be stuttering");
-        mDatesNTimes.add("April 3, 2019 11:25 PM");
-
-        mTaskTitles.add("Figure out how to connect this to database information");
-        mDatesNTimes.add("April 3, 2019 10:58 AM");
-
-        mTaskTitles.add("Test a really really really really really really really really really " +
-                "really really really really really really long title to make sure the text wrapping works");
-        mDatesNTimes.add("April 3, 2019 11:38 PM");
-
-        mTaskTitles.add("Test more");
-        mDatesNTimes.add("April 3, 2019 11:39 PM");
-
-        mTaskTitles.add("Test even more");
-        mDatesNTimes.add("April 3, 2019 11:39 PM");
-
-        mTaskTitles.add("Test some more");
-        mDatesNTimes.add("April 3, 2019 11:39 PM");
-
-        mTaskTitles.add("Test even more more");
-        mDatesNTimes.add("April 3, 2019 11:41 PM");
-
-        mTaskTitles.add("Testing");
-        mDatesNTimes.add("April 3, 2019 11:41 PM");
-
-        mTaskTitles.add("If");
-        mDatesNTimes.add("April 3, 2019 11:41 PM");
-
-        mTaskTitles.add("The");
-        mDatesNTimes.add("April 3, 2019 11:41 PM");
-
-        mTaskTitles.add("Scrolling");
-        mDatesNTimes.add("April 3, 2019 11:41 PM");
-
-        mTaskTitles.add("Also");
-        mDatesNTimes.add("April 3, 2019 11:41 PM");
-
-        mTaskTitles.add("Works");
-        mDatesNTimes.add("April 3, 2019 11:41 PM");
 
         ArrayList<Task> listOfTasks = getTasks();
 

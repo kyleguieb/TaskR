@@ -57,12 +57,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <View
-                android:id="@+id/divider4"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="@color/colorPrimary" />
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/RecyclerViewCalendar"
                 android:layout_width="match_parent"
