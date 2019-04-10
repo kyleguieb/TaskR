@@ -13,7 +13,6 @@
     <string name="time">Time</string>
     <string-array name="sort">
         <item>Most Recent</item>
-        <item>Latest</item>
         <item>Completed</item>
         <item>Date</item>
     </string-array>
