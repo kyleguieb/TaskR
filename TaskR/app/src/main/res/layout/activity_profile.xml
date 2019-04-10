@@ -104,8 +104,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+        android:id="@+id/progressingBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="271dp"
         android:layout_height="34dp"
         android:layout_marginStart="8dp"
@@ -121,7 +121,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewProfile"
-        app:layout_constraintVertical_bias="0.072" />
+        app:layout_constraintVertical_bias="0.072"
+        android:progress="25"
+        android:max="100"/>
 
     <TextView
         android:id="@+id/textViewPoints"
@@ -142,6 +144,6 @@
         app:layout_constraintBottom_toTopOf="@+id/scrollViewProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        app:layout_constraintTop_toBottomOf="@+id/progressingBar" />
 
 </android.support.constraint.ConstraintLayout>

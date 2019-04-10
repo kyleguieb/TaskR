@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Context mContext;
     private static SQLiteDatabase mDatabase;
+
 
     // Vars for RecyclerView
     private ArrayList<String> mTaskTitles = new ArrayList<>();
@@ -131,10 +133,15 @@ public class MainActivity extends AppCompatActivity {
         return values;
     }
 
+
     public static void addTask(Task c) {       //adds new task (should be in CreatingTask.java)
         ContentValues values = getContentValues(c);
 
         mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
+        //for test lol
+//        ProgressBar progressingBar = (ProgressBar) findViewById(R.id.progressingBar); //initiate progress bar
+//        int maxValue = progressingBar.getMax();
+
     }
 
     public static Task getTask(String name)    {       //get specific task by name
@@ -198,5 +205,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return tasks;
     }
+
+
+
+
 
 }

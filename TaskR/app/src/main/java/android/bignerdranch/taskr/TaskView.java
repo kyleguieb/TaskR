@@ -55,10 +55,6 @@ public class TaskView extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
-                case R.id.deleteBtn:
-                    //delete from the database using method defined in Main Activity
-                    startActivity(new Intent(TaskView.this, MainActivity.class));
-                    break;
 
                 case R.id.editBtn:
                     EditText inputName = findViewById(R.id.TitleView_editText);
@@ -74,15 +70,6 @@ public class TaskView extends AppCompatActivity {
                         Toast.makeText(TaskView.this, "Please fill in all fields!",
                                 Toast.LENGTH_SHORT).show();
                         break;
-                        //shouldn't go back to main activity if all fields aren't completed
-                        //startActivity(new Intent(TaskView.this, MainActivity.class));
-                        //if not all fields are filled, restart TaskView activity
-
-                                Toast.makeText(TaskView.this, "Please fill in at least one field!",
-                                Toast.LENGTH_SHORT).show();
-                                break;
-                                //if not all fields are filled, restart TaskView activity
-
                     }
 
                     Task alteredTask = new Task(inputName.getText().toString(), inputDescription.getText().toString(),
