@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
+    //initializes RecyclerView for the home screen
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.RecyclerViewHome);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mTaskTitles, mDatesNTimes);
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //defines new task button
     public void defineButtons() {
         //findViewById(R.id.DirectBtn).setOnClickListener(buttonClickListener);
         findViewById(R.id.NewTask_floatingActionButton).setOnClickListener(buttonClickListener);
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //practically makes a new task
     private static ContentValues getContentValues(Task task)    {   //adds new task (should be in CreatingTask.java)
         ContentValues values = new ContentValues();
         values.put(TaskDbSchema.TaskTable.Cols.NAME, task.getmName());
