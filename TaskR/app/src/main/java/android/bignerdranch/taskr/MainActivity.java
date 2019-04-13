@@ -1,5 +1,6 @@
 package android.bignerdranch.taskr;
 
+import android.app.AlertDialog;
 import android.bignerdranch.taskr.database.TaskBaseHelper;
 import android.bignerdranch.taskr.database.TaskCursorWrapper;
 import android.bignerdranch.taskr.database.TaskDbSchema;
@@ -14,13 +15,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> mDatesNTimes = new ArrayList<>();
 
     private TextView mTextMessage;
-    //private ImageButton direct_messages; // invisible_calendar_button, invisible_profile_button;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -74,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sort, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        //spinner.setOnItemSelectedListener(this);
+        //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for sorting
 
         defineButtons();
 
@@ -82,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void initTasks() { //Gotta figure this out, should be where it pulls from Database?
+    private void initTasks() {
 
         ArrayList<Task> listOfTasks = getTasks();
 
@@ -105,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void defineButtons() {
-        //findViewById(R.id.DirectBtn).setOnClickListener(buttonClickListener);
         findViewById(R.id.NewTask_floatingActionButton).setOnClickListener(buttonClickListener);
     }
 
@@ -114,7 +116,47 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.NewTask_floatingActionButton:
-                    startActivity(new Intent(MainActivity.this, CreatingTask.class));
+
+                    final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                    LayoutInflater inflater = LayoutInflater.from(mContext);
+                    View mView = inflater.inflate(R.layout.dialog_create, null);
+
+                    final EditText inputName = (EditText) mView.findViewById(R.id.newTitle);
+                    final EditText inputDate = (EditText) mView.findViewById(R.id.newDate);
+                    final EditText inputTime = (EditText) mView.findViewById(R.id.newTime);
+                    final EditText inputDescription = (EditText) mView.findViewById(R.id.newDescription);
+
+                    Button mCancel = (Button) mView.findViewById(R.id.cancelButton);
+                    Button mSave = (Button) mView.findViewById(R.id.saveButton);
+
+                    mBuilder.setView(mView);
+                    final AlertDialog dialog = mBuilder.create();
+                    dialog.show();
+
+                    mSave.setOnClickListener(new View.OnClickListener() {
+
+                        public void onClick(View view) {
+                            //adding that new task object to the database itself
+                            Task newTask = new Task(inputName.getText().toString(), inputDescription.getText().toString(),
+                                    inputDate.getText().toString() + " at " +
+                                            inputTime.getText().toString());
+                            MainActivity.addTask(newTask);
+
+                            Toast.makeText(MainActivity.this, "New Task Successfully added!",
+                                    Toast.LENGTH_SHORT).show();  //for debugging purposes
+
+                            dialog.dismiss();
+                            recreate();
+                        }
+                    });
+
+                    mCancel.setOnClickListener(new View.OnClickListener() {
+
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
                     break;
             }
         }

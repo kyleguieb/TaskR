@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/dialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/title"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/dialogDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialogTitle"
+        android:ems="10"
+        android:hint="@string/date"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogDescription"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/edit"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogDescription"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/editButton"
+        android:layout_toRightOf="@+id/editButton"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/delete"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/dialogDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialogDate"
+        android:ems="10"
+        android:hint="@string/description"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/dialogTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialogTitle"
+        android:layout_toEndOf="@+id/dialogDate"
+        android:layout_toRightOf="@+id/dialogDate"
+        android:ems="10"
+        android:hint="@string/time"
+        android:inputType="textPersonName|text" />
+</RelativeLayout>

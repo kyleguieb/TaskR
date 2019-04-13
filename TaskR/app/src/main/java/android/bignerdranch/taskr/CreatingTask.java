@@ -9,6 +9,8 @@ import android.bignerdranch.taskr.MainActivity;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//TODO: Delete this and xml with it
+
 public class CreatingTask extends AppCompatActivity {
 
     @Override
