@@ -1,10 +1,11 @@
 package android.bignerdranch.taskr;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class Task {
 
-
+    private UUID mId;
     private String mName;
     private String mDescription;
     private String mDateAndTimeDue;
@@ -15,16 +16,19 @@ public class Task {
 
     public Task(String taskName, String taskDescription, String taskDateAndTimeDue)
     {
+        mId = UUID.randomUUID();
         mName = taskName;
         mDescription = taskDescription;
         mDateAndTimeDue = taskDateAndTimeDue;
         mCompleted = false;     //starts off not completed
     }
 
-    public Task(String taskName)
+    public Task(UUID id)
     {
-        mName = taskName;
+        mId = id;
     }
+
+    public UUID getId() { return mId; }
 
     public String getmName() {
         return mName;

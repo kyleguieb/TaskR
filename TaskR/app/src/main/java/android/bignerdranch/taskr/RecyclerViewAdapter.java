@@ -12,14 +12,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
+    private ArrayList<UUID> mIds = new ArrayList<>();
     private ArrayList<String> mTitles = new ArrayList<>();
     private ArrayList<String> mDates = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> titles, ArrayList<String> dates) {
+    public RecyclerViewAdapter(Context context, ArrayList<UUID> ids, ArrayList<String> titles, ArrayList<String> dates) {
+        mIds = ids;
         mTitles = titles;
         mDates = dates;
         mContext = context;
@@ -46,9 +49,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 // if clicked on then should go to view task... IT WORKS! There is better way apparently
 
                 //first, we have to specify which task in the recycler view we are selecting via the task name
-                Intent intent = TaskView.newIntent(mContext, mTitles.get(position),
-                                                    MainActivity.getTask(mTitles.get(position)).getmDescription(),
-                                                    MainActivity.getTask(mTitles.get(position)).getmDateAndTimeDue());
+                //CHANGE TO UUID
+                Intent intent = TaskView.newIntent(mContext, mIds.get(position));
                 mContext.startActivity(intent);
 
                 //mContext.startActivity(new Intent(mContext, TaskView.class));

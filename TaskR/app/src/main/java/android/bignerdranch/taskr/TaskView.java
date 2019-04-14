@@ -9,8 +9,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.UUID;
+
 public class TaskView extends AppCompatActivity {
 
+    private static UUID mId;
     private String mOriginalTaskName;
     private String mOriginalDescription;
     private String mOriginalDateAndTime;
@@ -18,11 +21,13 @@ public class TaskView extends AppCompatActivity {
     private static final String EXTRA_TASK_DESC = "com.bignerdranch.android.taskr.extra_task_description";
     private static final String EXTRA_TASK_DATE_AND_TIME = "com.bignerdranch.android.taskr.extra_task_date_and_time";
 
-    public static Intent newIntent(Context packageContext, String taskName, String taskDescription, String taskDateAndTime) {
+    public static Intent newIntent(Context packageContext, UUID id) {
+        mId = id;
         Intent intent = new Intent(packageContext, TaskView.class); //for retrieving task name
-        intent.putExtra(EXTRA_TASK_NAME, taskName);
-        intent.putExtra(EXTRA_TASK_DESC, taskDescription);
-        intent.putExtra(EXTRA_TASK_DATE_AND_TIME, taskDateAndTime);
+        Task originalTask = MainActivity.getTask(id);
+        intent.putExtra(EXTRA_TASK_NAME, originalTask.getmName());
+        intent.putExtra(EXTRA_TASK_DESC, originalTask.getmDescription());
+        intent.putExtra(EXTRA_TASK_DATE_AND_TIME, originalTask.getmDateAndTimeDue());
         return intent;
     }
 
@@ -72,13 +77,13 @@ public class TaskView extends AppCompatActivity {
 
                     Task alteredTask = new Task(inputName.getText().toString(), inputDescription.getText().toString(),
                             inputDate.getText().toString() + " at " + inputTime.getText().toString());
-                    MainActivity.updateTask(mOriginalTaskName, alteredTask);
+                    MainActivity.updateTask(mId, alteredTask);
                     startActivity(new Intent(TaskView.this, MainActivity.class));
 
                     break;
                 case R.id.deleteBtn:
                     //delete from the database using method defined in Main Activity
-                    MainActivity.deleteTask(mOriginalTaskName);
+                    MainActivity.deleteTask(mId);
                     startActivity(new Intent(TaskView.this, MainActivity.class));
                     break;
             }

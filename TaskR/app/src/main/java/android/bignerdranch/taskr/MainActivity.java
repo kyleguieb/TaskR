@@ -21,16 +21,19 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Context mContext;
+    private static Context mContext;
     private static SQLiteDatabase mDatabase;
 
     // Vars for RecyclerView
+    private ArrayList<UUID> mIds = new ArrayList<>();
     private ArrayList<String> mTaskTitles = new ArrayList<>();
     private ArrayList<String> mDatesNTimes = new ArrayList<>();
 
@@ -88,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i = 0; i < listOfTasks.size(); i++)
         {
+            mIds.add(listOfTasks.get(i).getId());
             mTaskTitles.add(listOfTasks.get(i).getmName());
             mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
         }
@@ -97,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.RecyclerViewHome);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mTaskTitles, mDatesNTimes);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mIds, mTaskTitles, mDatesNTimes);
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -122,10 +126,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static ContentValues getContentValues(Task task)    {   //adds new task (should be in CreatingTask.java)
         ContentValues values = new ContentValues();
+        values.put(TaskDbSchema.TaskTable.Cols.UUID, task.getId().toString());
         values.put(TaskDbSchema.TaskTable.Cols.NAME, task.getmName());
         values.put(TaskDbSchema.TaskTable.Cols.DESCRIPTION, task.getmDescription());
         values.put(TaskDbSchema.TaskTable.Cols.DATE_AND_TIME_DUE, task.getmDateAndTimeDue());
-        //again, can modify if LocalDateAndTime gives us trouble
+        values.put(TaskDbSchema.TaskTable.Cols.COMPLETED, task.isCompleted() ? 1 : 0);
 
         return values;
     }
@@ -133,12 +138,16 @@ public class MainActivity extends AppCompatActivity {
     public static void addTask(Task c) {       //adds new task (should be in CreatingTask.java)
         ContentValues values = getContentValues(c);
 
-        mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
+        long rowInsertedSuccessfully = mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
+        if(rowInsertedSuccessfully != -1)
+            Toast.makeText(mContext, "New row added, row id: " + rowInsertedSuccessfully, Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(mContext, "Something wrong", Toast.LENGTH_SHORT).show();
     }
 
-    public static Task getTask(String name)    {       //get specific task by name
-        TaskCursorWrapper cursor = queryTasks(TaskDbSchema.TaskTable.Cols.NAME +
-                " = ?", new String[] {name});
+    public static Task getTask(UUID id)    {       //get specific task by uuid
+        TaskCursorWrapper cursor = queryTasks(TaskDbSchema.TaskTable.Cols.UUID +
+                " = ?", new String[] {id.toString()});
 
         try {
             if (cursor.getCount() == 0) {
@@ -152,18 +161,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void updateTask(String originalTaskName, Task task)   {   //edits task accordingly, should be in TaskView.java
+    public static void updateTask(UUID id, Task task)   {   //edits task accordingly
 
         //new task that will replace old task
         ContentValues values = getContentValues(task);
 
-        mDatabase.update(TaskDbSchema.TaskTable.NAME, values, TaskDbSchema.TaskTable.Cols.NAME
-                            + " = ?", new String[] { originalTaskName });
+        mDatabase.update(TaskDbSchema.TaskTable.NAME, values, TaskDbSchema.TaskTable.Cols.UUID
+                            + " = ?", new String[] { id.toString() });
     }
 
-    public static void deleteTask(String taskName)    {
-        mDatabase.delete(TaskDbSchema.TaskTable.NAME, TaskDbSchema.TaskTable.Cols.NAME
-                            + " = ?", new String[] {taskName});
+    public static void deleteTask(UUID taskID)    {
+        mDatabase.delete(TaskDbSchema.TaskTable.NAME, TaskDbSchema.TaskTable.Cols.UUID
+                            + " = ?", new String[] {taskID.toString()});
         //deletes tasks by searching by name (should change in the future, could accidentally delete a different task)
     }
 
