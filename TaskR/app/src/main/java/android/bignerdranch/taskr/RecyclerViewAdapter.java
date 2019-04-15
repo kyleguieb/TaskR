@@ -43,33 +43,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.tasks_title.setText(mTitles.get(position));
         holder.tasks_date.setText(mDates.get(position));
-        //pos = position;
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                // if clicked on then should go to view task... IT WORKS! There is better way apparently
-
-
-//                first, we have to specify which task in the recycler view we are selecting via the task name
-//                Intent intent = TaskView.newIntent(mContext, mTitles.get(position),
-//                                                    MainActivity.getTask(mTitles.get(position)).getmDescription(),
-//                                                    MainActivity.getTask(mTitles.get(position)).getmDateAndTimeDue());
-//                mContext.startActivity(intent);
-//
-//                mContext.startActivity(new Intent(mContext, TaskView.class));
-
                 //first, we have to specify which task in the recycler view we are selecting via the task name
-                //CHANGE TO UUID
-                Intent intent = TaskView.newIntent(mContext, mIds.get(position));
-                mContext.startActivity(intent);
+//                Intent intent = TaskView.newIntent(mContext, mIds.get(position));
+//                mContext.startActivity(intent);
 
-                //mContext.startActivity(new Intent(mContext, TaskView.class));
-
-
-                //TO BE REMOVED - Just a test
+                // TODO: TO BE REMOVED - Just a test
                 Toast.makeText(mContext, mTitles.get(position), Toast.LENGTH_SHORT).show();
 
                 // Dialog - Task Viewing
@@ -77,35 +61,48 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 LayoutInflater inflater = LayoutInflater.from(mContext);
                 View mView = inflater.inflate(R.layout.dialog_task, null);
 
-                EditText mTitle = (EditText) mView.findViewById(R.id.dialogTitle);
-                EditText mDate = (EditText) mView.findViewById(R.id.dialogDate);
-                EditText mTime = (EditText) mView.findViewById(R.id.dialogTime);
-                EditText mDescription = (EditText) mView.findViewById(R.id.dialogDescription);
+                final String taskViewTitle = mTitles.get(position);
+                String taskViewDateString = mDates.get(position);
+                String[] taskViewTokens = taskViewDateString.split(" at ");   //separates the date and time from each other
+                String taskViewDate = taskViewTokens[0];
+                final String taskViewTime = taskViewTokens[1];
+                final String taskViewDescription = MainActivity.getTask(mIds.get(position)).getmDescription();
+
+                final EditText mTitle = (EditText) mView.findViewById(R.id.dialogTitle);
+                final EditText mDate = (EditText) mView.findViewById(R.id.dialogDate);
+                final EditText mTime = (EditText) mView.findViewById(R.id.dialogTime);
+                final EditText mDescription = (EditText) mView.findViewById(R.id.dialogDescription);
+
+                mTitle.setText(taskViewTitle);
+                mDate.setText(taskViewDate);
+                mTime.setText(taskViewTime);
+                mDescription.setText(taskViewDescription);
 
                 Button mEdit = (Button) mView.findViewById(R.id.editButton);
                 Button mDelete = (Button) mView.findViewById(R.id.deleteButton);
-
-                mEdit.setOnClickListener(new View.OnClickListener() {
-
-                    public void onClick(View view) {
-//                    Intent intent = TaskView.newIntent(mContext, mTitles.get(position),
-//                            MainActivity.getTask(mTitles.get(position)).getmDescription(),
-//                            MainActivity.getTask(mTitles.get(position)).getmDateAndTimeDue());
-//                    mContext.startActivity(intent);
-
-                    }
-                });
 
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
 
+                mEdit.setOnClickListener(new View.OnClickListener() {
+
+                    public void onClick(View view) {
+                        Task updatedTask = new Task(mTitle.getText().toString(), mDescription.getText().toString(),
+                                    mDate.getText().toString() + " at " + mTime.getText().toString());
+                        MainActivity.updateTask(mIds.get(position), updatedTask);
+
+                        dialog.dismiss();
+                        mContext.startActivity(new Intent(mContext, MainActivity.class)); //TODO: Needs to be fixed maybe
+                    }
+                });
+
                 mDelete.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View view) {
-                        MainActivity.deleteTask(mTitles.get(position));
+                        MainActivity.deleteTask(mIds.get(position));
                         dialog.dismiss();
-                        mContext.startActivity(new Intent(mContext, MainActivity.class)); //TODO: Needs to be fixed
+                        mContext.startActivity(new Intent(mContext, MainActivity.class)); //TODO: Needs to be fixed maybe
                     }
                 });
             }
@@ -132,6 +129,3 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 }
-
-
-// Back in time version TODO: So much to fix
