@@ -46,9 +46,6 @@ public class CreatingTask extends AppCompatActivity {
                                             inputTime.getText().toString());
                     MainActivity.addTask(newTask);
 
-                    Toast.makeText(CreatingTask.this, "New Task Successfully added!",
-                                    Toast.LENGTH_SHORT).show();  //for debugging purposes
-
                     startActivity(new Intent(CreatingTask.this, MainActivity.class));
                     break;
             }
