@@ -14,8 +14,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Context mContext;
     private static SQLiteDatabase mDatabase;
+    public ProgressBar progressingBar;
 
 
     // Vars for RecyclerView
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        progressingBar =  findViewById(R.id.progressingBar);
 
         mContext = getApplicationContext();         //this line is super iffy, ask team members if problem persists
         mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();         //initialization of the database using SQLiteOpenHelper
@@ -84,6 +88,13 @@ public class MainActivity extends AppCompatActivity {
         initTasks();
 
     }
+
+    protected View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        View view = inflater.inflate(R.layout.)
+
+    }
+
 
     private void initTasks() { //Gotta figure this out, should be where it pulls from Database?
 
@@ -141,9 +152,7 @@ public class MainActivity extends AppCompatActivity {
         ContentValues values = getContentValues(c);
 
         mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
-        //for test lol
-//        ProgressBar progressingBar = (ProgressBar) findViewById(R.id.progressingBar); //initiate progress bar
-//        int maxValue = progressingBar.getMax();
+
 
     }
 
@@ -175,7 +184,13 @@ public class MainActivity extends AppCompatActivity {
     public static void deleteTask(String taskName)    {
         mDatabase.delete(TaskDbSchema.TaskTable.NAME, TaskDbSchema.TaskTable.Cols.NAME
                             + " = ?", new String[] {taskName});
+
         //deletes tasks by searching by name (should change in the future, could accidentally delete a different task)
+
+
+
+        //for test lol
+
     }
 
     private static TaskCursorWrapper queryTasks(String whereClause, String[] whereArgs)   {   //reading from database using query
