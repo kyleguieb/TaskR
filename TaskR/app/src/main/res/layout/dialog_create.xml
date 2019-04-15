@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/newTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/title"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/newDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newTitle"
+        android:ems="10"
+        android:hint="@string/date"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newDescription"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/cancel"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newDescription"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/cancelButton"
+        android:layout_toRightOf="@+id/cancelButton"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/save"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/newDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newDate"
+        android:ems="10"
+        android:hint="@string/description"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/newTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newTitle"
+        android:layout_toEndOf="@+id/newDate"
+        android:layout_toRightOf="@+id/newDate"
+        android:ems="10"
+        android:hint="@string/time"
+        android:inputType="textPersonName|text" />
+</RelativeLayout>
