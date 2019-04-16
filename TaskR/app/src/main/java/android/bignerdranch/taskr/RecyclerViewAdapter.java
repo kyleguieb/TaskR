@@ -1,21 +1,27 @@
 package android.bignerdranch.taskr;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.Calendar;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
@@ -23,6 +29,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<String> mTitles = new ArrayList<>();
     private ArrayList<String> mDates = new ArrayList<>();
     private Context mContext;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private TimePickerDialog.OnTimeSetListener mTimeSetListener;
 
     public RecyclerViewAdapter(Context context, ArrayList<UUID> ids, ArrayList<String> titles, ArrayList<String> dates) {
         mIds = ids;
@@ -69,8 +77,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 final String taskViewDescription = MainActivity.getTask(mIds.get(position)).getmDescription();
 
                 final EditText mTitle = (EditText) mView.findViewById(R.id.dialogTitle);
-                final EditText mDate = (EditText) mView.findViewById(R.id.dialogDate);
-                final EditText mTime = (EditText) mView.findViewById(R.id.dialogTime);
+                final TextView mDate = (TextView) mView.findViewById(R.id.dialogDate);
+                final TextView mTime = (TextView) mView.findViewById(R.id.dialogTime);
                 final EditText mDescription = (EditText) mView.findViewById(R.id.dialogDescription);
 
                 mTitle.setText(taskViewTitle);
@@ -84,6 +92,56 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
+
+                mDate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Calendar cal = Calendar.getInstance();
+                        int year = cal.get(Calendar.YEAR);
+                        int month = cal.get(Calendar.MONTH);
+                        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                        DatePickerDialog dateDialog = new DatePickerDialog(mContext, android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, month, day);
+                        dateDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.R.color.transparent));
+                        dateDialog.show();
+
+                    }
+                });
+
+                mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        month = month + 1;
+
+                        String date = month + "/" + dayOfMonth + "/" + year;
+                        mDate.setText(date);
+
+                    }
+                };
+                
+                mTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Calendar cal = Calendar.getInstance();
+                        int hour = cal.get(Calendar.HOUR_OF_DAY);
+                        int minutes = cal.get(Calendar.MINUTE);
+                        boolean isTwentyFour = false;
+
+                        TimePickerDialog timeDialog = new TimePickerDialog(mContext, android.R.style.Theme_Holo_Light_Dialog_MinWidth, mTimeSetListener, hour, minutes, isTwentyFour);
+                        timeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.R.color.transparent));
+                        timeDialog.show();
+
+                    }
+                });
+
+                mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                        String time = hourOfDay + ":" + minute;
+                        mTime.setText(time);
+                    }
+                };
 
                 mEdit.setOnClickListener(new View.OnClickListener() {
 
