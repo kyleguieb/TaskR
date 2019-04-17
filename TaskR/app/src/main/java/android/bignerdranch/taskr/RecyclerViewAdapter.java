@@ -112,13 +112,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         month = month + 1;
-
                         String date = month + "/" + dayOfMonth + "/" + year;
                         mDate.setText(date);
 
                     }
                 };
-                
+
                 mTime.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -195,16 +195,27 @@ public class MainActivity extends AppCompatActivity {
 
                         public void onClick(View view) {
                             //adding that new task object to the database itself
-                            Task newTask = new Task(inputName.getText().toString(), inputDescription.getText().toString(),
-                                    inputDate.getText().toString() + " at " +
-                                            inputTime.getText().toString());
-                            MainActivity.addTask(newTask);
 
-                            Toast.makeText(MainActivity.this, "New Task Successfully added!",
-                                    Toast.LENGTH_SHORT).show();  //for debugging purposes
+                            if (inputName.getText().toString().equals("") ||
+                                inputDate.getText().toString().equals("") ||
+                                inputTime.getText().toString().equals("") ||
+                                inputDescription.getText().toString().equals(""))
+                            {
+                                Toast.makeText(MainActivity.this, "Please fill in all fields!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Task newTask = new Task(inputName.getText().toString(), inputDescription.getText().toString(),
+                                        inputDate.getText().toString() + " at " +
+                                                inputTime.getText().toString());
+                                MainActivity.addTask(newTask);
 
-                            dialog.dismiss();
-                            recreate();
+                                Toast.makeText(MainActivity.this, "New Task Successfully added!",
+                                        Toast.LENGTH_SHORT).show();  //for debugging purposes
+
+                                dialog.dismiss();
+                                recreate();
+                            }
                         }
                     });
 
