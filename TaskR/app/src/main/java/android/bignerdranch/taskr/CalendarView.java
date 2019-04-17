@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class Calendar extends AppCompatActivity {
+public class CalendarView extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -17,13 +17,13 @@ public class Calendar extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    startActivity(new Intent(Calendar.this, MainActivity.class));
+                    startActivity(new Intent(CalendarView.this, MainActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
                     //startActivity(new Intent(Calendar.this, Calendar.class));
                     return true;
                 case R.id.navigation_notifications:
-                    startActivity(new Intent(Calendar.this, Profile.class));
+                    startActivity(new Intent(CalendarView.this, Profile.class));
                     return true;
             }
             return false;
