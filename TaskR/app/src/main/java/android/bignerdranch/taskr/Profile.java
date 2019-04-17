@@ -38,21 +38,8 @@ public class Profile extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        //defineButtons();
+
     }
 
-//    public void defineButtons() {
-//        findViewById(R.id.Friends_List_Button).setOnClickListener(buttonClickListener);
-//    }
-//
-//    private View.OnClickListener buttonClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            switch(v.getId()) {
-//                case R.id.Friends_List_Button:
-//                    startActivity(new Intent(Profile.this, FriendList.class));
-//                    break;
-//            }
-//        }
-//    };
+
 }
