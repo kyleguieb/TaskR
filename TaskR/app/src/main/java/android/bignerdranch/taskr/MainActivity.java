@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static Context mContext;
     private static SQLiteDatabase mDatabase;
-    public ProgressBar progressingBar;
 
 
     // Vars for RecyclerView
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        progressingBar =  findViewById(R.id.progressingBar);
 
         mContext = getApplicationContext();         //this line is super iffy, ask team members if problem persists
         mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();         //initialization of the database using SQLiteOpenHelper
