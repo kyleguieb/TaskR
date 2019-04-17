@@ -12,14 +12,18 @@
         android:hint="@string/title"
         android:inputType="text" />
 
-    <EditText
+    <TextView
         android:id="@+id/newDate"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_below="@+id/newTitle"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:background="@drawable/bottomborder"
         android:ems="10"
+        android:gravity="center_vertical"
         android:hint="@string/date"
-        android:inputType="text" />
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/cancelButton"
@@ -54,14 +58,18 @@
         android:hint="@string/description"
         android:inputType="textMultiLine" />
 
-    <EditText
+    <TextView
         android:id="@+id/newTime"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_below="@+id/newTitle"
         android:layout_toEndOf="@+id/newDate"
         android:layout_toRightOf="@+id/newDate"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/bottomborder"
         android:ems="10"
+        android:gravity="center_vertical"
         android:hint="@string/time"
-        android:inputType="textPersonName|text" />
+        android:textSize="18sp" />
 </RelativeLayout>

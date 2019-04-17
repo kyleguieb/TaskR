@@ -1,6 +1,8 @@
 package android.bignerdranch.taskr;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.bignerdranch.taskr.database.TaskBaseHelper;
 import android.bignerdranch.taskr.database.TaskCursorWrapper;
 import android.bignerdranch.taskr.database.TaskDbSchema;
@@ -9,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -21,16 +24,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<UUID> mIds = new ArrayList<>();
     private ArrayList<String> mTaskTitles = new ArrayList<>();
     private ArrayList<String> mDatesNTimes = new ArrayList<>();
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private TimePickerDialog.OnTimeSetListener mTimeSetListener;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -136,8 +145,8 @@ public class MainActivity extends AppCompatActivity {
                     View mView = inflater.inflate(R.layout.dialog_create, null);
 
                     final EditText inputName = (EditText) mView.findViewById(R.id.newTitle);
-                    final EditText inputDate = (EditText) mView.findViewById(R.id.newDate);
-                    final EditText inputTime = (EditText) mView.findViewById(R.id.newTime);
+                    final TextView inputDate = (TextView) mView.findViewById(R.id.newDate);
+                    final TextView inputTime = (TextView) mView.findViewById(R.id.newTime);
                     final EditText inputDescription = (EditText) mView.findViewById(R.id.newDescription);
 
                     Button mCancel = (Button) mView.findViewById(R.id.cancelButton);
@@ -147,20 +156,81 @@ public class MainActivity extends AppCompatActivity {
                     final AlertDialog dialog = mBuilder.create();
                     dialog.show();
 
+                    inputDate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Calendar cal = Calendar.getInstance();
+                            int year = cal.get(Calendar.YEAR);
+                            int month = cal.get(Calendar.MONTH);
+                            int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                            DatePickerDialog dateDialog = new DatePickerDialog(MainActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, month, day);
+                            dateDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.R.color.transparent));
+                            dateDialog.show();
+
+                        }
+                    });
+
+                    mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            month = month + 1;
+
+                            String date = month + "/" + dayOfMonth + "/" + year;
+                            inputDate.setText(date);
+
+                        }
+                    };
+
+                    inputTime.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Calendar cal = Calendar.getInstance();
+                            int hour = cal.get(Calendar.HOUR_OF_DAY);
+                            int minutes = cal.get(Calendar.MINUTE);
+                            boolean isTwentyFour = false;
+
+                            TimePickerDialog timeDialog = new TimePickerDialog(MainActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, mTimeSetListener, hour, minutes, isTwentyFour);
+                            timeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.R.color.transparent));
+                            timeDialog.show();
+
+                        }
+                    });
+
+                    mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                            String time = hourOfDay + ":" + minute;
+                            inputTime.setText(time);
+                        }
+                    };
+
                     mSave.setOnClickListener(new View.OnClickListener() {
 
                         public void onClick(View view) {
                             //adding that new task object to the database itself
-                            Task newTask = new Task(inputName.getText().toString(), inputDescription.getText().toString(),
-                                    inputDate.getText().toString() + " at " +
-                                            inputTime.getText().toString());
-                            MainActivity.addTask(newTask);
 
-                            Toast.makeText(MainActivity.this, "New Task Successfully added!",
-                                    Toast.LENGTH_SHORT).show();  //for debugging purposes
+                            if (inputName.getText().toString().equals("") ||
+                                inputDate.getText().toString().equals("") ||
+                                inputTime.getText().toString().equals("") ||
+                                inputDescription.getText().toString().equals(""))
+                            {
+                                Toast.makeText(MainActivity.this, "Please fill in all fields!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Task newTask = new Task(inputName.getText().toString(), inputDescription.getText().toString(),
+                                        inputDate.getText().toString() + " at " +
+                                                inputTime.getText().toString());
+                                MainActivity.addTask(newTask);
 
-                            dialog.dismiss();
-                            recreate();
+                                Toast.makeText(MainActivity.this, "New Task Successfully added!",
+                                        Toast.LENGTH_SHORT).show();  //for debugging purposes
+
+                                dialog.dismiss();
+                                recreate();
+                            }
                         }
                     });
 
