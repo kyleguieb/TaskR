@@ -20,7 +20,7 @@ public class Profile extends AppCompatActivity {
                     startActivity(new Intent(Profile.this, MainActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
-                    startActivity(new Intent(Profile.this, Calendar.class));
+                    startActivity(new Intent(Profile.this, CalendarView.class));
                     return true;
                 case R.id.navigation_notifications:
                     //startActivity(new Intent(Profile.this, Profile.class));

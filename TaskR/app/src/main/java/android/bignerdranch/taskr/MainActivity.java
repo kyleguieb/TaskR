@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     return true;
                 case R.id.navigation_dashboard:
-                    startActivity(new Intent(MainActivity.this, Calendar.class));
+                    startActivity(new Intent(MainActivity.this, CalendarView.class));
                     return true;
                 case R.id.navigation_notifications:
                     startActivity(new Intent(MainActivity.this, Profile.class));
