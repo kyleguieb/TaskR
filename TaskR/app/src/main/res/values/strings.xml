@@ -11,6 +11,7 @@
     <string name="date">Date</string>
     <string name="description">Description</string>
     <string name="time">Time</string>
+    <string name="Rewards">Rewards</string>
     <string-array name="sort">
         <item>Most Recent</item>
         <item>Completed</item>

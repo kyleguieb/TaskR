@@ -122,7 +122,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     @Override
                     public void onClick(View v) {
                         Calendar cal = Calendar.getInstance();
-                        int hour = cal.get(Calendar.HOUR_OF_DAY);
+                        int hour = cal.get(Calendar.HOUR);
                         int minutes = cal.get(Calendar.MINUTE);
                         boolean isTwentyFour = false;
 
