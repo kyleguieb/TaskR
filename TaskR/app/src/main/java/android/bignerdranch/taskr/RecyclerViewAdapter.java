@@ -144,14 +144,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     }
                 };
 
-                mCheckBox.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Task currentTask = MainActivity.getTask(mIds.get(position));
-                        currentTask.setCompleted(true);
-                        MainActivity.updateTask(mIds.get(position), currentTask);
-                    }
-                });
+//                mCheckBox.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Task currentTask = MainActivity.getTask(mIds.get(position));
+//                        currentTask.setCompleted(true);
+//                        MainActivity.updateTask(mIds.get(position), currentTask);
+//                    }
+//                });
 
                 mEdit.setOnClickListener(new View.OnClickListener() {
 
