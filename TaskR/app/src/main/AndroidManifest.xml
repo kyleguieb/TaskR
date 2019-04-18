@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Rewards"></activity>
         <activity android:name=".Profile" />
-        <activity android:name=".CalendarView" />
+        <activity android:name=".CalendarActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

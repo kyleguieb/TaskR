@@ -6,7 +6,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 public class Profile extends AppCompatActivity {
 
@@ -20,7 +19,7 @@ public class Profile extends AppCompatActivity {
                     startActivity(new Intent(Profile.this, MainActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
-                    startActivity(new Intent(Profile.this, CalendarView.class));
+                    startActivity(new Intent(Profile.this, CalendarActivity.class));
                     return true;
                 case R.id.navigation_notifications:
                     //startActivity(new Intent(Profile.this, Profile.class));

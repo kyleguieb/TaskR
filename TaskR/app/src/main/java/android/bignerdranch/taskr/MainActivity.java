@@ -25,15 +25,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import java.util.Calendar;
 
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     return true;
                 case R.id.navigation_dashboard:
-                    startActivity(new Intent(MainActivity.this, CalendarView.class));
+                    startActivity(new Intent(MainActivity.this, CalendarActivity.class));
                     return true;
                 case R.id.navigation_notifications:
                     startActivity(new Intent(MainActivity.this, Profile.class));
@@ -297,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
         return new TaskCursorWrapper(cursor);
     }
 
-    public ArrayList<Task> getTasks()    {       //get all tasks in the database and put them in an ArrayList
+    public static ArrayList<Task> getTasks()    {       //get all tasks in the database and put them in an ArrayList
         ArrayList<Task> tasks = new ArrayList<>();
 
         TaskCursorWrapper cursor = queryTasks(null,null);
