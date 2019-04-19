@@ -12,8 +12,8 @@
     <string name="description">Description</string>
     <string name="time">Time</string>
     <string name="Name">Name</string>
-    <string name="Price">Price</string>
-    <string name="Unlock">Unlock</string>
+    <string name="levelReq">Level Required:</string>
+    <string name="set">Set</string>
     <string-array name="sort">
         <item>Most Recent</item>
         <item>Completed</item>

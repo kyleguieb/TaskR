@@ -8,7 +8,7 @@
     tools:context=".Rewards">
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/scrollViewRewards"
         android:layout_width="191dp"
         android:layout_height="516dp"
         android:layout_marginStart="8dp"
@@ -64,10 +64,10 @@
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
-        app:layout_constraintStart_toEndOf="@+id/scrollView2" />
+        app:layout_constraintStart_toEndOf="@+id/scrollViewRewards" />
 
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/levelRequired"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -76,12 +76,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Price:"
+        android:text="@string/levelReq"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/rewardDescription"
         app:layout_constraintEnd_toStartOf="@+id/priceCost"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/scrollView2"
+        app:layout_constraintStart_toEndOf="@+id/scrollViewRewards"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ImageView
@@ -95,7 +95,7 @@
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.56"
-        app:layout_constraintStart_toEndOf="@+id/scrollView2"
+        app:layout_constraintStart_toEndOf="@+id/scrollViewRewards"
         app:layout_constraintTop_toBottomOf="@+id/rewardName"
         app:srcCompat="@android:color/black" />
 
@@ -112,23 +112,24 @@
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.106"
-        app:layout_constraintStart_toEndOf="@+id/scrollView2"
+        app:layout_constraintStart_toEndOf="@+id/scrollViewRewards"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/priceCost"
-        android:layout_width="89dp"
+        android:layout_width="75dp"
         android:layout_height="19dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/bottomborder"
         android:gravity="center"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/rewardDescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.545" />
 
     <TextView
         android:id="@+id/rewardDescription"
@@ -141,13 +142,13 @@
         android:layout_marginBottom="208dp"
         android:text="@string/description"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/unlockButton"
+        app:layout_constraintBottom_toTopOf="@+id/setButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.243"
-        app:layout_constraintStart_toEndOf="@+id/scrollView2" />
+        app:layout_constraintStart_toEndOf="@+id/scrollViewRewards" />
 
     <Button
-        android:id="@+id/unlockButton"
+        android:id="@+id/setButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -156,11 +157,11 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="24dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/Unlock"
+        android:text="@string/set"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/yourPoints"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/scrollView2" />
+        app:layout_constraintStart_toEndOf="@+id/scrollViewRewards" />
 
 </android.support.constraint.ConstraintLayout>

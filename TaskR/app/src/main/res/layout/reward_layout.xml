@@ -28,7 +28,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:text="@string/Price"
+        android:text="@string/levelReq"
         android:textColor="@android:color/black"
         android:textSize="16sp" />
 
