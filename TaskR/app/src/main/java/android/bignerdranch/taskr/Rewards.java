@@ -1,10 +1,14 @@
 package android.bignerdranch.taskr;
 
+<<<<<<< HEAD:TaskR/app/src/main/java/android/bignerdranch/taskr/Calendar.java
 import android.bignerdranch.taskr.database.TaskBaseHelper;
 import android.bignerdranch.taskr.database.TaskCursorWrapper;
 import android.bignerdranch.taskr.database.TaskDbSchema;
 import android.content.ContentValues;
 import android.content.Context;
+=======
+import android.app.Application;
+>>>>>>> Tiff:TaskR/app/src/main/java/android/bignerdranch/taskr/Rewards.java
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,9 +19,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+<<<<<<< HEAD:TaskR/app/src/main/java/android/bignerdranch/taskr/Calendar.java
 import android.widget.CalendarView;
 import android.widget.TextView;
 
+=======
+
+public class Rewards extends AppCompatActivity {
+>>>>>>> Tiff:TaskR/app/src/main/java/android/bignerdranch/taskr/Rewards.java
 
 import java.util.ArrayList;
 
@@ -36,13 +45,13 @@ public class Calendar extends AppCompatActivity  {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    startActivity(new Intent(Calendar.this, MainActivity.class));
+                    startActivity(new Intent(Rewards.this, MainActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
-                    //startActivity(new Intent(Calendar.this, Calendar.class));
+                    startActivity(new Intent(Rewards.this, CalendarActivity.class));
                     return true;
                 case R.id.navigation_notifications:
-                    startActivity(new Intent(Calendar.this, Profile.class));
+                    startActivity(new Intent(Rewards.this, Profile.class));
                     return true;
             }
             return false;
@@ -52,11 +61,17 @@ public class Calendar extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD:TaskR/app/src/main/java/android/bignerdranch/taskr/Calendar.java
         setContentView(R.layout.activity_calendar);
 //        mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();
 //        mContext = getApplicationContext();
 
         //mTextMessage = (TextView) findViewById(R.id.message);
+=======
+        //setContentView(R.layout.activity_rewards);
+        //getTheme().applyStyle(R.style.AppThemeMint, true);
+        setContentView(R.layout.activity_rewards);
+>>>>>>> Tiff:TaskR/app/src/main/java/android/bignerdranch/taskr/Rewards.java
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -64,6 +79,7 @@ public class Calendar extends AppCompatActivity  {
 
 
     }
+<<<<<<< HEAD:TaskR/app/src/main/java/android/bignerdranch/taskr/Calendar.java
 //
 //
 //    private void initRecyclerView() {
@@ -164,4 +180,8 @@ public class Calendar extends AppCompatActivity  {
 //        }
 //        return tasks;
 //    }
+=======
+
+
+>>>>>>> Tiff:TaskR/app/src/main/java/android/bignerdranch/taskr/Rewards.java
 }

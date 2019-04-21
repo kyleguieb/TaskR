@@ -28,14 +28,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import java.util.Calendar;
 
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     return true;
                 case R.id.navigation_dashboard:
-                    startActivity(new Intent(MainActivity.this, Calendar.class));
+                    startActivity(new Intent(MainActivity.this, CalendarActivity.class));
                     return true;
                 case R.id.navigation_notifications:
                     startActivity(new Intent(MainActivity.this, Profile.class));
@@ -184,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Calendar cal = Calendar.getInstance();
-                            int hour = cal.get(Calendar.HOUR_OF_DAY);
+                            int hour = cal.get(Calendar.HOUR);
                             int minutes = cal.get(Calendar.MINUTE);
                             boolean isTwentyFour = false;
 
@@ -321,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
         return new TaskCursorWrapper(cursor);
     }
 
-    public ArrayList<Task> getTasks()    {       //get all tasks in the database and put them in an ArrayList
+    public static ArrayList<Task> getTasks()    {       //get all tasks in the database and put them in an ArrayList
         ArrayList<Task> tasks = new ArrayList<>();
 
         TaskCursorWrapper cursor = queryTasks(null,null);

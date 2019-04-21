@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -80,6 +81,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 final TextView mDate = (TextView) mView.findViewById(R.id.dialogDate);
                 final TextView mTime = (TextView) mView.findViewById(R.id.dialogTime);
                 final EditText mDescription = (EditText) mView.findViewById(R.id.dialogDescription);
+                final CheckBox mCheckBox = (CheckBox) mView.findViewById(R.id.isCompleted);
 
                 mTitle.setText(taskViewTitle);
                 mDate.setText(taskViewDate);
@@ -122,7 +124,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     @Override
                     public void onClick(View v) {
                         Calendar cal = Calendar.getInstance();
-                        int hour = cal.get(Calendar.HOUR_OF_DAY);
+                        int hour = cal.get(Calendar.HOUR);
                         int minutes = cal.get(Calendar.MINUTE);
                         boolean isTwentyFour = false;
 
@@ -141,6 +143,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         mTime.setText(time);
                     }
                 };
+
+//                mCheckBox.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Task currentTask = MainActivity.getTask(mIds.get(position));
+//                        currentTask.setCompleted(true);
+//                        MainActivity.updateTask(mIds.get(position), currentTask);
+//                    }
+//                });
 
                 mEdit.setOnClickListener(new View.OnClickListener() {
 

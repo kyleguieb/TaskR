@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppThemeMint" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/mintColorPrimary</item>
+        <item name="colorPrimaryDark">@color/mintColorPrimaryDark</item>
+        <item name="colorAccent">@color/mintColorAccent</item>
+    </style>
+
 </resources>

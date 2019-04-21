@@ -25,7 +25,7 @@ public class Profile extends AppCompatActivity {
                     startActivity(new Intent(Profile.this, MainActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
-                    startActivity(new Intent(Profile.this, Calendar.class));
+                    startActivity(new Intent(Profile.this, CalendarActivity.class));
                     return true;
                 case R.id.navigation_notifications:
                     //startActivity(new Intent(Profile.this, Profile.class));
@@ -72,7 +72,6 @@ public class Profile extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
     }
 
 
@@ -93,5 +92,22 @@ public class Profile extends AppCompatActivity {
         return progressBarMaxed;
     }
 
+//        defineButtons();
+//    }
+
+    public void defineButtons() {
+        findViewById(R.id.starButton).setOnClickListener(buttonClickListener);
+    }
+
+    private View.OnClickListener buttonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()) {
+                case R.id.starButton:
+                    startActivity(new Intent(Profile.this, Rewards.class));
+                    break;
+            }
+        }
+    };
 
 }

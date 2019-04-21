@@ -23,6 +23,7 @@
         android:ems="10"
         android:gravity="center_vertical"
         android:hint="@string/date"
+        android:textColor="@android:color/black"
         android:textSize="18sp" />
 
     <Button
@@ -63,13 +64,14 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_below="@+id/newTitle"
-        android:layout_toEndOf="@+id/newDate"
-        android:layout_toRightOf="@+id/newDate"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/newDate"
+        android:layout_toRightOf="@+id/newDate"
         android:background="@drawable/bottomborder"
         android:ems="10"
         android:gravity="center_vertical"
         android:hint="@string/time"
+        android:textColor="@android:color/black"
         android:textSize="18sp" />
 </RelativeLayout>
