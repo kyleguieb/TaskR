@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import static java.lang.Math.round;
+
 public class Profile extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -32,6 +34,8 @@ public class Profile extends AppCompatActivity {
             return false;
         }
     };
+    public static final double SCALE = 1.1; //Scale determines how fast to scale the xpToLevel.
+    public static final int XP_BASE = 10;
     private static ProgressBar mProgressBar;
     private TextView mExperienceCounter;
     private static TextView mLevels;
@@ -39,7 +43,9 @@ public class Profile extends AppCompatActivity {
     //private int mProgressStatus = 0;
     private static int currentExp = 0;
     private int i = 0;
-    private static int currentLevel = 0;
+    private static int currentLevel = 1;
+
+    private static int xpToLevel = XP_BASE;
 
 
     Button testButton; //test button
@@ -64,15 +70,12 @@ public class Profile extends AppCompatActivity {
                     isLevelUp();
                     mProgressBar.incrementProgressBy(1);
                     currentExp +=1;
-                    mExperienceCounter.setText(currentExp + "/100");
+                    mExperienceCounter.setText(currentExp + " / " + xpToLevel );
                     i++;
                 }
                 i = 0;
             }
         });
-
-
-
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -94,6 +97,8 @@ public class Profile extends AppCompatActivity {
         if (mProgressBar.getProgress() == mProgressBar.getMax())
         {
             mProgressBar.setProgress(0);
+            xpToLevel = (int)Math.pow((XP_BASE * currentLevel), SCALE); // Algorithm to determine how many exp for next level
+            mProgressBar.setMax(xpToLevel);
             currentExp = 0;
             currentLevel++;
             mLevels.setText(currentLevel + ""); //no idea why you need to add a blank thing but ok
@@ -117,5 +122,22 @@ public class Profile extends AppCompatActivity {
             }
         }
     };
+
+    /*
+    pseudocode
+
+    when a new task gets added to the "completed" array
+    check the difficulty
+    switch(difficulty)
+        if quick: while loop 5 times
+        if normal: while loop 10 times
+        if long: while loop 20 times
+
+
+    I think that should be it
+
+     */
+
+
 
 }
