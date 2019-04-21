@@ -35,9 +35,16 @@ public class Profile extends AppCompatActivity {
         }
     };
     private static ProgressBar mProgressBar;
-    private int mProgressStatus = 0;
     private TextView mPointsCounter;
-    private int points = 0; //make this usuable
+    private TextView mExperience;
+    private TextView mLevels;
+
+    private int mProgressStatus = 0;
+    private int points = 0; //make this usable
+    private int currentExp = 0;
+    private int i = 0;
+    private int currentLevel = 0;
+
 
     Button testButton; //test button
     //private Handler mHandler = new Handler();
@@ -49,20 +56,37 @@ public class Profile extends AppCompatActivity {
 
         mProgressBar = findViewById(R.id.progressingBar);
         mPointsCounter = findViewById(R.id.textViewPoints);
+        mExperience = findViewById(R.id.xpCounter);
+        mLevels = findViewById(R.id.text);
 
         testButton = findViewById(R.id.buttonToTest);
         //TODO - move this into a separate method?
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressBar.incrementProgressBy(10);
-                points += 10;
-                mPointsCounter.setText(points + " points");
-                //figure out overflow progress
-                if (isLevelUp())
+                while(i < 9)
                 {
-                    mProgressBar.setProgress(0);
+                    if (isLevelUp())
+                    {
+                        mProgressBar.setProgress(0);
+                        currentExp = 0;
+                        currentLevel++;
+
+                    }
+                    mProgressBar.incrementProgressBy(1);
+                    currentExp +=1;
+                    points +=1;
+                    //mLevels.setText(currentLevel);
+                    mExperience.setText(currentExp + "/100");
+                    mPointsCounter.setText(points + " points");
+                    i++;
                 }
+                i = 0;
+//                mProgressBar.incrementProgressBy(10);
+//                points += 10;
+//                mPointsCounter.setText(points + " points");
+                //figure out overflow progress
+
 
             }
         });

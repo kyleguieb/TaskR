@@ -50,6 +50,27 @@
     </ScrollView>
 
     <TextView
+        android:id="@+id/textViewLevel"
+        android:layout_width="111dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/textview_border"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@android:color/black"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scrollViewProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUsername"
+        app:layout_constraintVertical_bias="0.0"  />
+    <TextView
         android:id="@+id/textViewUsername"
         android:layout_width="181dp"
         android:layout_height="19dp"
@@ -68,22 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewName"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/imageViewProfile"
-        android:layout_width="111dp"
-        android:layout_height="99dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/textview_border"
-        app:layout_constraintBottom_toTopOf="@+id/scrollViewProfile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUsername"
-        app:layout_constraintVertical_bias="0.0" />
+
 
     <TextView
         android:id="@+id/textViewName"
@@ -115,14 +121,13 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorTest"
+        android:max="100"
         android:progressBackgroundTint="@color/colorRed"
         android:progressTint="@color/colorBlue"
         app:layout_constraintBottom_toTopOf="@+id/scrollViewProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewProfile"
-        app:layout_constraintVertical_bias="0.072"
-        android:max="100"/>
+        app:layout_constraintTop_toTopOf="@+id/textViewLevel" />
 
     <TextView
         android:id="@+id/textViewPoints"
@@ -155,11 +160,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/textViewPoints"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="test"
+        app:layout_constraintBottom_toTopOf="@+id/scrollViewProfile"
+        app:layout_constraintEnd_toStartOf="@+id/textViewLevel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressingBar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/starButton"
@@ -171,5 +176,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/btn_star_big_on" />
+
+    <TextView
+        android:id="@+id/xpCounter"
+        android:layout_width="104dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="0/100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="179dp" />
+
+
+
 
 </android.support.constraint.ConstraintLayout>
