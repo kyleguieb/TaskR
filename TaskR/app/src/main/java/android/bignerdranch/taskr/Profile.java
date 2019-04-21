@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class Profile extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -35,15 +33,13 @@ public class Profile extends AppCompatActivity {
         }
     };
     private static ProgressBar mProgressBar;
-    private TextView mPointsCounter;
-    private TextView mExperience;
-    private TextView mLevels;
+    private TextView mExperienceCounter;
+    private static TextView mLevels;
 
-    private int mProgressStatus = 0;
-    private int points = 0; //make this usable
-    private int currentExp = 0;
+    //private int mProgressStatus = 0;
+    private static int currentExp = 0;
     private int i = 0;
-    private int currentLevel = 0;
+    private static int currentLevel = 0;
 
 
     Button testButton; //test button
@@ -55,9 +51,8 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         mProgressBar = findViewById(R.id.progressingBar);
-        mPointsCounter = findViewById(R.id.textViewPoints);
-        mExperience = findViewById(R.id.xpCounter);
-        mLevels = findViewById(R.id.text);
+        mExperienceCounter = findViewById(R.id.textViewExperience);
+        mLevels = findViewById(R.id.textViewLevel);
 
         testButton = findViewById(R.id.buttonToTest);
         //TODO - move this into a separate method?
@@ -66,28 +61,13 @@ public class Profile extends AppCompatActivity {
             public void onClick(View v) {
                 while(i < 9)
                 {
-                    if (isLevelUp())
-                    {
-                        mProgressBar.setProgress(0);
-                        currentExp = 0;
-                        currentLevel++;
-
-                    }
+                    isLevelUp();
                     mProgressBar.incrementProgressBy(1);
                     currentExp +=1;
-                    points +=1;
-                    //mLevels.setText(currentLevel);
-                    mExperience.setText(currentExp + "/100");
-                    mPointsCounter.setText(points + " points");
+                    mExperienceCounter.setText(currentExp + "/100");
                     i++;
                 }
                 i = 0;
-//                mProgressBar.incrementProgressBy(10);
-//                points += 10;
-//                mPointsCounter.setText(points + " points");
-                //figure out overflow progress
-
-
             }
         });
 
@@ -100,20 +80,24 @@ public class Profile extends AppCompatActivity {
 
 
     /*
-    TODO
+    TODO - done
     Note to self: Image view, in XML, just change to TextView
     take out other stuff
     make text view to just an incrementing number
      */
 
-    public static boolean isLevelUp()
+    //Note: Level can't go past 3 digits otherwise it starts looking ugly, but
+    // I mean you can just make a check
+    // however comma it's pointless
+    public static void isLevelUp()
     {
-        boolean progressBarMaxed = false;
         if (mProgressBar.getProgress() == mProgressBar.getMax())
         {
-            progressBarMaxed = true;
+            mProgressBar.setProgress(0);
+            currentExp = 0;
+            currentLevel++;
+            mLevels.setText(currentLevel + ""); //no idea why you need to add a blank thing but ok
         }
-        return progressBarMaxed;
     }
 
 //        defineButtons();

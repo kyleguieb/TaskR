@@ -130,9 +130,9 @@
         app:layout_constraintTop_toTopOf="@+id/textViewLevel" />
 
     <TextView
-        android:id="@+id/textViewPoints"
-        android:layout_width="151dp"
-        android:layout_height="59dp"
+        android:id="@+id/textViewExperience"
+        android:layout_width="112dp"
+        android:layout_height="33dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -141,14 +141,15 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/textview_border"
         android:gravity="center"
-        android:text="0 points"
+        android:text="0/100"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scrollViewProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressingBar" />
+        app:layout_constraintTop_toBottomOf="@+id/progressingBar"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonToTest"
@@ -163,8 +164,10 @@
         android:text="test"
         app:layout_constraintBottom_toTopOf="@+id/scrollViewProfile"
         app:layout_constraintEnd_toStartOf="@+id/textViewLevel"
+        app:layout_constraintHorizontal_bias="0.413"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
 
     <ImageView
         android:id="@+id/starButton"
@@ -177,18 +180,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/btn_star_big_on" />
 
-    <TextView
-        android:id="@+id/xpCounter"
-        android:layout_width="104dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="0/100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="179dp" />
+
 
 
 
