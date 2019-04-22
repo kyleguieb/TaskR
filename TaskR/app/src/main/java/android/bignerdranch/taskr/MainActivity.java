@@ -6,6 +6,9 @@ import android.app.TimePickerDialog;
 import android.bignerdranch.taskr.database.TaskBaseHelper;
 import android.bignerdranch.taskr.database.TaskCursorWrapper;
 import android.bignerdranch.taskr.database.TaskDbSchema;
+import android.bignerdranch.taskr.database.ThemeBaseHelper;
+import android.bignerdranch.taskr.database.ThemeCursorWrapper;
+import android.bignerdranch.taskr.database.ThemeDbSchema;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +34,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.Calendar;
 
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static Context mContext;
     private static SQLiteDatabase mDatabase;
+    private static SQLiteDatabase mThemeDatabase;
 
     // Vars for RecyclerView
     private ArrayList<UUID> mIds = new ArrayList<>();
@@ -71,8 +76,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mContext = getApplicationContext();         //this line is super iffy, ask team members if problem persists
-        mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();         //initialization of the database using SQLiteOpenHelper
+        mContext = getApplicationContext();
+        mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();
+        mThemeDatabase = new ThemeBaseHelper(mContext).getWritableDatabase();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -311,4 +317,70 @@ public class MainActivity extends AppCompatActivity {
         return tasks;
     }
 
+    private static ContentValues getThemeContentValues(Theme theme) {
+        ContentValues values = new ContentValues();
+        values.put(ThemeDbSchema.ThemeTable.Cols.NAME, theme.getName());
+        values.put(ThemeDbSchema.ThemeTable.Cols.LEVEL_REQUIREMENT, theme.getLevelRequirement());
+        values.put(ThemeDbSchema.ThemeTable.Cols.UNLOCKED, theme.isUnlocked() ? 1 : 0);
+        values.put(ThemeDbSchema.ThemeTable.Cols.THEME, theme.getTheme());
+        values.put(ThemeDbSchema.ThemeTable.Cols.DESCRIPTION, theme.getDescription());
+
+        return values;
+    }
+
+    public void addCrime(Theme t) {
+        ContentValues values = getThemeContentValues(t);
+
+        mThemeDatabase.insert(ThemeDbSchema.ThemeTable.NAME, null, values);
+    }
+
+    private ThemeCursorWrapper queryThemes(String whereClause, String[] whereArgs) {
+        Cursor cursor = mThemeDatabase.query(
+                ThemeDbSchema.ThemeTable.NAME,
+                null, // columns, null selects all columns
+                whereClause,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+
+        return new ThemeCursorWrapper(cursor);
+    }
+
+    public List<Theme> getCrimes() {
+        List<Theme> themes = new ArrayList<>();
+
+        ThemeCursorWrapper cursor = queryThemes(null, null);
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                themes.add(cursor.getTheme());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return themes;
+    }
+
+    public Theme getTheme(String name) {
+        ThemeCursorWrapper cursor = queryThemes(
+                ThemeDbSchema.ThemeTable.Cols.NAME + " = ?",
+                new String[] { name }
+        );
+
+        try {
+            if (cursor.getCount() == 0) {
+                return null;
+            }
+
+            cursor.moveToFirst();
+            return cursor.getTheme();
+        } finally {
+            cursor.close();
+        }
+    }
 }
