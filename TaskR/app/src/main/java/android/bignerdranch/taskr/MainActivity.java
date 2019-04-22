@@ -260,12 +260,6 @@ public class MainActivity extends AppCompatActivity {
         ContentValues values = getContentValues(c);
 
         mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
-
-        long rowInsertedSuccessfully = mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
-        if(rowInsertedSuccessfully != -1)
-            Toast.makeText(mContext, "New row added, row id: " + rowInsertedSuccessfully, Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(mContext, "Something wrong", Toast.LENGTH_SHORT).show();
     }
 
     public static Task getTask(UUID id)    {       //get specific task by uuid

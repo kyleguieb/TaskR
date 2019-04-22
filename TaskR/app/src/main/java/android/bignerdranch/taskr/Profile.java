@@ -65,13 +65,14 @@ public class Profile extends AppCompatActivity {
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                while(i < 9)
+                while(i < 9) //9 just for testing
                 {
                     isLevelUp();
                     mProgressBar.incrementProgressBy(1);
                     currentExp +=1;
                     mExperienceCounter.setText(currentExp + " / " + xpToLevel );
                     i++;
+
                 }
                 i = 0;
             }
@@ -105,8 +106,6 @@ public class Profile extends AppCompatActivity {
         }
     }
 
-//        defineButtons();
-//    }
 
     public void defineButtons() {
         findViewById(R.id.starButton).setOnClickListener(buttonClickListener);
