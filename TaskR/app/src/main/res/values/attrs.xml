@@ -4,6 +4,5 @@
     <attr name="primary" format="color" />
     <attr name="primaryDark" format="color" />
     <attr name="accent" format="color" />
-    <attr name="background" format="color" />
-
+    
 </resources>
