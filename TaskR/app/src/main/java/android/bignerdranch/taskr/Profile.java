@@ -61,12 +61,16 @@ public class Profile extends AppCompatActivity {
         mLevels = findViewById(R.id.textViewLevel);
 
         testButton = findViewById(R.id.buttonToTest);
+        mLevels.setText(currentLevel + "");
+        mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+
         //TODO - move this into a separate method?
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                while(i < 9) //9 just for testing
+                while(i < 9)// for testing purposes
                 {
+
                     isLevelUp();
                     mProgressBar.incrementProgressBy(1);
                     currentExp +=1;
