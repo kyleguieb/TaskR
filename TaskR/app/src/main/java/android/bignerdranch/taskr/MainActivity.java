@@ -21,10 +21,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
+
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static Context mContext;
     private static SQLiteDatabase mDatabase;
+
 
     // Vars for RecyclerView
     private ArrayList<UUID> mIds = new ArrayList<>();
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         mContext = getApplicationContext();         //this line is super iffy, ask team members if problem persists
         mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();         //initialization of the database using SQLiteOpenHelper
 
@@ -89,6 +95,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+//    protected View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+//    {
+//        //View view = inflater.inflate(R.layout.)
+//
+//    }
+
+
     private void initTasks() {
 
         ArrayList<Task> listOfTasks = getTasks();
@@ -103,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
+    //initializes RecyclerView for the home screen
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.RecyclerViewHome);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mIds, mTaskTitles, mDatesNTimes);
@@ -112,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //defines new task button
     public void defineButtons() {
         findViewById(R.id.NewTask_floatingActionButton).setOnClickListener(buttonClickListener);
     }
@@ -228,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //practically makes a new task
     private static ContentValues getContentValues(Task task)    {   //adds new task (should be in CreatingTask.java)
         ContentValues values = new ContentValues();
         values.put(TaskDbSchema.TaskTable.Cols.UUID, task.getId().toString());
@@ -239,8 +255,11 @@ public class MainActivity extends AppCompatActivity {
         return values;
     }
 
+
     public static void addTask(Task c) {       //adds new task (should be in CreatingTask.java)
         ContentValues values = getContentValues(c);
+
+        mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
 
         long rowInsertedSuccessfully = mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);
         if(rowInsertedSuccessfully != -1)
@@ -274,10 +293,17 @@ public class MainActivity extends AppCompatActivity {
                             + " = ?", new String[] { id.toString() });
     }
 
+
     public static void deleteTask(UUID taskID)    {
         mDatabase.delete(TaskDbSchema.TaskTable.NAME, TaskDbSchema.TaskTable.Cols.UUID
                             + " = ?", new String[] {taskID.toString()});
+
         //deletes tasks by searching by name (should change in the future, could accidentally delete a different task)
+
+
+
+        //for test lol
+
     }
 
     private static TaskCursorWrapper queryTasks(String whereClause, String[] whereArgs)   {   //reading from database using query
@@ -310,5 +336,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return tasks;
     }
+
+
+
+
 
 }
