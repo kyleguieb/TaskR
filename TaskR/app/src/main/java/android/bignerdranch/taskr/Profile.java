@@ -5,15 +5,25 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 import static java.lang.Math.round;
 
 public class Profile extends AppCompatActivity {
+
+    // Vars for recycler view
+    private ArrayList<UUID> mIds = new ArrayList<>();
+    private ArrayList<String> mTaskTitles = new ArrayList<>();
+    private ArrayList<String> mDatesNTimes = new ArrayList<>();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -34,6 +44,7 @@ public class Profile extends AppCompatActivity {
             return false;
         }
     };
+
     public static final double SCALE = 1.1; //Scale determines how fast to scale the xpToLevel.
     public static final int XP_BASE = 10;
     private static ProgressBar mProgressBar;
@@ -76,9 +87,14 @@ public class Profile extends AppCompatActivity {
                 i = 0;
             }
         });
+
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        initTasks();
+
+        defineButtons();
     }
 
 
@@ -105,8 +121,6 @@ public class Profile extends AppCompatActivity {
         }
     }
 
-//        defineButtons();
-//    }
 
     public void defineButtons() {
         findViewById(R.id.starButton).setOnClickListener(buttonClickListener);
@@ -138,6 +152,29 @@ public class Profile extends AppCompatActivity {
 
      */
 
+    private void initTasks() {
 
+        //TODO: To be fixed or moved when connected to database, refer to CalendarActivity
+
+//        ArrayList<Task> listOfTasks = getTasks();
+//
+//        for(int i = 0; i < listOfTasks.size(); i++)
+//        {
+//            mIds.add(listOfTasks.get(i).getId());
+//            mTaskTitles.add(listOfTasks.get(i).getmName());
+//            mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+//        }
+
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.RecyclerViewProfile);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mIds, mTaskTitles, mDatesNTimes);
+
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+    }
 
 }

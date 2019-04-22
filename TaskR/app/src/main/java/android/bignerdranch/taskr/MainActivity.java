@@ -93,10 +93,10 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Spinner spinner = findViewById(R.id.filterHomeSpinner);
+        Spinner spinnerSort = findViewById(R.id.filterHomeSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sort, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        spinnerSort.setAdapter(adapter);
         //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for sorting
 
         defineButtons();
@@ -158,6 +158,12 @@ public class MainActivity extends AppCompatActivity {
 
                     Button mCancel = (Button) mView.findViewById(R.id.cancelButton);
                     Button mSave = (Button) mView.findViewById(R.id.saveButton);
+
+//                    Spinner spinnerDifficulty = findViewById(R.id.filterHomeSpinner);
+//                    ArrayAdapter<CharSequence> adapterDifficulty = ArrayAdapter.createFromResource(mContext, R.array.difficulty, android.R.layout.simple_spinner_item);
+//                    adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    spinnerDifficulty.setAdapter(adapterDifficulty);
+//                    //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for difficulty
 
                     mBuilder.setView(mView);
                     final AlertDialog dialog = mBuilder.create();
@@ -346,7 +352,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return tasks;
     }
-    
+
     private static ContentValues getThemeContentValues(Theme theme) {
         ContentValues values = new ContentValues();
         values.put(ThemeDbSchema.ThemeTable.Cols.NAME, theme.getName());
