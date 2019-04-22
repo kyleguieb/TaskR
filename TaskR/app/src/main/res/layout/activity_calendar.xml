@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorTest"
-    tools:context=".Calendar">
+    tools:context=".CalendarActivity">
 
     <CalendarView
-        android:id="@+id/calendarView"
+        android:id="@+id/actualCalendar"
         android:layout_width="0dp"
         android:layout_height="315dp"
         android:layout_marginStart="8dp"
@@ -20,7 +20,7 @@
         android:background="@drawable/textview_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -45,23 +45,18 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@color/colorEmptyList"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:layout_constraintTop_toBottomOf="@+id/actualCalendar"
         app:layout_constraintVertical_bias="0.073">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <View
-                android:id="@+id/divider4"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="@color/colorPrimary" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/RecyclerViewCalendar"
@@ -72,12 +67,6 @@
                 tools:listitem="@layout/recycler_view_item_7">
 
             </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:id="@+id/divider3"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="@color/colorPrimary" />
 
         </LinearLayout>
     </ScrollView>

@@ -4,16 +4,31 @@ import android.bignerdranch.taskr.Task;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
+import java.util.UUID;
+
+import static android.bignerdranch.taskr.database.TaskDbSchema.TaskTable.Cols.COMPLETED;
+import static android.bignerdranch.taskr.database.TaskDbSchema.TaskTable.Cols.DATE_AND_TIME_DUE;
+import static android.bignerdranch.taskr.database.TaskDbSchema.TaskTable.Cols.DESCRIPTION;
+import static android.bignerdranch.taskr.database.TaskDbSchema.TaskTable.Cols.NAME;
+import static android.bignerdranch.taskr.database.TaskDbSchema.TaskTable.Cols.UUID;
+
 public class TaskCursorWrapper extends CursorWrapper {
     public TaskCursorWrapper(Cursor cursor) {
         super(cursor);
     }
 
     public Task getTask()   {   //pull out relevant column data
-        String name = getString(getColumnIndex(TaskDbSchema.TaskTable.Cols.NAME));
-        String description = getString(getColumnIndex(TaskDbSchema.TaskTable.Cols.NAME));
-        String dateAndTimeDue = getString(getColumnIndex(TaskDbSchema.TaskTable.Cols.DATE_AND_TIME_DUE));
+        String idString = getString(getColumnIndex(UUID));
+        String name = getString(getColumnIndex(NAME));
+        String description = getString(getColumnIndex(DESCRIPTION));
+        String dateAndTimeDue = getString(getColumnIndex(DATE_AND_TIME_DUE));
+        int isCompleted = getInt(getColumnIndex(COMPLETED));
 
-        return null;
+        Task task = new Task(java.util.UUID.fromString(idString));
+        task.setmName(name);
+        task.setmDescription(description);
+        task.setmDateAndTimeDue(dateAndTimeDue);
+        task.setCompleted(isCompleted != 0);
+        return task;
     }
 }

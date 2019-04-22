@@ -9,15 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Searching"></activity>
-        <activity android:name=".FriendList" />
-        <activity android:name=".NonFriendProfile" />
+        <activity android:name=".Rewards"></activity>
         <activity android:name=".Profile" />
-        <activity android:name=".TaskView" />
-        <activity android:name=".CreatingTask" />
-        <activity android:name=".DirectMessageChat" />
-        <activity android:name=".DirectMessagesList" />
-        <activity android:name=".Calendar" />
+        <activity android:name=".CalendarActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,9 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-        android:name=".Login"
-        android:label="@string/app_name"></activity>
     </application>
 
 </manifest>
