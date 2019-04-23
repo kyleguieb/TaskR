@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
 
 import static java.lang.Math.round;
@@ -52,12 +54,17 @@ public class Profile extends AppCompatActivity {
     private TextView mExperienceCounter;
     private static TextView mLevels;
 
+    private TextView mTaskCounter;
+    private TextView mIDCounter;
+
     //private int mProgressStatus = 0;
     private static int currentExp = 0;
     private int i = 0;
     private static int currentLevel = 1;
 
     private static int xpToLevel = XP_BASE;
+    private static int taskCounter = 0;
+    Random random = new Random();
 
 
     Button testButton; //test button
@@ -72,10 +79,14 @@ public class Profile extends AppCompatActivity {
         mExperienceCounter = findViewById(R.id.textViewExperience);
         mLevels = findViewById(R.id.textViewLevel);
 
+        mTaskCounter = findViewById(R.id.textViewTaskCounter);
+        mIDCounter = findViewById(R.id.textViewIDCounter);
+
         testButton = findViewById(R.id.buttonToTest);
         //Set text here just to display it properly between screens :^)
         mLevels.setText(currentLevel + "");
         mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+        mProgressBar.setProgress(currentExp);
 
         //TODO - move this into a separate method?
         testButton.setOnClickListener(new View.OnClickListener() {
@@ -163,17 +174,68 @@ public class Profile extends AppCompatActivity {
 
         //TODO: Should check to make sure it is working 100%
 
+
         for(int i = 0; i < listOfTasks.size(); i++)
         {
             if (listOfTasks.get(i).isCompleted()) {
                 mIds.add(listOfTasks.get(i).getId());
                 mTaskTitles.add(listOfTasks.get(i).getmName());
                 mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+                expCheck();
+                //taskCounter++;
             }
         }
 
         initRecyclerView();
     }
+    public void expCheck()
+    {
+        if (taskCounter < mIds.size())
+        {
+            addExp();
+            Toast.makeText(this, "UNDERtask counter is" + taskCounter + "ID SIZE IS " + mIds.size(), Toast.LENGTH_SHORT).show();
+            taskCounter++;
+            mTaskCounter.setText("tasks "+taskCounter);
+            mIDCounter.setText("IDs "+mIds.size());
+
+        }
+        else if (taskCounter-1 > mIds.size())
+        {
+            taskCounter = mIds.size();
+            addExp();
+            Toast.makeText(this, "OVERtask counter is" + taskCounter + "ID SIZE IS " + mIds.size(), Toast.LENGTH_SHORT).show();
+            taskCounter++;
+            mTaskCounter.setText("tasks "+taskCounter);
+            mIDCounter.setText("IDs "+mIds.size());
+        }
+        else
+        {
+            Toast.makeText(this, "EVEN" + taskCounter + "id" + mIds.size(), Toast.LENGTH_SHORT).show();
+            mTaskCounter.setText("tasks "+taskCounter);
+            mIDCounter.setText("IDs "+mIds.size());
+        }
+
+    }
+
+    private void addExp()
+    {
+        //Generate random xp from 5-25
+        int randomXP = random.nextInt(25-5) + 5;
+        int xpLoop = 0;
+        while(xpLoop < randomXP)// loops through giving xp
+        {
+
+            isLevelUp();
+            mProgressBar.incrementProgressBy(1);
+            currentExp +=1;
+            mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+            xpLoop++;
+            //Toast.makeText(this, "Your exp growth is " + randomXP, Toast.LENGTH_SHORT).show();
+        }
+        //taskCounter++;
+    }
+
+
 
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.RecyclerViewProfile);
@@ -183,5 +245,7 @@ public class Profile extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
+
+
 
 }

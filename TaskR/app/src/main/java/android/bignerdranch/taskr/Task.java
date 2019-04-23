@@ -2,7 +2,7 @@ package android.bignerdranch.taskr;
 
 import java.util.UUID;
 
-public class Task {
+public class Task{
 
     private UUID mId;
     private String mName;
