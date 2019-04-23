@@ -118,9 +118,11 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i = 0; i < listOfTasks.size(); i++)
         {
-            mIds.add(listOfTasks.get(i).getId());
-            mTaskTitles.add(listOfTasks.get(i).getmName());
-            mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+            if (!listOfTasks.get(i).isCompleted()) {
+                mIds.add(listOfTasks.get(i).getId());
+                mTaskTitles.add(listOfTasks.get(i).getmName());
+                mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+            }
         }
 
         initRecyclerView();

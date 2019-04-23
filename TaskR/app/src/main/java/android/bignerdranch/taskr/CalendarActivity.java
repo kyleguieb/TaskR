@@ -59,18 +59,18 @@ public class CalendarActivity extends AppCompatActivity {
 
         for(int i = 0; i < listOfTasks.size(); i++)
         {
-            String taskDateAndTimeTokens[] = listOfTasks.get(i).getmDateAndTimeDue().split(" at ");
-            if (taskDateAndTimeTokens[0].compareTo(currentDate) == 0) {
-                mIds.add(listOfTasks.get(i).getId());
-                mTaskTitles.add(listOfTasks.get(i).getmName());
-                mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+            if (!listOfTasks.get(i).isCompleted()) {
+                String taskDateAndTimeTokens[] = listOfTasks.get(i).getmDateAndTimeDue().split(" at ");
+                if (taskDateAndTimeTokens[0].compareTo(currentDate) == 0) {
+                    mIds.add(listOfTasks.get(i).getId());
+                    mTaskTitles.add(listOfTasks.get(i).getmName());
+                    mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
 
+                }
             }
         }
 
         initRecyclerView();
-
-        // TODO: Is this repeated above and below??
 
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -84,12 +84,15 @@ public class CalendarActivity extends AppCompatActivity {
 
                 for(int i = 0; i < listOfTasks.size(); i++)
                 {
-                    String taskDateAndTimeTokens[] = listOfTasks.get(i).getmDateAndTimeDue().split(" at ");
-                    if (taskDateAndTimeTokens[0].compareTo(date) == 0) {
-                        mIds.add(listOfTasks.get(i).getId());
-                        mTaskTitles.add(listOfTasks.get(i).getmName());
-                        mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+                    if (!listOfTasks.get(i).isCompleted()) {
 
+                        String taskDateAndTimeTokens[] = listOfTasks.get(i).getmDateAndTimeDue().split(" at ");
+                        if (taskDateAndTimeTokens[0].compareTo(date) == 0) {
+                            mIds.add(listOfTasks.get(i).getId());
+                            mTaskTitles.add(listOfTasks.get(i).getmName());
+                            mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+
+                        }
                     }
                 }
 
