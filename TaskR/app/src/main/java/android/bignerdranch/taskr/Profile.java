@@ -61,6 +61,7 @@ public class Profile extends AppCompatActivity {
         mLevels = findViewById(R.id.textViewLevel);
 
         testButton = findViewById(R.id.buttonToTest);
+        //Set text here just to display it properly between screens :^)
         mLevels.setText(currentLevel + "");
         mExperienceCounter.setText(currentExp + " / " + xpToLevel );
 
