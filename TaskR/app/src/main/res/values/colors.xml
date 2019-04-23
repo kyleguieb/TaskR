@@ -12,5 +12,8 @@
     <color name="mintColorPrimary">#76be2f</color>
     <color name="mintColorPrimaryDark">#289b23</color>
     <color name="mintColorAccent">#f9a825</color>
+    <color name="lilacColorPrimary">#720d5d</color>
+    <color name="lilacColorPrimaryDark">#430033</color>
+    <color name="lilacColorAccent">#e30425</color>
 
 </resources>

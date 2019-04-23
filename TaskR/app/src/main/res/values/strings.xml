@@ -19,5 +19,9 @@
         <item>Completed</item>
         <item>Date</item>
     </string-array>
-    <string name="example">Finish design of new screens \nSunday, January 4 12:00pm</string>
+    <string-array name="difficulty">
+        <item>Quick</item>
+        <item>Normal</item>
+        <item>Long</item>
+    </string-array>
 </resources>

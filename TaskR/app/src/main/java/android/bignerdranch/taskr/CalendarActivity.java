@@ -70,6 +70,8 @@ public class CalendarActivity extends AppCompatActivity {
 
         initRecyclerView();
 
+        // TODO: Is this repeated above and below??
+
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
