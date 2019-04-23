@@ -8,14 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppThemeMint" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeMint" parent="AppTheme">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/mintColorPrimary</item>
         <item name="colorPrimaryDark">@color/mintColorPrimaryDark</item>
         <item name="colorAccent">@color/mintColorAccent</item>
     </style>
 
-    <style name="AppThemeLilac" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeLilac" parent="AppTheme">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/lilacColorPrimary</item>
         <item name="colorPrimaryDark">@color/lilacColorPrimaryDark</item>

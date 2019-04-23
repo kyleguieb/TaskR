@@ -24,6 +24,7 @@ public class Profile extends AppCompatActivity {
     private ArrayList<UUID> mIds = new ArrayList<>();
     private ArrayList<String> mTaskTitles = new ArrayList<>();
     private ArrayList<String> mDatesNTimes = new ArrayList<>();
+    private ArrayList<Task> listOfTasks = MainActivity.getTasks();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -154,16 +155,16 @@ public class Profile extends AppCompatActivity {
 
     private void initTasks() {
 
-        //TODO: To be fixed or moved when connected to database, refer to CalendarActivity
+        //TODO: Should check to make sure it is working 100%
 
-//        ArrayList<Task> listOfTasks = getTasks();
-//
-//        for(int i = 0; i < listOfTasks.size(); i++)
-//        {
-//            mIds.add(listOfTasks.get(i).getId());
-//            mTaskTitles.add(listOfTasks.get(i).getmName());
-//            mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
-//        }
+        for(int i = 0; i < listOfTasks.size(); i++)
+        {
+            if (listOfTasks.get(i).isCompleted()) {
+                mIds.add(listOfTasks.get(i).getId());
+                mTaskTitles.add(listOfTasks.get(i).getmName());
+                mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+            }
+        }
 
         initRecyclerView();
     }
