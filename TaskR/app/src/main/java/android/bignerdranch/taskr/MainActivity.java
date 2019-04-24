@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
 
-    // counts task finished for profile
-    public static int globalTaskFinishedCounter = 0;
-    private static boolean turnOnUser = false;
-    public static boolean firstStart = false;
+    // all necessary for profile
+    public static int globalTaskFinishedCounter = 0; //counter for the tasks
+    private static boolean turnOnUser = false; //honestly forgot why i needed it, but it's necessary
+    public static boolean firstStart = false; //needed to ensure extra xp isn't granted on startup
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

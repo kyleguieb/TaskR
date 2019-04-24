@@ -67,9 +67,8 @@ public class Profile extends AppCompatActivity {
     private int i = 0;
 
     private static int xpToLevel = XP_BASE;
-    private boolean firstTimeStart = false;
 
-    Random random = new Random();
+    Random random = new Random(); //for xp granting
 
 
     Button testButton; //test button
@@ -80,13 +79,14 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         initUser();
-        xpToLevel =(int)Math.pow((XP_BASE * currentLevel), SCALE);
+        xpToLevel =(int)Math.pow((XP_BASE * currentLevel), SCALE); //makes sure the xpToLevel is consistent every startup
 
         mProgressBar = findViewById(R.id.progressingBar);
         mExperienceCounter = findViewById(R.id.textViewExperience);
         mLevels = findViewById(R.id.textViewLevel);
 
         testButton = findViewById(R.id.buttonToTest);
+
         //Set text here just to display it properly between screens :^)
         mLevels.setText(currentLevel + "");
         mExperienceCounter.setText(currentExp + " / " + xpToLevel );
@@ -110,7 +110,7 @@ public class Profile extends AppCompatActivity {
                 i = 0;
             }
         });
-
+        //End of testing
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -119,7 +119,7 @@ public class Profile extends AppCompatActivity {
         initTasks();
 
         //instantly does all the exp checking instead once per screen refresh
-        if (MainActivity.firstStart)
+        if (MainActivity.firstStart) //Refer to MainActivity.java line:58
         {
             for(int j = 0; j < mIds.size(); j++)
             {
@@ -127,7 +127,7 @@ public class Profile extends AppCompatActivity {
             }
         }
 
-        if (!MainActivity.firstStart)
+        if (!MainActivity.firstStart)//Refer to MainActivity.java line:58
         {
             MainActivity.globalTaskFinishedCounter = mIds.size();
             MainActivity.firstStart = true;
@@ -138,6 +138,7 @@ public class Profile extends AppCompatActivity {
     }
 
 
+    //made a function to update the user for easier use.
     private static void updateUser(int level, int exp)
     {
         User newUser = new User(level, exp);
@@ -156,6 +157,7 @@ public class Profile extends AppCompatActivity {
     // however comma it's pointless
     public static void isLevelUp()
     {
+        //THIS LOGIC FIXES THE OVERFLOW ISSUE. NEVER COMPARE PROGRESSBAR.PROGRESS
         if (currentExp >= xpToLevel)
         {
             mProgressBar.setProgress(0);
@@ -213,10 +215,11 @@ public class Profile extends AppCompatActivity {
 
     private void initUser()
     {
+        //it specifically gets the zeroth position cause that's what it should always do
+        //#SoloUserApplication btw
         User user = listOfUsers.get(0);
         currentLevel = user.getLevel();
         currentExp = user.getExpToNextLevel();
-
     }
 
     public void expCheck()
@@ -249,10 +252,9 @@ public class Profile extends AppCompatActivity {
     {
         //Generate random xp from 5-25
         int randomXP = random.nextInt(25-5) + 5;
-        int xpLoop = 0;
+        int xpLoop = 0; //just a counter for the while loop
         while(xpLoop < randomXP)// loops through giving xp
         {
-
             isLevelUp();
             mProgressBar.incrementProgressBy(1);
             currentExp +=1;
