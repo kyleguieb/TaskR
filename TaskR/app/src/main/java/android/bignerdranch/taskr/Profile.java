@@ -58,7 +58,7 @@ public class Profile extends AppCompatActivity {
     private static TextView mLevels;
 
     //creates User
-    private List<User> listOfUsers = MainActivity.getUsers();
+    public List<User> listOfUsers = MainActivity.getUsers();
 
     private static int currentExp;
     private static int currentLevel;
@@ -79,6 +79,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         initUser();
+        xpToLevel =(int)Math.pow((XP_BASE * currentLevel), SCALE);
 
         mProgressBar = findViewById(R.id.progressingBar);
         mExperienceCounter = findViewById(R.id.textViewExperience);
@@ -103,7 +104,7 @@ public class Profile extends AppCompatActivity {
                     currentExp +=1;
                     mExperienceCounter.setText(currentExp + " / " + xpToLevel );
                     i++;
-
+                    updateUser(currentLevel,currentExp);
                 }
                 i = 0;
             }
@@ -127,6 +128,12 @@ public class Profile extends AppCompatActivity {
     }
 
 
+    private static void updateUser(int level, int exp)
+    {
+        User newUser = new User(level, exp);
+        MainActivity.updateUser(newUser);
+    }
+
     /*
     TODO - done
     Note to self: Image view, in XML, just change to TextView
@@ -142,10 +149,10 @@ public class Profile extends AppCompatActivity {
         if (mProgressBar.getProgress() >= mProgressBar.getMax())
         {
             mProgressBar.setProgress(0);
+            currentLevel++;
             xpToLevel = (int)Math.pow((XP_BASE * currentLevel), SCALE); // Algorithm to determine how many exp for next level
             mProgressBar.setMax(xpToLevel);
             currentExp = 0;
-            currentLevel++;
             mLevels.setText(currentLevel + ""); //no idea why you need to add a blank thing but ok
         }
     }
@@ -199,6 +206,7 @@ public class Profile extends AppCompatActivity {
         User user = listOfUsers.get(0);
         currentLevel = user.getLevel();
         currentExp = user.getExpToNextLevel();
+        //xpToLevel = (int)Math.pow((XP_BASE * currentLevel), SCALE);
     }
 
     public void expCheck()
@@ -224,11 +232,8 @@ public class Profile extends AppCompatActivity {
         int xpLoop = 0;
         while(xpLoop < randomXP)// loops through giving xp
         {
-//            int a = mProgressBar.getProgress();
-//            if (mProgressBar.getProgress() >= mProgressBar.getMax())
-//            {
-                isLevelUp();
-//            }
+
+            isLevelUp();
             mProgressBar.incrementProgressBy(1);
             currentExp +=1;
             mExperienceCounter.setText(currentExp + " / " + xpToLevel );

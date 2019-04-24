@@ -384,11 +384,20 @@ public class MainActivity extends AppCompatActivity {
         mLevelAndExpDatabase.insert(LevelAndExpDbSchema.LevelAndExpTable.NAME, null, values);
     }
 
-    public void updateUser(User user) {
+//    public static void updateTask(UUID id, Task task)   {   //edits task accordingly
+//
+//        //new task that will replace old task
+//        ContentValues values = getContentValues(task);
+//
+//        mDatabase.update(TaskDbSchema.TaskTable.NAME, values, TaskDbSchema.TaskTable.Cols.UUID
+//                + " = ?", new String[] { id.toString() });
+//    }
+
+    public static void updateUser(User user) {
         String nameString = user.getName();
         ContentValues values = getLevelAndExpContentValues(user);
 
-        mDatabase.update(LevelAndExpDbSchema.LevelAndExpTable.NAME, values,
+        mLevelAndExpDatabase.update(LevelAndExpDbSchema.LevelAndExpTable.NAME, values,
                 LevelAndExpDbSchema.LevelAndExpTable.Cols.NAME + " = ?",
                 new String[] {nameString});
     }
