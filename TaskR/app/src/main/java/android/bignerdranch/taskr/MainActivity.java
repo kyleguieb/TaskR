@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
 
-    //Counter for profile
-    public static int superCounter = 0;
+    // counts task finished for profile
+    public static int globalTaskFinishedCounter = 0;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

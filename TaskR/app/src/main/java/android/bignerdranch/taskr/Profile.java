@@ -129,15 +129,15 @@ public class Profile extends AppCompatActivity {
     // however comma it's pointless
     public static void isLevelUp()
     {
-        if (mProgressBar.getProgress() == mProgressBar.getMax())
-        {
+        //if (mProgressBar.getProgress() >= mProgressBar.getMax())
+        //{
             mProgressBar.setProgress(0);
             xpToLevel = (int)Math.pow((XP_BASE * currentLevel), SCALE); // Algorithm to determine how many exp for next level
             mProgressBar.setMax(xpToLevel);
             currentExp = 0;
             currentLevel++;
             mLevels.setText(currentLevel + ""); //no idea why you need to add a blank thing but ok
-        }
+        //}
     }
 
 
@@ -164,10 +164,7 @@ public class Profile extends AppCompatActivity {
         if quick: while loop 5 times
         if normal: while loop 10 times
         if long: while loop 20 times
-
-
     I think that should be it
-
      */
 
     private void initTasks() {
@@ -189,16 +186,17 @@ public class Profile extends AppCompatActivity {
 
     public void expCheck()
     {
-        if (MainActivity.superCounter < mIds.size())
+        if (MainActivity.globalTaskFinishedCounter < mIds.size())
         {
             addExp();
-            MainActivity.superCounter++;
+            MainActivity.globalTaskFinishedCounter++;
         }
-        else if (MainActivity.superCounter > mIds.size())
+        else if (MainActivity.globalTaskFinishedCounter > mIds.size())
         {
-            MainActivity.superCounter = mIds.size();
-            addExp();
-            MainActivity.superCounter++;
+            while(MainActivity.globalTaskFinishedCounter > mIds.size())
+            {
+                MainActivity.globalTaskFinishedCounter--;
+            }
         }
     }
 
@@ -209,8 +207,10 @@ public class Profile extends AppCompatActivity {
         int xpLoop = 0;
         while(xpLoop < randomXP)// loops through giving xp
         {
-
-            isLevelUp();
+            if (mProgressBar.getProgress() >= mProgressBar.getMax())
+            {
+                isLevelUp();
+            }
             mProgressBar.incrementProgressBy(1);
             currentExp +=1;
             mExperienceCounter.setText(currentExp + " / " + xpToLevel );
