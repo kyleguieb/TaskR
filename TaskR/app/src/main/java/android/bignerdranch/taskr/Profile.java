@@ -67,6 +67,7 @@ public class Profile extends AppCompatActivity {
     private int i = 0;
 
     private static int xpToLevel = XP_BASE;
+    private boolean firstTimeStart = false;
 
     Random random = new Random();
 
@@ -117,12 +118,21 @@ public class Profile extends AppCompatActivity {
 
         initTasks();
 
-
         //instantly does all the exp checking instead once per screen refresh
-        for(int j = 0; j < mIds.size(); j++)
+        if (MainActivity.firstStart)
         {
-            expCheck();
+            for(int j = 0; j < mIds.size(); j++)
+            {
+                expCheck();
+            }
         }
+
+        if (!MainActivity.firstStart)
+        {
+            MainActivity.globalTaskFinishedCounter = mIds.size();
+            MainActivity.firstStart = true;
+        }
+
         mProgressBar.setProgress(currentExp);
         defineButtons();
     }
@@ -206,7 +216,7 @@ public class Profile extends AppCompatActivity {
         User user = listOfUsers.get(0);
         currentLevel = user.getLevel();
         currentExp = user.getExpToNextLevel();
-        //xpToLevel = (int)Math.pow((XP_BASE * currentLevel), SCALE);
+
     }
 
     public void expCheck()
@@ -214,8 +224,18 @@ public class Profile extends AppCompatActivity {
         if (MainActivity.globalTaskFinishedCounter < mIds.size())
         {
             addExp();
+
             MainActivity.globalTaskFinishedCounter++;
         }
+        //not tested but possible bug:
+        //if you delete task, then immediately complete a new one
+        //(i.e. profile > delete task > home > complete task > profile)
+        //you might not get xp
+
+        //as of two minutes later(11:37pm, 230419), can confirm.
+        //i can imagine that it has to do with the fact that deleting a task
+        //immediately brings you back to home rather than bringing you back to profile
+        //that's the only fix i can imagine, because it would reset the counter!
         else if (MainActivity.globalTaskFinishedCounter > mIds.size())
         {
             while(MainActivity.globalTaskFinishedCounter > mIds.size())
@@ -239,6 +259,7 @@ public class Profile extends AppCompatActivity {
             mExperienceCounter.setText(currentExp + " / " + xpToLevel );
             xpLoop++;
         }
+        updateUser(currentLevel,currentExp);
     }
 
 

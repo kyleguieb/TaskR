@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     // counts task finished for profile
     public static int globalTaskFinishedCounter = 0;
     private static boolean turnOnUser = false;
+    public static boolean firstStart = false;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
