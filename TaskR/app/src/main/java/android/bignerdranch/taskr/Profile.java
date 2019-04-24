@@ -71,7 +71,6 @@ public class Profile extends AppCompatActivity {
     Random random = new Random(); //for xp granting
 
 
-    Button testButton; //test button
     //private Handler mHandler = new Handler();
 
     @Override
@@ -85,32 +84,12 @@ public class Profile extends AppCompatActivity {
         mExperienceCounter = findViewById(R.id.textViewExperience);
         mLevels = findViewById(R.id.textViewLevel);
 
-        testButton = findViewById(R.id.buttonToTest);
 
         //Set text here just to display it properly between screens :^)
         mLevels.setText(currentLevel + "");
         mExperienceCounter.setText(currentExp + " / " + xpToLevel );
         mProgressBar.setProgress(currentExp);
         mProgressBar.setMax(xpToLevel);
-
-        //Here for testing
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                while(i < 9)// for testing purposes
-                {
-
-                    isLevelUp();
-                    mProgressBar.incrementProgressBy(1);
-                    currentExp +=1;
-                    mExperienceCounter.setText(currentExp + " / " + xpToLevel );
-                    i++;
-                    updateUser(currentLevel,currentExp);
-                }
-                i = 0;
-            }
-        });
-        //End of testing
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
