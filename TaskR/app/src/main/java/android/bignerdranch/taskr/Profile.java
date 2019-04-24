@@ -129,15 +129,15 @@ public class Profile extends AppCompatActivity {
     // however comma it's pointless
     public static void isLevelUp()
     {
-        //if (mProgressBar.getProgress() >= mProgressBar.getMax())
-        //{
+        if (mProgressBar.getProgress() >= mProgressBar.getMax())
+        {
             mProgressBar.setProgress(0);
             xpToLevel = (int)Math.pow((XP_BASE * currentLevel), SCALE); // Algorithm to determine how many exp for next level
             mProgressBar.setMax(xpToLevel);
             currentExp = 0;
             currentLevel++;
             mLevels.setText(currentLevel + ""); //no idea why you need to add a blank thing but ok
-        //}
+        }
     }
 
 
@@ -207,10 +207,11 @@ public class Profile extends AppCompatActivity {
         int xpLoop = 0;
         while(xpLoop < randomXP)// loops through giving xp
         {
-            if (mProgressBar.getProgress() >= mProgressBar.getMax())
-            {
+//            int a = mProgressBar.getProgress();
+//            if (mProgressBar.getProgress() >= mProgressBar.getMax())
+//            {
                 isLevelUp();
-            }
+//            }
             mProgressBar.incrementProgressBy(1);
             currentExp +=1;
             mExperienceCounter.setText(currentExp + " / " + xpToLevel );
