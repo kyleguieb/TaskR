@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
-    android:id="@+id/parent_layout">
+    android:id="@+id/parent_layoutReward">
 
     <TextView
         android:id="@+id/reward_name"
@@ -42,7 +42,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
-        android:background="@color/colorPrimary" />
+        android:background="?attr/colorPrimary" />
 
     <ImageView
         android:id="@+id/color_theme"
@@ -52,7 +52,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="6dp"
-        app:srcCompat="@android:color/black" />
+        android:background="?attr/colorPrimary" />
 
 
 </RelativeLayout>

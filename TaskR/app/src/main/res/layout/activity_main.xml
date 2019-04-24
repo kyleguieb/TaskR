@@ -20,7 +20,7 @@
         android:layout_marginBottom="8dp"
         android:background="@android:color/black"
         android:clickable="true"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.949"
@@ -60,15 +60,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewToday"
-                android:layout_width="410dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:text="TODAY"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/RecyclerViewHome"

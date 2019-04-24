@@ -31,6 +31,7 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/RecyclerViewRewards"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout_editor_absoluteX="8dp"
@@ -47,24 +48,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/navigation" />
-
-    <TextView
-        android:id="@+id/yourPoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"
-        android:text="Your Points"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.474"
-        app:layout_constraintStart_toEndOf="@+id/scrollViewRewards" />
 
     <TextView
         android:id="@+id/levelRequired"
@@ -155,13 +138,13 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="40dp"
         android:background="?attr/colorPrimaryDark"
         android:text="@string/set"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/yourPoints"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/scrollViewRewards" />
 
 </android.support.constraint.ConstraintLayout>

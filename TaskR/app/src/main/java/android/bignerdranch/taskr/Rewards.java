@@ -7,12 +7,20 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class Rewards extends Activity implements OnClickListener {
+import java.util.ArrayList;
+
+public class Rewards extends AppCompatActivity implements OnClickListener {
+
+    private ArrayList<String> mThemes = new ArrayList<>();
+    private ArrayList<String> mLevels = new ArrayList<>();
+    private ArrayList<Integer> mColors = new ArrayList<>();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -50,6 +58,8 @@ public class Rewards extends Activity implements OnClickListener {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        initTasks();
     }
 
     @Override
@@ -63,6 +73,7 @@ public class Rewards extends Activity implements OnClickListener {
 //                break;
             case R.id.setButton:
                 Utils.changeToTheme(this, Utils.THEME_WHITE);
+                //Utils.changeToTheme(MainActivity.class, Utils.THEME_WHITE);
                 break;
 //            case R.id.button3:
 //                Utils.changeToTheme(this, Utils.THEME_BLUE);
@@ -70,32 +81,31 @@ public class Rewards extends Activity implements OnClickListener {
         }
     }
 
-//
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        //setContentView(R.layout.activity_rewards);
-////        final int theme = R.style.AppTheme;
-////        getTheme().applyStyle(theme, true);
-//        setContentView(R.layout.activity_rewards);
-//
-//        Button change = findViewById(R.id.setButton);
-//        change.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                getApplication().setTheme(R.style.AppThemeMint);
-////                recreate();
-////                theme = R.style.AppThemeMint;
-//                recreate();
-//
-//            }
-//        });
-//
-//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-//
-//    }
+    private void initTasks() {
+
+        mThemes.add("Default");
+        mLevels.add("1");
+        mColors.add(R.color.colorPrimary);
+
+        mThemes.add("Lilac");
+        mLevels.add("5");
+        mColors.add(R.color.mintColorPrimary);
+
+        mThemes.add("Mint");
+        mLevels.add("10");
+        mColors.add(R.color.lilacColorPrimary);
+
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.RecyclerViewRewards);
+        OtherAdapter adapter = new OtherAdapter(this, mThemes, mLevels, mColors);
+
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+    }
 
 
 }
