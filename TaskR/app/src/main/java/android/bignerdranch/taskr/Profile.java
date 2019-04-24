@@ -156,7 +156,7 @@ public class Profile extends AppCompatActivity {
     // however comma it's pointless
     public static void isLevelUp()
     {
-        if (mProgressBar.getProgress() >= mProgressBar.getMax())
+        if (currentExp >= xpToLevel)
         {
             mProgressBar.setProgress(0);
             currentLevel++;
