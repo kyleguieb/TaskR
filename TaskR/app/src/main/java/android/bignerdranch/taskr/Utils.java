@@ -1,6 +1,7 @@
 package android.bignerdranch.taskr;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.app.Activity;
 import android.bignerdranch.taskr.R;
@@ -32,10 +33,10 @@ public class Utils {
                     activity.setTheme(R.style.AppTheme);
                     break;
                 case THEME_WHITE:
-                    activity.setTheme(R.style.AppThemeMint);
+                    activity.setTheme(R.style.AppThemeLilac);
                     break;
                 case THEME_BLUE:
-                    activity.setTheme(R.style.AppThemeLilac);
+                    activity.setTheme(R.style.AppThemeMint);
                     break;
             }
         }

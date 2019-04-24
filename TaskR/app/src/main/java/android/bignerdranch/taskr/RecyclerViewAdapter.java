@@ -168,7 +168,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     }
                 });
 
-                mDelete.setOnClickListener(new View.OnClickListener() {
+                    mDelete.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View view) {
                         MainActivity.deleteTask(mIds.get(position));

@@ -50,6 +50,7 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_calendar);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
