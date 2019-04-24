@@ -1,5 +1,7 @@
 package android.bignerdranch.taskr;
 
+import android.bignerdranch.taskr.database.LevelAndExpBaseHelper;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -54,10 +57,14 @@ public class Profile extends AppCompatActivity {
     private TextView mExperienceCounter;
     private static TextView mLevels;
 
-    //private int mProgressStatus = 0;
-    private static int currentExp = 0;
+    //creates User
+    private List<User> listOfUsers = MainActivity.getUsers();
+
+    private static int currentExp;
+    private static int currentLevel;
+
+    //this is for the test button
     private int i = 0;
-    private static int currentLevel = 1;
 
     private static int xpToLevel = XP_BASE;
 
@@ -71,6 +78,7 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        initUser();
 
         mProgressBar = findViewById(R.id.progressingBar);
         mExperienceCounter = findViewById(R.id.textViewExperience);
@@ -83,7 +91,7 @@ public class Profile extends AppCompatActivity {
         mProgressBar.setProgress(currentExp);
         mProgressBar.setMax(xpToLevel);
 
-        //TODO - move this into a separate method?
+        //Here for testing
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +113,9 @@ public class Profile extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+
         initTasks();
+
 
         //instantly does all the exp checking instead once per screen refresh
         for(int j = 0; j < mIds.size(); j++)
@@ -182,6 +192,13 @@ public class Profile extends AppCompatActivity {
         }
 
         initRecyclerView();
+    }
+
+    private void initUser()
+    {
+        User user = listOfUsers.get(0);
+        currentLevel = user.getLevel();
+        currentExp = user.getExpToNextLevel();
     }
 
     public void expCheck()
