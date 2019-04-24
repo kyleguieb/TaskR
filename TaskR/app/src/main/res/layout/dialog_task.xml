@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/dialogDescription"
         android:layout_marginTop="15dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="?attr/colorPrimaryDark"
         android:text="@string/save"
         android:textColor="@android:color/white" />
 
@@ -47,7 +47,7 @@
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/editButton"
         android:layout_toRightOf="@+id/editButton"
-        android:background="@color/colorPrimaryDark"
+        android:background="?attr/colorPrimaryDark"
         android:text="@string/delete"
         android:textColor="@android:color/white" />
 

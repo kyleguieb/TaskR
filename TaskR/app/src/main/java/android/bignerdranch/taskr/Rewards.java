@@ -89,11 +89,11 @@ public class Rewards extends AppCompatActivity implements OnClickListener {
 
         mThemes.add("Lilac");
         mLevels.add("5");
-        mColors.add(R.color.mintColorPrimary);
+        mColors.add(R.color.lilacColorPrimary);
 
         mThemes.add("Mint");
         mLevels.add("10");
-        mColors.add(R.color.lilacColorPrimary);
+        mColors.add(R.color.mintColorPrimary);
 
         initRecyclerView();
     }
