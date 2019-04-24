@@ -52,7 +52,7 @@ public class Rewards extends AppCompatActivity implements OnClickListener {
         setContentView(R.layout.activity_rewards);
 
         findViewById(R.id.setButton).setOnClickListener(this);
-        //findViewById(R.id.button2).setOnClickListener(this);
+        findViewById(R.id.defaultTheme).setOnClickListener(this);
         //findViewById(R.id.button3).setOnClickListener(this);
 
 
@@ -68,9 +68,9 @@ public class Rewards extends AppCompatActivity implements OnClickListener {
         // TODO Auto-generated method stub
         switch (v.getId())
         {
-//            case R.id.button1:
-//                Utils.changeToTheme(this, Utils.THEME_DEFAULT);
-//                break;
+            case R.id.defaultTheme:
+                Utils.changeToTheme(this, Utils.THEME_DEFAULT);
+                break;
             case R.id.setButton:
                 Utils.changeToTheme(this, Utils.THEME_WHITE);
                 //Utils.changeToTheme(MainActivity.class, Utils.THEME_WHITE);
@@ -83,17 +83,17 @@ public class Rewards extends AppCompatActivity implements OnClickListener {
 
     private void initTasks() {
 
-        mThemes.add("Default");
-        mLevels.add("1");
-        mColors.add(R.color.colorPrimary);
+//        mThemes.add("Default");
+//        mLevels.add("1");
+//        mColors.add(R.color.colorPrimary);
 
         mThemes.add("Lilac");
         mLevels.add("5");
         mColors.add(R.color.lilacColorPrimary);
 
-        mThemes.add("Mint");
-        mLevels.add("10");
-        mColors.add(R.color.mintColorPrimary);
+//        mThemes.add("Mint");
+//        mLevels.add("10");
+//        mColors.add(R.color.mintColorPrimary);
 
         initRecyclerView();
     }

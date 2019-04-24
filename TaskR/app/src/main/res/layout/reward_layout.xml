@@ -14,8 +14,6 @@
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/color_theme"
-        android:layout_toRightOf="@id/color_theme"
         android:text="@string/Name"
         android:textColor="@android:color/black"
         android:textSize="16sp" />
@@ -29,7 +27,7 @@
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         android:text="@string/levelReq"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="16sp" />
 
     <View
@@ -43,15 +41,5 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:background="?attr/colorPrimary" />
-
-    <ImageView
-        android:id="@+id/color_theme"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_centerVertical="false"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="6dp" />
-
 
 </RelativeLayout>
