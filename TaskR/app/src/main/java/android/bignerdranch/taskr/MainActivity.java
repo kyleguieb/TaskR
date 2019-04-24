@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
 
+    // all necessary for profile
+    public static int globalTaskFinishedCounter = 0; //counter for the tasks
+    private static boolean turnOnUser = false; //honestly forgot why i needed it, but it's necessary
+    public static boolean firstStart = false; //needed to ensure extra xp isn't granted on startup
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -94,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
         defineButtons();
 
         initTasks();
+        if (!turnOnUser)
+        {
+            initUsers();
+            turnOnUser = true;
+        }
 
     }
 
@@ -103,6 +113,26 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 
+    private void initUsers()
+    {
+        List<User> listOfUsers = getUsers();
+
+        for(int i = 0; i < listOfUsers.size(); i++)
+        {
+            if(listOfUsers.get(i).getName().equals("user"))
+            {
+                break;
+            }
+        }
+
+        User user = new User(1, 0);
+        MainActivity.addUser(user);
+//        Task newTask = new Task(inputName.getText().toString(), inputDescription.getText().toString(),
+//                inputDate.getText().toString() + " at " +
+//                        inputTime.getText().toString());
+//        MainActivity.addTask(newTask);
+
+    }
 
     private void initTasks() {
 
@@ -341,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
         return tasks;
     }
 
-    private static ContentValues getLevelAndExpContentValues(User user) {
+    public static ContentValues getLevelAndExpContentValues(User user) {
         ContentValues values = new ContentValues();
         values.put(LevelAndExpDbSchema.LevelAndExpTable.Cols.NAME, user.getName());
         values.put(LevelAndExpDbSchema.LevelAndExpTable.Cols.LEVEL, user.getLevel());
@@ -350,22 +380,31 @@ public class MainActivity extends AppCompatActivity {
         return values;
     }
 
-    public void addUser(User user) {
+    public static void addUser(User user) {
         ContentValues values = getLevelAndExpContentValues(user);
 
         mLevelAndExpDatabase.insert(LevelAndExpDbSchema.LevelAndExpTable.NAME, null, values);
     }
 
-    public void updateUser(User user) {
+//    public static void updateTask(UUID id, Task task)   {   //edits task accordingly
+//
+//        //new task that will replace old task
+//        ContentValues values = getContentValues(task);
+//
+//        mDatabase.update(TaskDbSchema.TaskTable.NAME, values, TaskDbSchema.TaskTable.Cols.UUID
+//                + " = ?", new String[] { id.toString() });
+//    }
+
+    public static void updateUser(User user) {
         String nameString = user.getName();
         ContentValues values = getLevelAndExpContentValues(user);
 
-        mDatabase.update(LevelAndExpDbSchema.LevelAndExpTable.NAME, values,
+        mLevelAndExpDatabase.update(LevelAndExpDbSchema.LevelAndExpTable.NAME, values,
                 LevelAndExpDbSchema.LevelAndExpTable.Cols.NAME + " = ?",
                 new String[] {nameString});
     }
 
-    private LevelAndExpCursorWrapper queryLevelAndExp(String whereClause, String[] whereArgs) {
+    private static LevelAndExpCursorWrapper queryLevelAndExp(String whereClause, String[] whereArgs) {
         Cursor cursor = mLevelAndExpDatabase.query(
                 LevelAndExpDbSchema.LevelAndExpTable.NAME,
                 null,   //columns - null selects all columns
@@ -379,9 +418,11 @@ public class MainActivity extends AppCompatActivity {
         return new LevelAndExpCursorWrapper(cursor);
     }
 
-    public List<User> getUsers() {
+    public static List<User> getUsers() {
         List<User> users = new ArrayList<>();
 
+//        TaskCursorWrapper cursor = queryTasks(TaskDbSchema.TaskTable.Cols.UUID +
+//                " = ?", new String[] {id.toString()});
         LevelAndExpCursorWrapper cursor = queryLevelAndExp(null, null);
 
         try {
@@ -397,7 +438,7 @@ public class MainActivity extends AppCompatActivity {
         return users;
     }
 
-    public User getUser(String name) {
+    public static User getUser(String name) {
         LevelAndExpCursorWrapper cursor = queryLevelAndExp(
                 LevelAndExpDbSchema.LevelAndExpTable.Cols.NAME + " = ?",
                 new String[] { name });

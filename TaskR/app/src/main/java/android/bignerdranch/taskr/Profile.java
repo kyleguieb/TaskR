@@ -1,5 +1,7 @@
 package android.bignerdranch.taskr;
 
+import android.bignerdranch.taskr.database.LevelAndExpBaseHelper;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -54,17 +57,18 @@ public class Profile extends AppCompatActivity {
     private TextView mExperienceCounter;
     private static TextView mLevels;
 
-    private TextView mTaskCounter;
-    private TextView mIDCounter;
+    //creates User
+    public List<User> listOfUsers = MainActivity.getUsers();
 
-    //private int mProgressStatus = 0;
-    private static int currentExp = 0;
+    private static int currentExp;
+    private static int currentLevel;
+
+    //this is for the test button
     private int i = 0;
-    private static int currentLevel = 1;
 
     private static int xpToLevel = XP_BASE;
-    private static int taskCounter = 0;
-    Random random = new Random();
+
+    Random random = new Random(); //for xp granting
 
 
     Button testButton; //test button
@@ -75,21 +79,22 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_profile);
+        initUser();
+        xpToLevel =(int)Math.pow((XP_BASE * currentLevel), SCALE); //makes sure the xpToLevel is consistent every startup
 
         mProgressBar = findViewById(R.id.progressingBar);
         mExperienceCounter = findViewById(R.id.textViewExperience);
         mLevels = findViewById(R.id.textViewLevel);
 
-        mTaskCounter = findViewById(R.id.textViewTaskCounter);
-        mIDCounter = findViewById(R.id.textViewIDCounter);
-
         testButton = findViewById(R.id.buttonToTest);
+
         //Set text here just to display it properly between screens :^)
         mLevels.setText(currentLevel + "");
         mExperienceCounter.setText(currentExp + " / " + xpToLevel );
         mProgressBar.setProgress(currentExp);
+        mProgressBar.setMax(xpToLevel);
 
-        //TODO - move this into a separate method?
+        //Here for testing
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,21 +106,45 @@ public class Profile extends AppCompatActivity {
                     currentExp +=1;
                     mExperienceCounter.setText(currentExp + " / " + xpToLevel );
                     i++;
-
+                    updateUser(currentLevel,currentExp);
                 }
                 i = 0;
             }
         });
-
+        //End of testing
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+
         initTasks();
 
+        //instantly does all the exp checking instead once per screen refresh
+        if (MainActivity.firstStart) //Refer to MainActivity.java line:58
+        {
+            for(int j = 0; j < mIds.size(); j++)
+            {
+                expCheck();
+            }
+        }
+
+        if (!MainActivity.firstStart)//Refer to MainActivity.java line:58
+        {
+            MainActivity.globalTaskFinishedCounter = mIds.size();
+            MainActivity.firstStart = true;
+        }
+
+        mProgressBar.setProgress(currentExp);
         defineButtons();
     }
 
+
+    //made a function to update the user for easier use.
+    private static void updateUser(int level, int exp)
+    {
+        User newUser = new User(level, exp);
+        MainActivity.updateUser(newUser);
+    }
 
     /*
     TODO - done
@@ -129,13 +158,14 @@ public class Profile extends AppCompatActivity {
     // however comma it's pointless
     public static void isLevelUp()
     {
-        if (mProgressBar.getProgress() == mProgressBar.getMax())
+        //THIS LOGIC FIXES THE OVERFLOW ISSUE. NEVER COMPARE PROGRESSBAR.PROGRESS
+        if (currentExp >= xpToLevel)
         {
             mProgressBar.setProgress(0);
+            currentLevel++;
             xpToLevel = (int)Math.pow((XP_BASE * currentLevel), SCALE); // Algorithm to determine how many exp for next level
             mProgressBar.setMax(xpToLevel);
             currentExp = 0;
-            currentLevel++;
             mLevels.setText(currentLevel + ""); //no idea why you need to add a blank thing but ok
         }
     }
@@ -157,18 +187,14 @@ public class Profile extends AppCompatActivity {
     };
 
     /*
-    pseudocode
-
+    //TODO: whenever task diffictuly gets implemented
     when a new task gets added to the "completed" array
     check the difficulty
     switch(difficulty)
         if quick: while loop 5 times
         if normal: while loop 10 times
         if long: while loop 20 times
-
-
     I think that should be it
-
      */
 
     private void initTasks() {
@@ -182,60 +208,62 @@ public class Profile extends AppCompatActivity {
                 mIds.add(listOfTasks.get(i).getId());
                 mTaskTitles.add(listOfTasks.get(i).getmName());
                 mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
-                expCheck();
-                //taskCounter++;
             }
         }
 
         initRecyclerView();
     }
+
+    private void initUser()
+    {
+        //it specifically gets the zeroth position cause that's what it should always do
+        //#SoloUserApplication btw
+        User user = listOfUsers.get(0);
+        currentLevel = user.getLevel();
+        currentExp = user.getExpToNextLevel();
+    }
+
     public void expCheck()
     {
-        if (taskCounter < mIds.size())
+        if (MainActivity.globalTaskFinishedCounter < mIds.size())
         {
             addExp();
-            Toast.makeText(this, "UNDERtask counter is" + taskCounter + "ID SIZE IS " + mIds.size(), Toast.LENGTH_SHORT).show();
-            taskCounter++;
-            mTaskCounter.setText("tasks "+taskCounter);
-            mIDCounter.setText("IDs "+mIds.size());
 
+            MainActivity.globalTaskFinishedCounter++;
         }
-        else if (taskCounter-1 > mIds.size())
-        {
-            taskCounter = mIds.size();
-            addExp();
-            Toast.makeText(this, "OVERtask counter is" + taskCounter + "ID SIZE IS " + mIds.size(), Toast.LENGTH_SHORT).show();
-            taskCounter++;
-            mTaskCounter.setText("tasks "+taskCounter);
-            mIDCounter.setText("IDs "+mIds.size());
-        }
-        else
-        {
-            Toast.makeText(this, "EVEN" + taskCounter + "id" + mIds.size(), Toast.LENGTH_SHORT).show();
-            mTaskCounter.setText("tasks "+taskCounter);
-            mIDCounter.setText("IDs "+mIds.size());
-        }
+        //not tested but possible bug:
+        //if you delete task, then immediately complete a new one
+        //(i.e. profile > delete task > home > complete task > profile)
+        //you might not get xp
 
+        //as of two minutes later(11:37pm, 230419), can confirm.
+        //i can imagine that it has to do with the fact that deleting a task
+        //immediately brings you back to home rather than bringing you back to profile
+        //that's the only fix i can imagine, because it would reset the counter!
+        else if (MainActivity.globalTaskFinishedCounter > mIds.size())
+        {
+            while(MainActivity.globalTaskFinishedCounter > mIds.size())
+            {
+                MainActivity.globalTaskFinishedCounter--;
+            }
+        }
     }
 
     private void addExp()
     {
         //Generate random xp from 5-25
         int randomXP = random.nextInt(25-5) + 5;
-        int xpLoop = 0;
+        int xpLoop = 0; //just a counter for the while loop
         while(xpLoop < randomXP)// loops through giving xp
         {
-
             isLevelUp();
             mProgressBar.incrementProgressBy(1);
             currentExp +=1;
             mExperienceCounter.setText(currentExp + " / " + xpToLevel );
             xpLoop++;
-            //Toast.makeText(this, "Your exp growth is " + randomXP, Toast.LENGTH_SHORT).show();
         }
-        //taskCounter++;
+        updateUser(currentLevel,currentExp);
     }
-
 
 
     private void initRecyclerView() {
@@ -244,7 +272,6 @@ public class Profile extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
 
