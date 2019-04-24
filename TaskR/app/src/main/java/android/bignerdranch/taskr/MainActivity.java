@@ -3,12 +3,12 @@ package android.bignerdranch.taskr;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.bignerdranch.taskr.database.LevelAndExpBaseHelper;
+import android.bignerdranch.taskr.database.LevelAndExpCursorWrapper;
+import android.bignerdranch.taskr.database.LevelAndExpDbSchema;
 import android.bignerdranch.taskr.database.TaskBaseHelper;
 import android.bignerdranch.taskr.database.TaskCursorWrapper;
 import android.bignerdranch.taskr.database.TaskDbSchema;
-import android.bignerdranch.taskr.database.ThemeBaseHelper;
-import android.bignerdranch.taskr.database.ThemeCursorWrapper;
-import android.bignerdranch.taskr.database.ThemeDbSchema;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -24,13 +24,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ProgressBar;
 
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -46,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static Context mContext;
     private static SQLiteDatabase mDatabase;
-    private static SQLiteDatabase mThemeDatabase;
-
+    private static SQLiteDatabase mLevelAndExpDatabase;
 
     // Vars for RecyclerView
     private ArrayList<UUID> mIds = new ArrayList<>();
@@ -81,14 +77,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        mContext = getApplicationContext();         //this line is super iffy, ask team members if problem persists
-        mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();         //initialization of the database using SQLiteOpenHelper
-
         mContext = getApplicationContext();
         mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();
-        mThemeDatabase = new ThemeBaseHelper(mContext).getWritableDatabase();
-
+        mLevelAndExpDatabase = new LevelAndExpBaseHelper(mContext).getWritableDatabase();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -347,27 +338,34 @@ public class MainActivity extends AppCompatActivity {
         return tasks;
     }
 
-    private static ContentValues getThemeContentValues(Theme theme) {
+    private static ContentValues getLevelAndExpContentValues(User user) {
         ContentValues values = new ContentValues();
-        values.put(ThemeDbSchema.ThemeTable.Cols.NAME, theme.getName());
-        values.put(ThemeDbSchema.ThemeTable.Cols.LEVEL_REQUIREMENT, theme.getLevelRequirement());
-        values.put(ThemeDbSchema.ThemeTable.Cols.UNLOCKED, theme.isUnlocked() ? 1 : 0);
-        values.put(ThemeDbSchema.ThemeTable.Cols.THEME, theme.getTheme());
-        values.put(ThemeDbSchema.ThemeTable.Cols.DESCRIPTION, theme.getDescription());
+        values.put(LevelAndExpDbSchema.LevelAndExpTable.Cols.NAME, user.getName());
+        values.put(LevelAndExpDbSchema.LevelAndExpTable.Cols.LEVEL, user.getLevel());
+        values.put(LevelAndExpDbSchema.LevelAndExpTable.Cols.EXP, user.getExpToNextLevel());
 
         return values;
     }
 
-    public void addCrime(Theme t) {
-        ContentValues values = getThemeContentValues(t);
+    public void addUser(User user) {
+        ContentValues values = getLevelAndExpContentValues(user);
 
-        mThemeDatabase.insert(ThemeDbSchema.ThemeTable.NAME, null, values);
+        mLevelAndExpDatabase.insert(LevelAndExpDbSchema.LevelAndExpTable.NAME, null, values);
     }
 
-    private ThemeCursorWrapper queryThemes(String whereClause, String[] whereArgs) {
-        Cursor cursor = mThemeDatabase.query(
-                ThemeDbSchema.ThemeTable.NAME,
-                null, // columns, null selects all columns
+    public void updateUser(User user) {
+        String nameString = user.getName();
+        ContentValues values = getLevelAndExpContentValues(user);
+
+        mDatabase.update(LevelAndExpDbSchema.LevelAndExpTable.NAME, values,
+                LevelAndExpDbSchema.LevelAndExpTable.Cols.NAME + " = ?",
+                new String[] {nameString});
+    }
+
+    private LevelAndExpCursorWrapper queryLevelAndExp(String whereClause, String[] whereArgs) {
+        Cursor cursor = mLevelAndExpDatabase.query(
+                LevelAndExpDbSchema.LevelAndExpTable.NAME,
+                null,   //columns - null selects all columns
                 whereClause,
                 whereArgs,
                 null,
@@ -375,43 +373,24 @@ public class MainActivity extends AppCompatActivity {
                 null
         );
 
-        return new ThemeCursorWrapper(cursor);
+        return new LevelAndExpCursorWrapper(cursor);
     }
 
-    public List<Theme> getCrimes() {
-        List<Theme> themes = new ArrayList<>();
+    public List<User> getUsers() {
+        List<User> users = new ArrayList<>();
 
-        ThemeCursorWrapper cursor = queryThemes(null, null);
+        LevelAndExpCursorWrapper cursor = queryLevelAndExp(null, null);
 
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                themes.add(cursor.getTheme());
+                users.add(cursor.getExpAndLevel());
                 cursor.moveToNext();
             }
         } finally {
             cursor.close();
         }
 
-        return themes;
+        return users;
     }
-
-    public Theme getTheme(String name) {
-        ThemeCursorWrapper cursor = queryThemes(
-                ThemeDbSchema.ThemeTable.Cols.NAME + " = ?",
-                new String[] { name }
-        );
-
-        try {
-            if (cursor.getCount() == 0) {
-                return null;
-            }
-
-            cursor.moveToFirst();
-            return cursor.getTheme();
-        } finally {
-            cursor.close();
-        }
-    }
-
 }
