@@ -393,4 +393,21 @@ public class MainActivity extends AppCompatActivity {
 
         return users;
     }
+
+    public User getUser(String name) {
+        LevelAndExpCursorWrapper cursor = queryLevelAndExp(
+                LevelAndExpDbSchema.LevelAndExpTable.Cols.NAME + " = ?",
+                new String[] { name });
+
+        try {
+            if (cursor.getCount() == 0) {
+                return null;
+            }
+
+            cursor.moveToFirst();
+            return cursor.getExpAndLevel();
+        } finally {
+            cursor.close();
+        }
+    }
 }
