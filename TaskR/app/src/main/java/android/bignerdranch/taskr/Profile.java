@@ -54,16 +54,13 @@ public class Profile extends AppCompatActivity {
     private TextView mExperienceCounter;
     private static TextView mLevels;
 
-    private TextView mTaskCounter;
-    private TextView mIDCounter;
-
     //private int mProgressStatus = 0;
     private static int currentExp = 0;
     private int i = 0;
     private static int currentLevel = 1;
 
     private static int xpToLevel = XP_BASE;
-    private static int taskCounter = 0;
+
     Random random = new Random();
 
 
@@ -79,14 +76,12 @@ public class Profile extends AppCompatActivity {
         mExperienceCounter = findViewById(R.id.textViewExperience);
         mLevels = findViewById(R.id.textViewLevel);
 
-        mTaskCounter = findViewById(R.id.textViewTaskCounter);
-        mIDCounter = findViewById(R.id.textViewIDCounter);
-
         testButton = findViewById(R.id.buttonToTest);
         //Set text here just to display it properly between screens :^)
         mLevels.setText(currentLevel + "");
         mExperienceCounter.setText(currentExp + " / " + xpToLevel );
         mProgressBar.setProgress(currentExp);
+        mProgressBar.setMax(xpToLevel);
 
         //TODO - move this into a separate method?
         testButton.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +107,12 @@ public class Profile extends AppCompatActivity {
 
         initTasks();
 
+        //instantly does all the exp checking instead once per screen refresh
+        for(int j = 0; j < mIds.size(); j++)
+        {
+            expCheck();
+        }
+        mProgressBar.setProgress(currentExp);
         defineButtons();
     }
 
@@ -156,8 +157,7 @@ public class Profile extends AppCompatActivity {
     };
 
     /*
-    pseudocode
-
+    //TODO: whenever task diffictuly gets implemented
     when a new task gets added to the "completed" array
     check the difficulty
     switch(difficulty)
@@ -181,40 +181,25 @@ public class Profile extends AppCompatActivity {
                 mIds.add(listOfTasks.get(i).getId());
                 mTaskTitles.add(listOfTasks.get(i).getmName());
                 mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
-                expCheck();
-                //taskCounter++;
             }
         }
 
         initRecyclerView();
     }
+
     public void expCheck()
     {
-        if (taskCounter < mIds.size())
+        if (MainActivity.superCounter < mIds.size())
         {
             addExp();
-            Toast.makeText(this, "UNDERtask counter is" + taskCounter + "ID SIZE IS " + mIds.size(), Toast.LENGTH_SHORT).show();
-            taskCounter++;
-            mTaskCounter.setText("tasks "+taskCounter);
-            mIDCounter.setText("IDs "+mIds.size());
-
+            MainActivity.superCounter++;
         }
-        else if (taskCounter-1 > mIds.size())
+        else if (MainActivity.superCounter > mIds.size())
         {
-            taskCounter = mIds.size();
+            MainActivity.superCounter = mIds.size();
             addExp();
-            Toast.makeText(this, "OVERtask counter is" + taskCounter + "ID SIZE IS " + mIds.size(), Toast.LENGTH_SHORT).show();
-            taskCounter++;
-            mTaskCounter.setText("tasks "+taskCounter);
-            mIDCounter.setText("IDs "+mIds.size());
+            MainActivity.superCounter++;
         }
-        else
-        {
-            Toast.makeText(this, "EVEN" + taskCounter + "id" + mIds.size(), Toast.LENGTH_SHORT).show();
-            mTaskCounter.setText("tasks "+taskCounter);
-            mIDCounter.setText("IDs "+mIds.size());
-        }
-
     }
 
     private void addExp()
@@ -230,11 +215,8 @@ public class Profile extends AppCompatActivity {
             currentExp +=1;
             mExperienceCounter.setText(currentExp + " / " + xpToLevel );
             xpLoop++;
-            //Toast.makeText(this, "Your exp growth is " + randomXP, Toast.LENGTH_SHORT).show();
         }
-        //taskCounter++;
     }
-
 
 
     private void initRecyclerView() {
@@ -243,7 +225,6 @@ public class Profile extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
 
