@@ -19,6 +19,21 @@
     <color name="lilacColorPrimaryDark">#430033</color>
     <color name="lilacColorAccent">#e30425</color>
 
+    <color name="echoColorPrimary">#525252</color>
+    <color name="echoColorPrimaryDark">#000099</color>
+    <color name="echoColorAccent">#cccccc</color>
+
+    <color name="QPColorPrimary">#ffa500</color>
+    <color name="QPColorPrimaryDark">#cc8400</color>
+    <color name="QPColorAccent">#3232ff</color>
+
+    <color name="SnSColorPrimary">#a40000</color>
+    <color name="SnSColorPrimaryDark">#720000</color>
+    <color name="SnSColorAccent">#d2b394</color>
+
+    <color name="WCColorPrimary">#df4777</color>
+    <color name="WCColorPrimaryDark">#b92051</color>
+    <color name="WCColorAccent">#f7d7e1</color>
 
 
 </resources>

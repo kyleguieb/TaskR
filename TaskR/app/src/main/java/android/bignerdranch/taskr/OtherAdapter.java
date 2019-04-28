@@ -18,14 +18,18 @@ public class OtherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private ArrayList<String> mThemes = new ArrayList<>();
     private ArrayList<String> mLevels = new ArrayList<>();
-    private ArrayList<Integer> mColors = new ArrayList<>();
+    private ArrayList<Integer> mPrimaryColors = new ArrayList<>();
+    private ArrayList<Integer> mPrimaryDarkColors = new ArrayList<>();
+    private ArrayList<Integer> mPrimaryAccentColors = new ArrayList<>();
     private Context mContext;
 
-    public OtherAdapter(Context context, ArrayList<String> themes, ArrayList<String> levels, ArrayList<Integer> colors) {
+    public OtherAdapter(Context context, ArrayList<String> themes, ArrayList<String> levels, ArrayList<Integer> primary, ArrayList<Integer> dark, ArrayList<Integer> accent) {
         mContext = context;
         mThemes = themes;
         mLevels = levels;
-        mColors = colors;
+        mPrimaryColors = primary;
+        mPrimaryDarkColors = dark;
+        mPrimaryAccentColors = accent;
     }
 
     @NonNull
@@ -50,15 +54,23 @@ public class OtherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
                     // TODO: is changing the first in the recycler view instead of Rewards screen stuff???
 
-//                    final String rewardName = mThemes.get(i);
-//                    final String rewardLevel = mLevels.get(i);
-//                    final Integer rewardColor = mColors.get(i);
-//
-//                    final TextView mTheme = (TextView) ((Activity)mContext).findViewById(R.id.reward_name);
-//                    final TextView mLevel = (TextView) ((Activity)mContext).findViewById(R.id.reward_price);
-//
-//                    mTheme.setText(rewardName);
-//                    mLevel.setText(rewardLevel);
+                    final String rewardName = mThemes.get(i);
+                    final String rewardLevel = mLevels.get(i);
+                    final Integer rewardColorPrimary = mPrimaryColors.get(i);
+                    final Integer rewardColorDark = mPrimaryDarkColors.get(i);
+                    final Integer rewardColorAccent = mPrimaryAccentColors.get(i);
+
+                    final TextView mTheme = (TextView) ((Activity)mContext).findViewById(R.id.rewardName);
+                    final TextView mLevel = (TextView) ((Activity)mContext).findViewById(R.id.priceCost);
+                    final ImageView mColorPrimary = (ImageView) ((Activity) mContext).findViewById(R.id.primary);
+                    final ImageView mColorDark = (ImageView) ((Activity) mContext).findViewById(R.id.primarydark);
+                    final ImageView mColorAccent = (ImageView) ((Activity) mContext).findViewById(R.id.acccent);
+
+                    mTheme.setText(rewardName);
+                    mLevel.setText(rewardLevel);
+                    mColorPrimary.setBackgroundResource(rewardColorPrimary);
+                    mColorDark.setBackgroundResource(rewardColorDark);
+                    mColorAccent.setBackgroundResource(rewardColorAccent);
 
                 }
             });

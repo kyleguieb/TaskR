@@ -20,7 +20,9 @@ public class Rewards extends AppCompatActivity implements OnClickListener {
 
     private ArrayList<String> mThemes = new ArrayList<>();
     private ArrayList<String> mLevels = new ArrayList<>();
-    private ArrayList<Integer> mColors = new ArrayList<>();
+    private ArrayList<Integer> mPrimaryColors = new ArrayList<>();
+    private ArrayList<Integer> mPrimaryDarkColors = new ArrayList<>();
+    private ArrayList<Integer> mAccentColors = new ArrayList<>();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,8 +58,6 @@ public class Rewards extends AppCompatActivity implements OnClickListener {
 
         findViewById(R.id.setButton).setOnClickListener(this);
         findViewById(R.id.defaultTheme).setOnClickListener(this);
-        //findViewById(R.id.button3).setOnClickListener(this);
-
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.navigation_rewards);
@@ -69,42 +69,73 @@ public class Rewards extends AppCompatActivity implements OnClickListener {
     @Override
     public void onClick(View v)
     {
-        // TODO Auto-generated method stub
         switch (v.getId())
         {
             case R.id.defaultTheme:
                 Utils.changeToTheme(this, Utils.THEME_DEFAULT);
                 break;
             case R.id.setButton:
-                Utils.changeToTheme(this, Utils.THEME_WHITE);
-                //Utils.changeToTheme(MainActivity.class, Utils.THEME_WHITE);
+                Utils.changeToTheme(this, Utils.THEME_LILAC);
+                //Utils.changeToTheme(MainActivity.class, Utils.THEME_MINT);
+
+                //Utils.changeToTheme(this, Utils.THEME_ECHO);
+                //Utils.changeToTheme(this, Utils.THEME_SNS);
+                //Utils.changeToTheme(this, Utils.THEME_QP);
+                //Utils.changeToTheme(this, Utils.THEME_WISHCRAFT);
                 break;
-//            case R.id.button3:
-//                Utils.changeToTheme(this, Utils.THEME_BLUE);
-//                break;
         }
     }
 
     private void initTasks() {
 
-//        mThemes.add_icon("Default");
-//        mLevels.add_icon("1");
-//        mColors.add_icon(R.color.colorPrimary);
+        mThemes.add("Default");
+        mLevels.add("1");
+        mPrimaryColors.add(R.color.colorPrimary);
+        mPrimaryDarkColors.add(R.color.colorPrimaryDark);
+        mAccentColors.add(R.color.colorAccent);
 
-        mThemes.add("Lilac");
+        mThemes.add("Lilac Theme");
         mLevels.add("5");
-        mColors.add(R.color.lilacColorPrimary);
+        mPrimaryColors.add(R.color.lilacColorPrimary);
+        mPrimaryDarkColors.add(R.color.lilacColorPrimaryDark);
+        mAccentColors.add(R.color.lilacColorAccent);
 
-//        mThemes.add_icon("Mint");
-//        mLevels.add_icon("10");
-//        mColors.add_icon(R.color.mintColorPrimary);
+        mThemes.add("Mint Theme");
+        mLevels.add("10");
+        mPrimaryColors.add(R.color.mintColorPrimary);
+        mPrimaryDarkColors.add(R.color.mintColorPrimaryDark);
+        mAccentColors.add(R.color.mintColorAccent);
+
+        mThemes.add("Echo Theme");
+        mLevels.add("350");
+        mPrimaryColors.add(R.color.echoColorPrimary);
+        mPrimaryDarkColors.add(R.color.echoColorPrimaryDark);
+        mAccentColors.add(R.color.echoColorAccent);
+
+        mThemes.add("Swords and Sorcery Theme");
+        mLevels.add("350");
+        mPrimaryColors.add(R.color.SnSColorPrimary);
+        mPrimaryDarkColors.add(R.color.SnSColorPrimaryDark);
+        mAccentColors.add(R.color.SnSColorAccent);
+
+        mThemes.add("QP Theme");
+        mLevels.add("350");
+        mPrimaryColors.add(R.color.QPColorPrimary);
+        mPrimaryDarkColors.add(R.color.QPColorPrimaryDark);
+        mAccentColors.add(R.color.QPColorAccent);
+
+        mThemes.add("WishCraft Theme");
+        mLevels.add("350");
+        mPrimaryColors.add(R.color.WCColorPrimary);
+        mPrimaryDarkColors.add(R.color.WCColorPrimaryDark);
+        mAccentColors.add(R.color.WCColorAccent);
 
         initRecyclerView();
     }
 
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.RecyclerViewRewards);
-        OtherAdapter adapter = new OtherAdapter(this, mThemes, mLevels, mColors);
+        OtherAdapter adapter = new OtherAdapter(this, mThemes, mLevels, mPrimaryColors, mPrimaryDarkColors, mAccentColors);
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

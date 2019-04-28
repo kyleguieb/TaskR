@@ -22,4 +22,32 @@
         <item name="colorAccent">@color/lilacColorAccent</item>
     </style>
 
+    <style name="AppThemeEcho" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/echoColorPrimary</item>
+        <item name="colorPrimaryDark">@color/echoColorPrimaryDark</item>
+        <item name="colorAccent">@color/echoColorAccent</item>
+    </style>
+
+    <style name="AppThemeSwordsNSorcery" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/SnSColorPrimary</item>
+        <item name="colorPrimaryDark">@color/SnSColorPrimaryDark</item>
+        <item name="colorAccent">@color/SnSColorAccent</item>
+    </style>
+
+    <style name="AppThemeQP" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/QPColorPrimary</item>
+        <item name="colorPrimaryDark">@color/QPColorPrimaryDark</item>
+        <item name="colorAccent">@color/QPColorAccent</item>
+    </style>
+
+    <style name="AppThemeWishCraft" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/WCColorPrimary</item>
+        <item name="colorPrimaryDark">@color/WCColorPrimaryDark</item>
+        <item name="colorAccent">@color/WCColorAccent</item>
+    </style>
+
 </resources>

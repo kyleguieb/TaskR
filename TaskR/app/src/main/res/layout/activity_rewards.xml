@@ -74,14 +74,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
+        android:background="?attr/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rewardName"
-        app:srcCompat="?attr/colorAccent" />
+        app:layout_constraintTop_toBottomOf="@+id/rewardName" />
 
     <TextView
         android:id="@+id/rewardName"
-        android:layout_width="102dp"
-        android:layout_height="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
@@ -167,9 +167,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
+        android:background="?attr/colorPrimary"
         app:layout_constraintStart_toEndOf="@+id/scrollViewRewards"
-        app:layout_constraintTop_toBottomOf="@+id/rewardName"
-        app:srcCompat="?attr/colorPrimary" />
+        app:layout_constraintTop_toBottomOf="@+id/rewardName" />
 
     <ImageView
         android:id="@+id/primarydark"
@@ -180,9 +180,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="?attr/colorPrimaryDark"
         app:layout_constraintEnd_toStartOf="@+id/acccent"
         app:layout_constraintStart_toEndOf="@+id/primary"
-        app:layout_constraintTop_toBottomOf="@+id/rewardName"
-        app:srcCompat="?attr/colorPrimaryDark" />
+        app:layout_constraintTop_toBottomOf="@+id/rewardName" />
 
 </android.support.constraint.ConstraintLayout>
