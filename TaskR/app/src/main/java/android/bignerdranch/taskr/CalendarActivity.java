@@ -42,6 +42,9 @@ public class CalendarActivity extends AppCompatActivity {
                 case R.id.navigation_notifications:
                     startActivity(new Intent(CalendarActivity.this, Profile.class));
                     return true;
+                case R.id.navigation_rewards:
+                    startActivity(new Intent(CalendarActivity.this, Rewards.class));
+                    return true;
             }
             return false;
         }
@@ -54,6 +57,7 @@ public class CalendarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calendar);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.navigation_dashboard);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         mCalendarView = (CalendarView) findViewById(R.id.actualCalendar);

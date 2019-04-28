@@ -16,6 +16,8 @@
     <string name="set">Set</string>
     <string name="defaultTheme">Reset</string>
     <string name="rewardThemeName">Theme Name</string>
+    <string name="title_reward">Rewards</string>
+    <string name="add">+</string>
     <string-array name="sort">
         <item>Most Recent</item>
         <item>Completed</item>

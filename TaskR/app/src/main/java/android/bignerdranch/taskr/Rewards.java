@@ -37,6 +37,9 @@ public class Rewards extends AppCompatActivity implements OnClickListener {
                 case R.id.navigation_notifications:
                     startActivity(new Intent(Rewards.this, Profile.class));
                     return true;
+                case R.id.navigation_rewards:
+                    //startActivity(new Intent(Rewards.this, Rewards.class));
+                    return true;
             }
             return false;
         }
@@ -57,6 +60,7 @@ public class Rewards extends AppCompatActivity implements OnClickListener {
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.navigation_rewards);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         initTasks();
@@ -83,17 +87,17 @@ public class Rewards extends AppCompatActivity implements OnClickListener {
 
     private void initTasks() {
 
-//        mThemes.add("Default");
-//        mLevels.add("1");
-//        mColors.add(R.color.colorPrimary);
+//        mThemes.add_icon("Default");
+//        mLevels.add_icon("1");
+//        mColors.add_icon(R.color.colorPrimary);
 
         mThemes.add("Lilac");
         mLevels.add("5");
         mColors.add(R.color.lilacColorPrimary);
 
-//        mThemes.add("Mint");
-//        mLevels.add("10");
-//        mColors.add(R.color.mintColorPrimary);
+//        mThemes.add_icon("Mint");
+//        mLevels.add_icon("10");
+//        mColors.add_icon(R.color.mintColorPrimary);
 
         initRecyclerView();
     }

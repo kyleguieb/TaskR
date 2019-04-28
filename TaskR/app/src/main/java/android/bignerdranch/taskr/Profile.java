@@ -46,6 +46,9 @@ public class Profile extends AppCompatActivity {
                 case R.id.navigation_notifications:
                     //startActivity(new Intent(Profile.this, Profile.class));
                     return true;
+                case R.id.navigation_rewards:
+                    startActivity(new Intent(Profile.this, Rewards.class));
+                    return true;
             }
             return false;
         }
@@ -93,6 +96,7 @@ public class Profile extends AppCompatActivity {
         mProgressBar.setMax(xpToLevel);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.navigation_notifications);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
@@ -145,22 +149,22 @@ public class Profile extends AppCompatActivity {
             xpToLevel = (int)Math.pow((XP_BASE * currentLevel), SCALE); // Algorithm to determine how many exp for next level
             mProgressBar.setMax(xpToLevel);
             currentExp = 0;
-            mLevels.setText(currentLevel + ""); //no idea why you need to add a blank thing but ok
+            mLevels.setText(currentLevel + ""); //no idea why you need to add_icon a blank thing but ok
         }
     }
 
 
     public void defineButtons() {
-        findViewById(R.id.starButton).setOnClickListener(buttonClickListener);
+        //findViewById(R.id.starButton).setOnClickListener(buttonClickListener);
     }
 
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
-                case R.id.starButton:
-                    startActivity(new Intent(Profile.this, Rewards.class));
-                    break;
+//                case R.id.starButton:
+//                    startActivity(new Intent(Profile.this, Rewards.class));
+//                    break;
             }
         }
     };

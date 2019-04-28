@@ -72,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_notifications:
                     startActivity(new Intent(MainActivity.this, Profile.class));
                     return true;
+                case R.id.navigation_rewards:
+                    startActivity(new Intent(MainActivity.this, Rewards.class));
+                    return true;
             }
             return false;
         }

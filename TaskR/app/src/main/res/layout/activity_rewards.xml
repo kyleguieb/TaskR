@@ -9,7 +9,7 @@
 
     <ScrollView
         android:id="@+id/scrollViewRewards"
-        android:layout_width="191dp"
+        android:layout_width="194dp"
         android:layout_height="516dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
