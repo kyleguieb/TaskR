@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Rewards"></activity>
+        <activity android:name=".Stickers"></activity>
+        <activity android:name=".Rewards" />
+        <activity android:name=".Themes" />
         <activity android:name=".Profile" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".MainActivity">

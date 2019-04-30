@@ -1,7 +1,5 @@
 package android.bignerdranch.taskr;
 
-import android.bignerdranch.taskr.database.LevelAndExpBaseHelper;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,10 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -163,7 +159,7 @@ public class Profile extends AppCompatActivity {
         public void onClick(View v) {
             switch(v.getId()) {
 //                case R.id.starButton:
-//                    startActivity(new Intent(Profile.this, Rewards.class));
+//                    startActivity(new Intent(Profile.this, Themes.class));
 //                    break;
             }
         }
