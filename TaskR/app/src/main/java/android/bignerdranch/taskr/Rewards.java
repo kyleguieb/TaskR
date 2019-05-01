@@ -191,6 +191,17 @@ public class Rewards extends AppCompatActivity {
         }
     }
 
+    /*
+   //TODO: whenever task diffictuly gets implemented
+   when a new task gets added to the "completed" array
+   check the difficulty
+   switch(difficulty)
+       if quick: while loop 5 times
+       if normal: while loop 10 times
+       if long: while loop 20 times
+   I think that should be it
+    */
+
     private void addExp()
     {
         //Generate random xp from 5-25
