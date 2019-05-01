@@ -12,12 +12,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -104,6 +106,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Button mEdit = (Button) mView.findViewById(R.id.editButton);
                 Button mDelete = (Button) mView.findViewById(R.id.deleteButton);
 
+                Spinner spinnerDifficulty = mView.findViewById(R.id.spinnerDifficultView);
+                ArrayAdapter<CharSequence> adapterDifficulty = ArrayAdapter.createFromResource(mContext, R.array.difficulty, android.R.layout.simple_spinner_item);
+                adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerDifficulty.setAdapter(adapterDifficulty);
+                //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for difficulty
+
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
@@ -153,7 +161,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
                         String time = hourOfDay + ":" + minute;
-                        mTime.setText(time);
+                        //mTime.setText(String.format("%02d:%02d", hourOfDay, minute));
+                        int hour = hourOfDay % 12;
+                        if (hour == 0)
+                            hour = 12;
+                        mTime.setText(String.format("%02d:%02d %s", hour, minute,
+                                hourOfDay < 12 ? "AM" : "PM"));
                     }
                 };
 

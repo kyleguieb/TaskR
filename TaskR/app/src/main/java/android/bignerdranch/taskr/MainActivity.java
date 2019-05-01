@@ -187,11 +187,11 @@ public class MainActivity extends AppCompatActivity {
                     Button mCancel = (Button) mView.findViewById(R.id.cancelButton);
                     Button mSave = (Button) mView.findViewById(R.id.saveButton);
 
-//                    Spinner spinnerDifficulty = findViewById(R.id.filterHomeSpinner);
-//                    ArrayAdapter<CharSequence> adapterDifficulty = ArrayAdapter.createFromResource(mContext, R.array.difficulty, android.R.layout.simple_spinner_item);
-//                    adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                    spinnerDifficulty.setAdapter(adapterDifficulty);
-//                    //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for difficulty
+                    Spinner spinnerDifficulty = mView.findViewById(R.id.spinnerDifficult);
+                    ArrayAdapter<CharSequence> adapterDifficulty = ArrayAdapter.createFromResource(mContext, R.array.difficulty, android.R.layout.simple_spinner_item);
+                    adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerDifficulty.setAdapter(adapterDifficulty);
+                    //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for difficulty
 
                     mBuilder.setView(mView);
                     final AlertDialog dialog = mBuilder.create();
@@ -243,7 +243,12 @@ public class MainActivity extends AppCompatActivity {
                         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
                             String time = hourOfDay + ":" + minute;
-                            inputTime.setText(time);
+                            //inputTime.setText(time);
+                            int hour = hourOfDay % 12;
+                            if (hour == 0)
+                                hour = 12;
+                            inputTime.setText(String.format("%02d:%02d %s", hour, minute,
+                                    hourOfDay < 12 ? "AM" : "PM"));
                         }
                     };
 

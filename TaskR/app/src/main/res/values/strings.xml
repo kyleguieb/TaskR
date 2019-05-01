@@ -26,6 +26,7 @@
         <item>Difficulty</item>
     </string-array>
     <string-array name="difficulty">
+        <item>Difficulty</item>
         <item>Quick</item>
         <item>Normal</item>
         <item>Long</item>
