@@ -187,11 +187,11 @@ public class MainActivity extends AppCompatActivity {
                     Button mCancel = (Button) mView.findViewById(R.id.cancelButton);
                     Button mSave = (Button) mView.findViewById(R.id.saveButton);
 
-//                    Spinner spinnerDifficulty = findViewById(R.id.filterHomeSpinner);
-//                    ArrayAdapter<CharSequence> adapterDifficulty = ArrayAdapter.createFromResource(mContext, R.array.difficulty, android.R.layout.simple_spinner_item);
-//                    adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                    spinnerDifficulty.setAdapter(adapterDifficulty);
-//                    //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for difficulty
+                    Spinner spinnerDifficulty = mView.findViewById(R.id.spinnerDifficult);
+                    ArrayAdapter<CharSequence> adapterDifficulty = ArrayAdapter.createFromResource(mContext, R.array.difficulty, android.R.layout.simple_spinner_item);
+                    adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerDifficulty.setAdapter(adapterDifficulty);
+                    //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for difficulty
 
                     mBuilder.setView(mView);
                     final AlertDialog dialog = mBuilder.create();
