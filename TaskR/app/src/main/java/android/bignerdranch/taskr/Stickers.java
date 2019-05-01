@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-public class Rewards extends AppCompatActivity {
+public class Stickers extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -17,16 +17,16 @@ public class Rewards extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    startActivity(new Intent(Rewards.this, MainActivity.class));
+                    startActivity(new Intent(Stickers.this, MainActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
-                    startActivity(new Intent(Rewards.this, CalendarActivity.class));
+                    startActivity(new Intent(Stickers.this, CalendarActivity.class));
                     return true;
                 case R.id.navigation_notifications:
-                    startActivity(new Intent(Rewards.this, Profile.class));
+                    startActivity(new Intent(Stickers.this, Profile.class));
                     return true;
                 case R.id.navigation_rewards:
-                    //startActivity(new Intent(Themes.this, Themes.class));
+                    startActivity(new Intent(Stickers.this, Rewards.class));
                     return true;
             }
             return false;
@@ -37,7 +37,7 @@ public class Rewards extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
-        setContentView(R.layout.activity_rewards);
+        setContentView(R.layout.activity_stickers);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.navigation_rewards);
@@ -47,22 +47,21 @@ public class Rewards extends AppCompatActivity {
     }
 
     public void defineButtons() {
-        findViewById(R.id.themeChange).setOnClickListener(buttonClickListener);
-        findViewById(R.id.stickerBook).setOnClickListener(buttonClickListener);
+        findViewById(R.id.previousPage).setOnClickListener(buttonClickListener);
+        findViewById(R.id.nextPage).setOnClickListener(buttonClickListener);
     }
 
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
-                case R.id.themeChange:
-                    startActivity(new Intent(Rewards.this, Themes.class));
+                case R.id.previousPage:
+
                     break;
-                case R.id.stickerBook:
-                    startActivity(new Intent(Rewards.this, Stickers.class));
+                case R.id.nextPage:
+
                     break;
             }
         }
     };
-
 }

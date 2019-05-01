@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
-    android:id="@+id/parent_layout">
+    android:id="@+id/parent_layoutReward">
 
     <TextView
         android:id="@+id/reward_name"
@@ -14,21 +14,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/color_theme"
-        android:layout_toRightOf="@id/color_theme"
         android:text="@string/Name"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/reward_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:text="@string/levelReq"
         android:textColor="@android:color/black"
         android:textSize="16sp" />
 
@@ -36,23 +22,31 @@
         android:id="@+id/divider15"
         android:layout_width="match_parent"
         android:layout_height="3dp"
-        android:layout_below="@id/reward_price"
+        android:layout_below="@id/reward_name"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
-        android:background="@color/colorPrimary" />
+        android:background="?attr/colorPrimary" />
 
-    <ImageView
-        android:id="@+id/color_theme"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_centerVertical="false"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="6dp"
-        app:srcCompat="@android:color/black" />
-
+    <Button
+        android:id="@+id/setButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_above="@+id/divider15"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:background="?attr/colorPrimaryDark"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/set"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
 
 </RelativeLayout>

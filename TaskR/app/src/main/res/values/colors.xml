@@ -2,15 +2,38 @@
 <resources>
     <color name="colorPrimary">#6744A9</color>
     <color name="colorPrimaryDark">#4F2C90</color>
-    <color name="colorAccent">#b491f6</color>
+    <color name="colorAccent">#B491F6</color>
+
     <color name="colorPrimary2">#5A4E75</color>
     <color name="colorLightGray">#F5F5F5</color>
     <color name="colorTest">#E7E7E9</color>
     <color name="colorRed">#FF0000</color>
     <color name="colorBlue">#0000FF</color>
     <color name="colorEmptyList">#C4C3C9</color>
+
     <color name="mintColorPrimary">#76be2f</color>
     <color name="mintColorPrimaryDark">#289b23</color>
     <color name="mintColorAccent">#f9a825</color>
+
+    <color name="lilacColorPrimary">#720d5d</color>
+    <color name="lilacColorPrimaryDark">#430033</color>
+    <color name="lilacColorAccent">#e30425</color>
+
+    <color name="echoColorPrimary">#525252</color>
+    <color name="echoColorPrimaryDark">#000099</color>
+    <color name="echoColorAccent">#cccccc</color>
+
+    <color name="QPColorPrimary">#ffa500</color>
+    <color name="QPColorPrimaryDark">#cc8400</color>
+    <color name="QPColorAccent">#3232ff</color>
+
+    <color name="SnSColorPrimary">#a40000</color>
+    <color name="SnSColorPrimaryDark">#720000</color>
+    <color name="SnSColorAccent">#d2b394</color>
+
+    <color name="WCColorPrimary">#df4777</color>
+    <color name="WCColorPrimaryDark">#b92051</color>
+    <color name="WCColorAccent">#f7d7e1</color>
+
 
 </resources>

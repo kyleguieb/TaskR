@@ -42,6 +42,9 @@ public class CalendarActivity extends AppCompatActivity {
                 case R.id.navigation_notifications:
                     startActivity(new Intent(CalendarActivity.this, Profile.class));
                     return true;
+                case R.id.navigation_rewards:
+                    startActivity(new Intent(CalendarActivity.this, Rewards.class));
+                    return true;
             }
             return false;
         }
@@ -50,21 +53,25 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_calendar);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.navigation_dashboard);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         mCalendarView = (CalendarView) findViewById(R.id.actualCalendar);
 
         for(int i = 0; i < listOfTasks.size(); i++)
         {
-            String taskDateAndTimeTokens[] = listOfTasks.get(i).getmDateAndTimeDue().split(" at ");
-            if (taskDateAndTimeTokens[0].compareTo(currentDate) == 0) {
-                mIds.add(listOfTasks.get(i).getId());
-                mTaskTitles.add(listOfTasks.get(i).getmName());
-                mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+            if (!listOfTasks.get(i).isCompleted()) {
+                String taskDateAndTimeTokens[] = listOfTasks.get(i).getmDateAndTimeDue().split(" at ");
+                if (taskDateAndTimeTokens[0].compareTo(currentDate) == 0) {
+                    mIds.add(listOfTasks.get(i).getId());
+                    mTaskTitles.add(listOfTasks.get(i).getmName());
+                    mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
 
+                }
             }
         }
 
@@ -82,12 +89,15 @@ public class CalendarActivity extends AppCompatActivity {
 
                 for(int i = 0; i < listOfTasks.size(); i++)
                 {
-                    String taskDateAndTimeTokens[] = listOfTasks.get(i).getmDateAndTimeDue().split(" at ");
-                    if (taskDateAndTimeTokens[0].compareTo(date) == 0) {
-                        mIds.add(listOfTasks.get(i).getId());
-                        mTaskTitles.add(listOfTasks.get(i).getmName());
-                        mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+                    if (!listOfTasks.get(i).isCompleted()) {
 
+                        String taskDateAndTimeTokens[] = listOfTasks.get(i).getmDateAndTimeDue().split(" at ");
+                        if (taskDateAndTimeTokens[0].compareTo(date) == 0) {
+                            mIds.add(listOfTasks.get(i).getId());
+                            mTaskTitles.add(listOfTasks.get(i).getmName());
+                            mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+
+                        }
                     }
                 }
 

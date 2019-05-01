@@ -3,6 +3,9 @@ package android.bignerdranch.taskr;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.bignerdranch.taskr.database.LevelAndExpBaseHelper;
+import android.bignerdranch.taskr.database.LevelAndExpCursorWrapper;
+import android.bignerdranch.taskr.database.LevelAndExpDbSchema;
 import android.bignerdranch.taskr.database.TaskBaseHelper;
 import android.bignerdranch.taskr.database.TaskCursorWrapper;
 import android.bignerdranch.taskr.database.TaskDbSchema;
@@ -21,13 +24,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ProgressBar;
 
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,6 +35,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.Calendar;
 
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static Context mContext;
     private static SQLiteDatabase mDatabase;
-
+    private static SQLiteDatabase mLevelAndExpDatabase;
 
     // Vars for RecyclerView
     private ArrayList<UUID> mIds = new ArrayList<>();
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> mDatesNTimes = new ArrayList<>();
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
+
+    // all necessary for profile
+    public static int globalTaskFinishedCounter = 0; //counter for the tasks
+    private static boolean turnOnUser = false; //honestly forgot why i needed it, but it's necessary
+    public static boolean firstStart = false; //needed to ensure extra xp isn't granted on startup
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -66,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_notifications:
                     startActivity(new Intent(MainActivity.this, Profile.class));
                     return true;
+                case R.id.navigation_rewards:
+                    startActivity(new Intent(MainActivity.this, Rewards.class));
+                    return true;
             }
             return false;
         }
@@ -74,24 +83,30 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main);
 
-
-        mContext = getApplicationContext();         //this line is super iffy, ask team members if problem persists
-        mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();         //initialization of the database using SQLiteOpenHelper
+        mContext = getApplicationContext();
+        mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();
+        mLevelAndExpDatabase = new LevelAndExpBaseHelper(mContext).getWritableDatabase();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Spinner spinner = findViewById(R.id.filterHomeSpinner);
+        Spinner spinnerSort = findViewById(R.id.filterHomeSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sort, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        spinnerSort.setAdapter(adapter);
         //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for sorting
 
         defineButtons();
 
         initTasks();
+        if (!turnOnUser)
+        {
+            initUsers();
+            turnOnUser = true;
+        }
 
     }
 
@@ -101,6 +116,26 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 
+    private void initUsers()
+    {
+        List<User> listOfUsers = getUsers();
+
+        for(int i = 0; i < listOfUsers.size(); i++)
+        {
+            if(listOfUsers.get(i).getName().equals("user"))
+            {
+                break;
+            }
+        }
+
+        User user = new User(1, 0);
+        MainActivity.addUser(user);
+//        Task newTask = new Task(inputName.getText().toString(), inputDescription.getText().toString(),
+//                inputDate.getText().toString() + " at " +
+//                        inputTime.getText().toString());
+//        MainActivity.addTask(newTask);
+
+    }
 
     private void initTasks() {
 
@@ -108,9 +143,11 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i = 0; i < listOfTasks.size(); i++)
         {
-            mIds.add(listOfTasks.get(i).getId());
-            mTaskTitles.add(listOfTasks.get(i).getmName());
-            mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+            if (!listOfTasks.get(i).isCompleted()) {
+                mIds.add(listOfTasks.get(i).getId());
+                mTaskTitles.add(listOfTasks.get(i).getmName());
+                mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+            }
         }
 
         initRecyclerView();
@@ -148,6 +185,12 @@ public class MainActivity extends AppCompatActivity {
 
                     Button mCancel = (Button) mView.findViewById(R.id.cancelButton);
                     Button mSave = (Button) mView.findViewById(R.id.saveButton);
+
+//                    Spinner spinnerDifficulty = findViewById(R.id.filterHomeSpinner);
+//                    ArrayAdapter<CharSequence> adapterDifficulty = ArrayAdapter.createFromResource(mContext, R.array.difficulty, android.R.layout.simple_spinner_item);
+//                    adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    spinnerDifficulty.setAdapter(adapterDifficulty);
+//                    //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for difficulty
 
                     mBuilder.setView(mView);
                     final AlertDialog dialog = mBuilder.create();
@@ -331,8 +374,87 @@ public class MainActivity extends AppCompatActivity {
         return tasks;
     }
 
+    public static ContentValues getLevelAndExpContentValues(User user) {
+        ContentValues values = new ContentValues();
+        values.put(LevelAndExpDbSchema.LevelAndExpTable.Cols.NAME, user.getName());
+        values.put(LevelAndExpDbSchema.LevelAndExpTable.Cols.LEVEL, user.getLevel());
+        values.put(LevelAndExpDbSchema.LevelAndExpTable.Cols.EXP, user.getExpToNextLevel());
 
+        return values;
+    }
 
+    public static void addUser(User user) {
+        ContentValues values = getLevelAndExpContentValues(user);
 
+        mLevelAndExpDatabase.insert(LevelAndExpDbSchema.LevelAndExpTable.NAME, null, values);
+    }
 
+//    public static void updateTask(UUID id, Task task)   {   //edits task accordingly
+//
+//        //new task that will replace old task
+//        ContentValues values = getContentValues(task);
+//
+//        mDatabase.update(TaskDbSchema.TaskTable.NAME, values, TaskDbSchema.TaskTable.Cols.UUID
+//                + " = ?", new String[] { id.toString() });
+//    }
+
+    public static void updateUser(User user) {
+        String nameString = user.getName();
+        ContentValues values = getLevelAndExpContentValues(user);
+
+        mLevelAndExpDatabase.update(LevelAndExpDbSchema.LevelAndExpTable.NAME, values,
+                LevelAndExpDbSchema.LevelAndExpTable.Cols.NAME + " = ?",
+                new String[] {nameString});
+    }
+
+    private static LevelAndExpCursorWrapper queryLevelAndExp(String whereClause, String[] whereArgs) {
+        Cursor cursor = mLevelAndExpDatabase.query(
+                LevelAndExpDbSchema.LevelAndExpTable.NAME,
+                null,   //columns - null selects all columns
+                whereClause,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+
+        return new LevelAndExpCursorWrapper(cursor);
+    }
+
+    public static List<User> getUsers() {
+        List<User> users = new ArrayList<>();
+
+//        TaskCursorWrapper cursor = queryTasks(TaskDbSchema.TaskTable.Cols.UUID +
+//                " = ?", new String[] {id.toString()});
+        LevelAndExpCursorWrapper cursor = queryLevelAndExp(null, null);
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                users.add(cursor.getExpAndLevel());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return users;
+    }
+
+    public static User getUser(String name) {
+        LevelAndExpCursorWrapper cursor = queryLevelAndExp(
+                LevelAndExpDbSchema.LevelAndExpTable.Cols.NAME + " = ?",
+                new String[] { name });
+
+        try {
+            if (cursor.getCount() == 0) {
+                return null;
+            }
+
+            cursor.moveToFirst();
+            return cursor.getExpAndLevel();
+        } finally {
+            cursor.close();
+        }
+    }
 }

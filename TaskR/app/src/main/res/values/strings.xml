@@ -12,12 +12,22 @@
     <string name="description">Description</string>
     <string name="time">Time</string>
     <string name="Name">Name</string>
-    <string name="levelReq">Level Required:</string>
+    <string name="levelReq">Level Required</string>
     <string name="set">Set</string>
+    <string name="defaultTheme">Reset</string>
+    <string name="rewardThemeName">Theme Name</string>
+    <string name="title_reward">Rewards</string>
+    <string name="completed">Completed</string>
+    <string name="themeChange">Theme Change</string>
+    <string name="book">Sticker Book</string>
     <string-array name="sort">
-        <item>Most Recent</item>
-        <item>Completed</item>
-        <item>Date</item>
+        <item>Date Created</item>
+        <item>Date Due</item>
+        <item>Difficulty</item>
     </string-array>
-    <string name="example">Finish design of new screens \nSunday, January 4 12:00pm</string>
+    <string-array name="difficulty">
+        <item>Quick</item>
+        <item>Normal</item>
+        <item>Long</item>
+    </string-array>
 </resources>

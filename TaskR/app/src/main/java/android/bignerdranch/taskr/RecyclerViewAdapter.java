@@ -7,12 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.util.Calendar;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<UUID> mIds = new ArrayList<>();
     private ArrayList<String> mTitles = new ArrayList<>();
@@ -49,18 +51,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.tasks_title.setText(mTitles.get(position));
         holder.tasks_date.setText(mDates.get(position));
+
+        //TODO: Kyle, right here is where upon checking the box it does stuff
+        holder.tasks_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    Task currentTask = MainActivity.getTask(mIds.get(position));
+                    currentTask.setCompleted(true);
+                    MainActivity.updateTask(mIds.get(position), currentTask);
+                    Toast.makeText(mContext, "Task changed!", Toast.LENGTH_SHORT).show();
+                    mContext.startActivity(new Intent(mContext, MainActivity.class)); // TODO: Needs to be fixed maybe
+
+                }
+            }
+        });
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                //first, we have to specify which task in the recycler view we are selecting via the task name
-//                Intent intent = TaskView.newIntent(mContext, mIds.get(position));
-//                mContext.startActivity(intent);
 
                 // TODO: TO BE REMOVED - Just a test
                 Toast.makeText(mContext, mTitles.get(position), Toast.LENGTH_SHORT).show();
@@ -144,15 +157,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     }
                 };
 
-//                mCheckBox.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Task currentTask = MainActivity.getTask(mIds.get(position));
-//                        currentTask.setCompleted(true);
-//                        MainActivity.updateTask(mIds.get(position), currentTask);
-//                    }
-//                });
-
                 mEdit.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View view) {
@@ -165,7 +169,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     }
                 });
 
-                mDelete.setOnClickListener(new View.OnClickListener() {
+                    mDelete.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View view) {
                         MainActivity.deleteTask(mIds.get(position));
@@ -184,6 +188,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        CheckBox tasks_checkbox;
         TextView tasks_title;
         TextView tasks_date;
         RelativeLayout parentLayout;
@@ -193,7 +198,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tasks_title = itemView.findViewById(R.id.task_title);
             tasks_date = itemView.findViewById(R.id.task_date);
             parentLayout = itemView.findViewById(R.id.parent_layout);
+            tasks_checkbox = itemView.findViewById(R.id.isCompleted);
 
         }
     }
+
 }
