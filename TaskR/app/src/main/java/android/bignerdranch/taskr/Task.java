@@ -1,6 +1,7 @@
 package android.bignerdranch.taskr;
 
 import java.util.UUID;
+import java.util.Calendar;
 
 public class Task{
 
@@ -9,6 +10,8 @@ public class Task{
     private String mDescription;
     private String mDateAndTimeDue;
     private boolean mCompleted;
+    private String mDifficulty;
+    private String mDateCreated;
 
     public Task(String taskName, String taskDescription, String taskDateAndTimeDue)
     {
@@ -16,7 +19,15 @@ public class Task{
         mName = taskName;
         mDescription = taskDescription;
         mDateAndTimeDue = taskDateAndTimeDue;
+        mDifficulty = "";
         mCompleted = false;     //starts off not completed
+
+        String currentMonth = Integer.toString(Calendar.getInstance().get(Calendar.MONTH) + 1);
+        String currentDay = Integer.toString(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        String currentYear = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+
+        String currentDate = currentMonth + "/" + currentDay + "/" + currentYear;
+        mDateCreated = currentDate;
     }
 
     public Task(UUID id)
@@ -56,5 +67,21 @@ public class Task{
 
     public void setCompleted(boolean completed) {
         mCompleted = completed;
+    }
+
+    public String getDifficulty() {
+        return mDifficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        mDifficulty = difficulty;
+    }
+
+    public String getDateCreated() {
+        return mDateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        mDateCreated = dateCreated;
     }
 }

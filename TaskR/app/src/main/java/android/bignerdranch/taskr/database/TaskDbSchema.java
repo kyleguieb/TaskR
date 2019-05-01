@@ -10,6 +10,8 @@ public class TaskDbSchema {
             public static final String DESCRIPTION = "description";
             public static final String DATE_AND_TIME_DUE = "dateAndTimeDue";
             public static final String COMPLETED = "completed";
+            public static final String DIFFICULTY = "difficulty";
+            public static final String DATE_CREATED = "dateCreated";
         }
     }
 }
