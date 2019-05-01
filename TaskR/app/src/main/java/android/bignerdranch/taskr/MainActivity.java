@@ -295,6 +295,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(TaskDbSchema.TaskTable.Cols.DESCRIPTION, task.getmDescription());
         values.put(TaskDbSchema.TaskTable.Cols.DATE_AND_TIME_DUE, task.getmDateAndTimeDue());
         values.put(TaskDbSchema.TaskTable.Cols.COMPLETED, task.isCompleted() ? 1 : 0);
+        values.put(TaskDbSchema.TaskTable.Cols.DIFFICULTY, task.getDifficulty());
         values.put(TaskDbSchema.TaskTable.Cols.DATE_CREATED, task.getDateCreated());
 
         return values;

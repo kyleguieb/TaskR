@@ -13,7 +13,7 @@ public class Task{
     private String mDifficulty;
     private String mDateCreated;
 
-    public Task(String taskName, String taskDescription, String taskDateAndTimeDue)
+    public Task(String taskName, String taskDescription, String taskDateAndTimeDue, String difficulty)
     {
         mId = UUID.randomUUID();
         mName = taskName;
