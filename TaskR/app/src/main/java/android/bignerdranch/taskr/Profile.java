@@ -191,7 +191,6 @@ public class Profile extends AppCompatActivity {
                 mTaskTitles.add(listOfTasks.get(i).getmName());
                 mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
             }
-            MainActivity.mIdsSizeForRewards = mIds.size();
         }
 
         initRecyclerView();

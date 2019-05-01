@@ -10,10 +10,19 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 public class Rewards extends AppCompatActivity {
+
+    //Probably really bad fix, but it works LOL. Explanation below at initTasks()
+    private ArrayList<UUID> mIds = new ArrayList<>();
+    private ArrayList<String> mTaskTitles = new ArrayList<>();
+    private ArrayList<String> mDatesNTimes = new ArrayList<>();
+    private ArrayList<Task> listOfTasks = MainActivity.getTasks();
+
 
     public static final double SCALE = 1.1; //Scale determines how fast to scale the xpToLevel.
     public static final int XP_BASE = 10;
@@ -79,10 +88,12 @@ public class Rewards extends AppCompatActivity {
         navigation.setSelectedItemId(R.id.navigation_rewards);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        initTasks();
+
         //instantly does all the exp checking instead once per screen refresh
         if (MainActivity.firstStart) //Refer to MainActivity.java line:58
         {
-            for(int j = 0; j < MainActivity.mIdsSizeForRewards; j++)
+            for(int j = 0; j < mIds.size(); j++)
             {
                 expCheck();
             }
@@ -90,7 +101,7 @@ public class Rewards extends AppCompatActivity {
 
         if (!MainActivity.firstStart)//Refer to MainActivity.java line:58
         {
-            MainActivity.globalTaskFinishedCounter = MainActivity.mIdsSizeForRewards;
+            MainActivity.globalTaskFinishedCounter = mIds.size();
             MainActivity.firstStart = true;
         }
 
@@ -118,6 +129,21 @@ public class Rewards extends AppCompatActivity {
             }
         }
     };
+
+    private void initTasks() {
+
+        //TODO: Should check to make sure it is working 100%
+
+
+        for(int i = 0; i < listOfTasks.size(); i++)
+        {
+            if (listOfTasks.get(i).isCompleted()) {
+                mIds.add(listOfTasks.get(i).getId());
+                mTaskTitles.add(listOfTasks.get(i).getmName());
+                mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+            }
+        }
+    }
 
     private void initUser()
     {
@@ -150,15 +176,15 @@ public class Rewards extends AppCompatActivity {
 
     public void expCheck()
     {
-        if (MainActivity.globalTaskFinishedCounter < MainActivity.mIdsSizeForRewards)
+        if (MainActivity.globalTaskFinishedCounter < mIds.size())
         {
             addExp();
 
             MainActivity.globalTaskFinishedCounter++;
         }
-        else if (MainActivity.globalTaskFinishedCounter > MainActivity.mIdsSizeForRewards)
+        else if (MainActivity.globalTaskFinishedCounter > mIds.size())
         {
-            while(MainActivity.globalTaskFinishedCounter > MainActivity.mIdsSizeForRewards)
+            while(MainActivity.globalTaskFinishedCounter > mIds.size())
             {
                 MainActivity.globalTaskFinishedCounter--;
             }

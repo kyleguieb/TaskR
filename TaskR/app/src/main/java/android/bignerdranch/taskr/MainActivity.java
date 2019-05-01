@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     public static int globalTaskFinishedCounter = 0; //counter for the tasks
     private static boolean turnOnUser = false; //honestly forgot why i needed it, but it's necessary
     public static boolean firstStart = false; //needed to ensure extra xp isn't granted on startup
-    public static int mIdsSizeForRewards = 0;
+//    public static int mIdsSizeForRewards = 0;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
