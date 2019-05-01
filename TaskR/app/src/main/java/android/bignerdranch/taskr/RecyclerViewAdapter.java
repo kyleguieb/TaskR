@@ -153,7 +153,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
                         String time = hourOfDay + ":" + minute;
-                        mTime.setText(time);
+                        //mTime.setText(String.format("%02d:%02d", hourOfDay, minute));
+                        int hour = hourOfDay % 12;
+                        if (hour == 0)
+                            hour = 12;
+                        mTime.setText(String.format("%02d:%02d %s", hour, minute,
+                                hourOfDay < 12 ? "AM" : "PM"));
                     }
                 };
 
