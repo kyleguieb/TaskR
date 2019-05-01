@@ -77,6 +77,8 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_profile);
+
+        //things that deal with exp
         initUser();
         xpToLevel =(int)Math.pow((XP_BASE * currentLevel), SCALE); //makes sure the xpToLevel is consistent every startup
 
@@ -90,6 +92,7 @@ public class Profile extends AppCompatActivity {
         mExperienceCounter.setText(currentExp + " / " + xpToLevel );
         mProgressBar.setProgress(currentExp);
         mProgressBar.setMax(xpToLevel);
+        //end
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.navigation_notifications);
@@ -188,6 +191,7 @@ public class Profile extends AppCompatActivity {
                 mTaskTitles.add(listOfTasks.get(i).getmName());
                 mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
             }
+            MainActivity.mIdsSizeForRewards = mIds.size();
         }
 
         initRecyclerView();
