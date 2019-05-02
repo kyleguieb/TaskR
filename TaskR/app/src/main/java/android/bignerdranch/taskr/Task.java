@@ -19,7 +19,7 @@ public class Task{
         mName = taskName;
         mDescription = taskDescription;
         mDateAndTimeDue = taskDateAndTimeDue;
-        mDifficulty = "";
+        mDifficulty = difficulty;
         mCompleted = false;     //starts off not completed
 
         String currentMonth = Integer.toString(Calendar.getInstance().get(Calendar.MONTH) + 1);
