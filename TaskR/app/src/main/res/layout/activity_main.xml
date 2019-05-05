@@ -20,7 +20,7 @@
         android:layout_marginBottom="8dp"
         android:background="@android:color/black"
         android:clickable="true"
-        app:backgroundTint="?attr/colorPrimary"
+        app:backgroundTint="?attr/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.949"

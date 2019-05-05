@@ -20,6 +20,22 @@
     <string name="completed">Completed</string>
     <string name="themeChange">Theme Change</string>
     <string name="book">Sticker Book</string>
+    <string-array name="stickers_id">
+        <item>@drawable/image_unlocked</item>
+        <item>@drawable/image_locked</item>
+        <item>@drawable/calendar_icon</item>
+        <item>@drawable/profile_icon</item>
+        <item>@drawable/ic_home_black_24dp</item>
+        <item>@drawable/check_icon</item>
+    </string-array>
+    <string-array name="sticker_titles">
+        <item>Psyduck</item>
+        <item>Locked</item>
+        <item>Locked</item>
+        <item>Locked</item>
+        <item>Locked</item>
+        <item>Locked</item>
+    </string-array>
     <string-array name="sort">
         <item>Date Created</item>
         <item>Date Due</item>
