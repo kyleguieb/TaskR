@@ -21,10 +21,16 @@ import java.util.UUID;
 
 public class Rewards extends AppCompatActivity {
 
+    final int QUICK_EXP = 10;
+    final int NORMAL_EXP = 20;
+    final int LONG_EXP = 30;
+
     //Probably really bad fix, but it works LOL. Explanation below at initTasks()
     private ArrayList<UUID> mIds = new ArrayList<>();
     private ArrayList<String> mTaskTitles = new ArrayList<>();
     private ArrayList<String> mDatesNTimes = new ArrayList<>();
+    private ArrayList<String> mDifficulties = new ArrayList<>();
+    private ArrayList<String> mDateCreated = new ArrayList<>();
     private ArrayList<Task> listOfTasks = MainActivity.getTasks();
 
     //Vars for grid
@@ -106,7 +112,7 @@ public class Rewards extends AppCompatActivity {
         {
             for(int j = 0; j < mIds.size(); j++)
             {
-                expCheck();
+                expCheck(listOfTasks.get(j).getDifficulty());
             }
         }
 
@@ -152,6 +158,8 @@ public class Rewards extends AppCompatActivity {
                 mIds.add(listOfTasks.get(i).getId());
                 mTaskTitles.add(listOfTasks.get(i).getmName());
                 mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+                mDifficulties.add(listOfTasks.get(i).getDifficulty());
+                mDateCreated.add(listOfTasks.get(i).getDateCreated());
             }
         }
     }
@@ -198,11 +206,11 @@ public class Rewards extends AppCompatActivity {
         }
     }
 
-    public void expCheck()
+    public void expCheck(String difficulty)
     {
         if (MainActivity.globalTaskFinishedCounter < mIds.size())
         {
-            addExp();
+            addExp(difficulty);
 
             MainActivity.globalTaskFinishedCounter++;
         }
@@ -215,29 +223,69 @@ public class Rewards extends AppCompatActivity {
         }
     }
 
-    /*
-   //TODO: whenever task diffictuly gets implemented
-   when a new task gets added to the "completed" array
-   check the difficulty
-   switch(difficulty)
-       if quick: while loop 5 times
-       if normal: while loop 10 times
-       if long: while loop 20 times
-   I think that should be it
-    */
+// OLD VERSION
+//    private void addExp()
+//    {
+//        //Generate random xp from 5-25
+//        int randomXP = random.nextInt(25-5) + 5;
+//        int xpLoop = 0; //just a counter for the while loop
+//        while(xpLoop < randomXP)// loops through giving xp
+//        {
+//            isLevelUp();
+//            mProgressBar.incrementProgressBy(1);
+//            currentExp +=1;
+//            mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+//            xpLoop++;
+//        }
+//        updateUser(currentLevel,currentExp);
+//    }
 
-    private void addExp()
+    private void addExp(String difficulty)
     {
-        //Generate random xp from 5-25
-        int randomXP = random.nextInt(25-5) + 5;
-        int xpLoop = 0; //just a counter for the while loop
-        while(xpLoop < randomXP)// loops through giving xp
+        int xpLoop = 0;
+        switch (difficulty)
         {
-            isLevelUp();
-            mProgressBar.incrementProgressBy(1);
-            currentExp +=1;
-            mExperienceCounter.setText(currentExp + " / " + xpToLevel );
-            xpLoop++;
+            case "Quick":
+                while (xpLoop < QUICK_EXP) //Possibly make into constant
+                {
+                    isLevelUp();
+                    mProgressBar.incrementProgressBy(1);
+                    currentExp +=1;
+                    mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                    xpLoop++;
+                }
+                break;
+            case "Normal":
+                while (xpLoop < NORMAL_EXP) //Possibly make into constant
+                {
+                    isLevelUp();
+                    mProgressBar.incrementProgressBy(1);
+                    currentExp +=1;
+                    mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                    xpLoop++;
+                }
+                break;
+            case "Long":
+                while (xpLoop < LONG_EXP) //Possibly make into constant
+                {
+                    isLevelUp();
+                    mProgressBar.incrementProgressBy(1);
+                    currentExp +=1;
+                    mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                    xpLoop++;
+                }
+                break;
+            default: //just in case, do something
+                int randomXP = random.nextInt(15-5) + 5;
+                while(xpLoop < randomXP)// loops through giving xp
+                 {
+                    isLevelUp();
+                    mProgressBar.incrementProgressBy(1);
+                    currentExp +=1;
+                    mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                    xpLoop++;
+                }
+                break;
         }
         updateUser(currentLevel,currentExp);
     }

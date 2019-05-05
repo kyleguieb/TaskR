@@ -25,6 +25,8 @@ public class Profile extends AppCompatActivity {
     private ArrayList<UUID> mIds = new ArrayList<>();
     private ArrayList<String> mTaskTitles = new ArrayList<>();
     private ArrayList<String> mDatesNTimes = new ArrayList<>();
+    private ArrayList<String> mDifficulties = new ArrayList<>();
+    private ArrayList<String> mDateCreated = new ArrayList<>();
     private ArrayList<Task> listOfTasks = MainActivity.getTasks();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -90,6 +92,8 @@ public class Profile extends AppCompatActivity {
                 mIds.add(listOfTasks.get(i).getId());
                 mTaskTitles.add(listOfTasks.get(i).getmName());
                 mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+                mDifficulties.add(listOfTasks.get(i).getDifficulty());
+                mDateCreated.add(listOfTasks.get(i).getDateCreated());
             }
         }
 
@@ -99,7 +103,7 @@ public class Profile extends AppCompatActivity {
 
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.RecyclerViewProfile);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mIds, mTaskTitles, mDatesNTimes);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mIds, mTaskTitles, mDatesNTimes); //needs to query mDifficulties and mDateCreated TODO
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
