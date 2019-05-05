@@ -187,11 +187,11 @@ public class MainActivity extends AppCompatActivity {
                     Button mCancel = (Button) mView.findViewById(R.id.cancelButton);
                     Button mSave = (Button) mView.findViewById(R.id.saveButton);
 
-//                    Spinner spinnerDifficulty = findViewById(R.id.filterHomeSpinner);
-//                    ArrayAdapter<CharSequence> adapterDifficulty = ArrayAdapter.createFromResource(mContext, R.array.difficulty, android.R.layout.simple_spinner_item);
-//                    adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                    spinnerDifficulty.setAdapter(adapterDifficulty);
-//                    //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for difficulty
+                    final Spinner spinnerDifficulty = mView.findViewById(R.id.spinnerDifficult);
+                    ArrayAdapter<CharSequence> adapterDifficulty = ArrayAdapter.createFromResource(mContext, R.array.difficulty, android.R.layout.simple_spinner_item);
+                    adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerDifficulty.setAdapter(adapterDifficulty);
+                    //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for difficulty
 
                     mBuilder.setView(mView);
                     final AlertDialog dialog = mBuilder.create();
@@ -260,7 +260,8 @@ public class MainActivity extends AppCompatActivity {
                             if (inputName.getText().toString().equals("") ||
                                 inputDate.getText().toString().equals("") ||
                                 inputTime.getText().toString().equals("") ||
-                                inputDescription.getText().toString().equals(""))
+                                inputDescription.getText().toString().equals("") ||
+                                spinnerDifficulty.getSelectedItem().toString().equals("Difficulty"))
                             {
                                 Toast.makeText(MainActivity.this, "Please fill in all fields!",
                                         Toast.LENGTH_SHORT).show();
@@ -268,11 +269,12 @@ public class MainActivity extends AppCompatActivity {
                             else {
                                 Task newTask = new Task(inputName.getText().toString(), inputDescription.getText().toString(),
                                         inputDate.getText().toString() + " at " +
-                                                inputTime.getText().toString());
+                                                inputTime.getText().toString(), spinnerDifficulty.getSelectedItem().toString());
+
                                 MainActivity.addTask(newTask);
 
-                                Toast.makeText(MainActivity.this, "New Task Successfully added!",
-                                        Toast.LENGTH_SHORT).show();  //for debugging purposes
+                                Toast.makeText(MainActivity.this, "New Task Added; date created is " + newTask.getDateCreated()
+                                        + " and difficulty is " + newTask.getDifficulty(), Toast.LENGTH_SHORT).show();  //for debugging purposes
 
                                 dialog.dismiss();
                                 recreate();
@@ -300,12 +302,14 @@ public class MainActivity extends AppCompatActivity {
         values.put(TaskDbSchema.TaskTable.Cols.DESCRIPTION, task.getmDescription());
         values.put(TaskDbSchema.TaskTable.Cols.DATE_AND_TIME_DUE, task.getmDateAndTimeDue());
         values.put(TaskDbSchema.TaskTable.Cols.COMPLETED, task.isCompleted() ? 1 : 0);
+        values.put(TaskDbSchema.TaskTable.Cols.DIFFICULTY, task.getDifficulty());
+        values.put(TaskDbSchema.TaskTable.Cols.DATE_CREATED, task.getDateCreated());
 
         return values;
     }
 
 
-    public static void addTask(Task c) {       //adds new task (should be in CreatingTask.java)
+    public static void addTask(Task c) {
         ContentValues values = getContentValues(c);
 
         mDatabase.insert(TaskDbSchema.TaskTable.NAME, null, values);

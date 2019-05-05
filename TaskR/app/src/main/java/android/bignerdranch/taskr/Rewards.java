@@ -1,12 +1,16 @@
 package android.bignerdranch.taskr;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,6 +27,10 @@ public class Rewards extends AppCompatActivity {
     private ArrayList<String> mDatesNTimes = new ArrayList<>();
     private ArrayList<Task> listOfTasks = MainActivity.getTasks();
 
+    //Vars for grid
+    private GridView book;
+    private GridViewAdapter gridAdapter;
+
 
     public static final double SCALE = 1.1; //Scale determines how fast to scale the xpToLevel.
     public static final int XP_BASE = 10;
@@ -35,7 +43,6 @@ public class Rewards extends AppCompatActivity {
 
     private static int currentExp;
     private static int currentLevel;
-
     private static int xpToLevel = XP_BASE;
 
     Random random = new Random(); //for xp granting
@@ -88,6 +95,10 @@ public class Rewards extends AppCompatActivity {
         navigation.setSelectedItemId(R.id.navigation_rewards);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        book = (GridView) findViewById(R.id.bookGrid);
+        gridAdapter = new GridViewAdapter(this, R.layout.sticker_layout, getData());
+        book.setAdapter(gridAdapter);
+
         initTasks();
 
         //instantly does all the exp checking instead once per screen refresh
@@ -113,7 +124,7 @@ public class Rewards extends AppCompatActivity {
 
     public void defineButtons() {
         findViewById(R.id.themeChange).setOnClickListener(buttonClickListener);
-        findViewById(R.id.stickerBook).setOnClickListener(buttonClickListener);
+        //findViewById(R.id.stickerBook).setOnClickListener(buttonClickListener);
     }
 
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
@@ -123,9 +134,9 @@ public class Rewards extends AppCompatActivity {
                 case R.id.themeChange:
                     startActivity(new Intent(Rewards.this, Themes.class));
                     break;
-                case R.id.stickerBook:
-                    startActivity(new Intent(Rewards.this, Stickers.class));
-                    break;
+//                case R.id.stickerBook:
+//                    startActivity(new Intent(Rewards.this, Stickers.class));
+//                    break;
             }
         }
     };
@@ -143,6 +154,19 @@ public class Rewards extends AppCompatActivity {
                 mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
             }
         }
+    }
+
+    private ArrayList<ImageItem> getData() {
+        final ArrayList<ImageItem> imageItems = new ArrayList<>();
+        TypedArray imgs = getResources().obtainTypedArray(R.array.stickers_id);
+        String[] itemsArray = getResources().getStringArray(R.array.sticker_titles);
+
+        for (int i = 0; i < imgs.length(); i++) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
+            imageItems.add(new ImageItem(bitmap, itemsArray[i]));
+        }
+
+        return imageItems;
     }
 
     private void initUser()

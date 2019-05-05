@@ -12,12 +12,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -104,6 +106,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Button mEdit = (Button) mView.findViewById(R.id.editButton);
                 Button mDelete = (Button) mView.findViewById(R.id.deleteButton);
 
+                final Spinner spinnerDifficulty = mView.findViewById(R.id.spinnerDifficultView);
+                ArrayAdapter<CharSequence> adapterDifficulty = ArrayAdapter.createFromResource(mContext, R.array.difficulty, android.R.layout.simple_spinner_item);
+                adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerDifficulty.setAdapter(adapterDifficulty);
+                //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for difficulty
+                int spinnerPosition = adapterDifficulty.getPosition(MainActivity.getTask(mIds.get(position)).getDifficulty());
+                spinnerDifficulty.setSelection(spinnerPosition);
+
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
@@ -165,12 +175,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 mEdit.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View view) {
-                        Task updatedTask = new Task(mTitle.getText().toString(), mDescription.getText().toString(),
-                                    mDate.getText().toString() + " at " + mTime.getText().toString());
-                        MainActivity.updateTask(mIds.get(position), updatedTask);
+                        if (!spinnerDifficulty.getSelectedItem().toString().equals("Difficulty")) {
+                            Task updatedTask = new Task(mTitle.getText().toString(), mDescription.getText().toString(),
+                                    mDate.getText().toString() + " at " + mTime.getText().toString(),
+                                    spinnerDifficulty.getSelectedItem().toString());
+                            MainActivity.updateTask(mIds.get(position), updatedTask);
 
-                        dialog.dismiss();
-                        mContext.startActivity(new Intent(mContext, MainActivity.class)); //TODO: Needs to be fixed maybe
+                            dialog.dismiss();
+                            mContext.startActivity(new Intent(mContext, MainActivity.class)); //TODO: Needs to be fixed maybe
+                        }
                     }
                 });
 
