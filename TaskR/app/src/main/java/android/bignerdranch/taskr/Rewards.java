@@ -207,6 +207,23 @@ public class Rewards extends AppCompatActivity {
         }
     }
 
+    public void expCheck(String difficulty)
+    {
+        if (MainActivity.globalTaskFinishedCounter < mIds.size())
+        {
+            addExp(difficulty);
+
+            MainActivity.globalTaskFinishedCounter++;
+        }
+        else if (MainActivity.globalTaskFinishedCounter > mIds.size())
+        {
+            while(MainActivity.globalTaskFinishedCounter > mIds.size())
+            {
+                MainActivity.globalTaskFinishedCounter--;
+            }
+        }
+    }
+
     private void addExp(String difficulty)
     {
         int xpLoop = 0;
@@ -234,7 +251,7 @@ public class Rewards extends AppCompatActivity {
                 xpLoop++;
             }
         }
-        else if(difficulty.equals("Long"))
+        else //if(difficulty.equals("Long"))
         {
             while (xpLoop < LONG_EXP) //Possibly make into constant
             {
@@ -245,25 +262,8 @@ public class Rewards extends AppCompatActivity {
                 xpLoop++;
             }
         }
-        updateUser(currentLevel,currentExp);
+        Rewards.updateUser(currentLevel,currentExp);
     } //end AddEXP
-
-    public void expCheck(String difficulty)
-    {
-        if (MainActivity.globalTaskFinishedCounter < mIds.size())
-        {
-            addExp(difficulty);
-
-            MainActivity.globalTaskFinishedCounter++;
-        }
-        else if (MainActivity.globalTaskFinishedCounter > mIds.size())
-        {
-            while(MainActivity.globalTaskFinishedCounter > mIds.size())
-            {
-                MainActivity.globalTaskFinishedCounter--;
-            }
-        }
-    }
 
 // OLD VERSION
 //    private void addExp()
