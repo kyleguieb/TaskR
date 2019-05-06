@@ -114,7 +114,7 @@ public class Rewards extends AppCompatActivity {
         //instantly does all the exp checking instead once per screen refresh
         if (MainActivity.firstStart) //Refer to MainActivity.java line:58
         {
-            for(int j = 0; j < mIds.size(); j++)
+            for(int j = listOfTasks.size() - 1; j > 0; j--)
             {
                 String difficulty = listOfTasks.get(j).getDifficulty();
                 expCheck(difficulty);
@@ -224,7 +224,6 @@ public class Rewards extends AppCompatActivity {
                 isLevelUp();
                 mProgressBar.incrementProgressBy(1);
                 currentExp +=1;
-                mExperienceCounter.setText(currentExp + " / " + xpToLevel );
                 xpLoop++;
             }
         }
@@ -234,8 +233,7 @@ public class Rewards extends AppCompatActivity {
             {
                 isLevelUp();
                 mProgressBar.incrementProgressBy(1);
-                currentExp +=1;
-                mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                currentExp++;
                 xpLoop++;
             }
         }
@@ -245,8 +243,7 @@ public class Rewards extends AppCompatActivity {
             {
                 isLevelUp();
                 mProgressBar.incrementProgressBy(1);
-                currentExp +=1;
-                mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                currentExp++;
                 xpLoop++;
             }
         }
@@ -256,11 +253,11 @@ public class Rewards extends AppCompatActivity {
             {
                 isLevelUp();
                 mProgressBar.incrementProgressBy(1);
-                currentExp +=1;
-                mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                currentExp++;
                 xpLoop++;
             }
         }
+        mExperienceCounter.setText(currentExp + " / " + xpToLevel );
         updateUser(currentLevel,currentExp);
     } //end AddEXP
 
