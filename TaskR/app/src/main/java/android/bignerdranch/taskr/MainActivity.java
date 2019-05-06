@@ -68,12 +68,15 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     return true;
                 case R.id.navigation_dashboard:
+                    finish();
                     startActivity(new Intent(MainActivity.this, CalendarActivity.class));
                     return true;
                 case R.id.navigation_notifications:
+                    finish();
                     startActivity(new Intent(MainActivity.this, Profile.class));
                     return true;
                 case R.id.navigation_rewards:
+                    finish();
                     startActivity(new Intent(MainActivity.this, Rewards.class));
                     return true;
             }

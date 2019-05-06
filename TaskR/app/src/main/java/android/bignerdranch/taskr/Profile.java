@@ -36,15 +36,18 @@ public class Profile extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    finish();
                     startActivity(new Intent(Profile.this, MainActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
+                    finish();
                     startActivity(new Intent(Profile.this, CalendarActivity.class));
                     return true;
                 case R.id.navigation_notifications:
                     //startActivity(new Intent(Profile.this, Profile.class));
                     return true;
                 case R.id.navigation_rewards:
+                    finish();
                     startActivity(new Intent(Profile.this, Rewards.class));
                     return true;
             }

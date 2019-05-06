@@ -22,16 +22,12 @@
     <string name="themeChange">Theme Change</string>
     <string name="book">Sticker Book</string>
     <string-array name="stickers_id">
-        <item>@drawable/computer</item>
-        <item>@drawable/image_unlocked</item>
         <item>@drawable/coolcrumpledpaper</item>
         <item>@drawable/computer_locked</item>
         <item>@drawable/image_locked</item>
         <item>@drawable/coolcrumpledpaperlocked</item>
     </string-array>
     <string-array name="sticker_titles">
-        <item>Computer</item>
-        <item>Psyduck</item>
         <item>Crumpled Paper</item>
         <item>Locked</item>
         <item>Locked</item>
