@@ -15,23 +15,24 @@
     <string name="levelReq">Level Required</string>
     <string name="set">Set</string>
     <string name="defaultTheme">Reset</string>
+    <string name="defaults">Default</string>
     <string name="rewardThemeName">Theme Name</string>
     <string name="title_reward">Rewards</string>
     <string name="completed">Completed</string>
     <string name="themeChange">Theme Change</string>
     <string name="book">Sticker Book</string>
     <string-array name="stickers_id">
+        <item>@drawable/computer</item>
         <item>@drawable/image_unlocked</item>
+        <item>@drawable/coolcrumpledpaper</item>
+        <item>@drawable/computer_locked</item>
         <item>@drawable/image_locked</item>
-        <item>@drawable/calendar_icon</item>
-        <item>@drawable/profile_icon</item>
-        <item>@drawable/ic_home_black_24dp</item>
-        <item>@drawable/check_icon</item>
+        <item>@drawable/coolcrumpledpaperlocked</item>
     </string-array>
     <string-array name="sticker_titles">
+        <item>Computer</item>
         <item>Psyduck</item>
-        <item>Locked</item>
-        <item>Locked</item>
+        <item>Crumpled Paper</item>
         <item>Locked</item>
         <item>Locked</item>
         <item>Locked</item>
