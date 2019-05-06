@@ -34,15 +34,18 @@ public class CalendarActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    finish();
                     startActivity(new Intent(CalendarActivity.this, MainActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
                     //startActivity(new Intent(Calendar.this, Calendar.class));
                     return true;
                 case R.id.navigation_notifications:
+                    finish();
                     startActivity(new Intent(CalendarActivity.this, Profile.class));
                     return true;
                 case R.id.navigation_rewards:
+                    finish();
                     startActivity(new Intent(CalendarActivity.this, Rewards.class));
                     return true;
             }

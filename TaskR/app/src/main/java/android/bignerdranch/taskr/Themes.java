@@ -29,15 +29,19 @@ public class Themes extends AppCompatActivity implements OnClickListener {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    finish();
                     startActivity(new Intent(Themes.this, MainActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
+                    finish();
                     startActivity(new Intent(Themes.this, CalendarActivity.class));
                     return true;
                 case R.id.navigation_notifications:
+                    finish();
                     startActivity(new Intent(Themes.this, Profile.class));
                     return true;
                 case R.id.navigation_rewards:
+                    finish();
                     startActivity(new Intent(Themes.this, Rewards.class));
                     return true;
             }

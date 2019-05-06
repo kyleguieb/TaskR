@@ -61,12 +61,15 @@ public class Rewards extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    finish();
                     startActivity(new Intent(Rewards.this, MainActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
+                    finish();
                     startActivity(new Intent(Rewards.this, CalendarActivity.class));
                     return true;
                 case R.id.navigation_notifications:
+                    finish();
                     startActivity(new Intent(Rewards.this, Profile.class));
                     return true;
                 case R.id.navigation_rewards:
@@ -111,9 +114,10 @@ public class Rewards extends AppCompatActivity {
         //instantly does all the exp checking instead once per screen refresh
         if (MainActivity.firstStart) //Refer to MainActivity.java line:58
         {
-            for(int j = 0; j < mIds.size(); j++)
+            for(int j = listOfTasks.size() - 1; j > 0; j--)
             {
-                expCheck(listOfTasks.get(j).getDifficulty());
+                String difficulty = listOfTasks.get(j).getDifficulty();
+                expCheck(difficulty);
             }
         }
 
@@ -139,6 +143,7 @@ public class Rewards extends AppCompatActivity {
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.themeChange:
+                    finish();
                     startActivity(new Intent(Rewards.this, Themes.class));
                     break;
 //                case R.id.stickerBook:
@@ -236,7 +241,6 @@ public class Rewards extends AppCompatActivity {
                 isLevelUp();
                 mProgressBar.incrementProgressBy(1);
                 currentExp +=1;
-                mExperienceCounter.setText(currentExp + " / " + xpToLevel );
                 xpLoop++;
             }
         }
@@ -246,23 +250,32 @@ public class Rewards extends AppCompatActivity {
             {
                 isLevelUp();
                 mProgressBar.incrementProgressBy(1);
-                currentExp +=1;
-                mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                currentExp++;
                 xpLoop++;
             }
         }
-        else //if(difficulty.equals("Long"))
+        else if(difficulty.equals("Long"))
         {
             while (xpLoop < LONG_EXP) //Possibly make into constant
             {
                 isLevelUp();
                 mProgressBar.incrementProgressBy(1);
-                currentExp +=1;
-                mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                currentExp++;
                 xpLoop++;
             }
         }
-        Rewards.updateUser(currentLevel,currentExp);
+        else
+        {
+            while (xpLoop < 2500) //if it fucks up...
+            {
+                isLevelUp();
+                mProgressBar.incrementProgressBy(1);
+                currentExp++;
+                xpLoop++;
+            }
+        }
+        mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+        updateUser(currentLevel,currentExp);
     } //end AddEXP
 
 // OLD VERSION
