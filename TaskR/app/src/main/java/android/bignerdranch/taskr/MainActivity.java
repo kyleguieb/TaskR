@@ -273,9 +273,6 @@ public class MainActivity extends AppCompatActivity {
 
                                 MainActivity.addTask(newTask);
 
-                                Toast.makeText(MainActivity.this, "New Task Added; date created is " + newTask.getDateCreated()
-                                        + " and difficulty is " + newTask.getDifficulty(), Toast.LENGTH_SHORT).show();  //for debugging purposes
-
                                 dialog.dismiss();
                                 recreate();
                             }

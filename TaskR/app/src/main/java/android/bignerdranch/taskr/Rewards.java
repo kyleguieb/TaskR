@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -206,6 +207,47 @@ public class Rewards extends AppCompatActivity {
         }
     }
 
+    private void addExp(String difficulty)
+    {
+        int xpLoop = 0;
+
+
+        if (difficulty.equals("Quick"))
+        {
+            while (xpLoop < QUICK_EXP) //Possibly make into constant
+            {
+                isLevelUp();
+                mProgressBar.incrementProgressBy(1);
+                currentExp +=1;
+                mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                xpLoop++;
+            }
+        }
+        else if(difficulty.equals("Normal"))
+        {
+            while (xpLoop < NORMAL_EXP) //Possibly make into constant
+            {
+                isLevelUp();
+                mProgressBar.incrementProgressBy(1);
+                currentExp +=1;
+                mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                xpLoop++;
+            }
+        }
+        else if(difficulty.equals("Long"))
+        {
+            while (xpLoop < LONG_EXP) //Possibly make into constant
+            {
+                isLevelUp();
+                mProgressBar.incrementProgressBy(1);
+                currentExp +=1;
+                mExperienceCounter.setText(currentExp + " / " + xpToLevel );
+                xpLoop++;
+            }
+        }
+        updateUser(currentLevel,currentExp);
+    } //end AddEXP
+
     public void expCheck(String difficulty)
     {
         if (MainActivity.globalTaskFinishedCounter < mIds.size())
@@ -239,55 +281,5 @@ public class Rewards extends AppCompatActivity {
 //        }
 //        updateUser(currentLevel,currentExp);
 //    }
-
-    private void addExp(String difficulty)
-    {
-        int xpLoop = 0;
-        switch (difficulty)
-        {
-            case "Quick":
-                while (xpLoop < QUICK_EXP) //Possibly make into constant
-                {
-                    isLevelUp();
-                    mProgressBar.incrementProgressBy(1);
-                    currentExp +=1;
-                    mExperienceCounter.setText(currentExp + " / " + xpToLevel );
-                    xpLoop++;
-                }
-                break;
-            case "Normal":
-                while (xpLoop < NORMAL_EXP) //Possibly make into constant
-                {
-                    isLevelUp();
-                    mProgressBar.incrementProgressBy(1);
-                    currentExp +=1;
-                    mExperienceCounter.setText(currentExp + " / " + xpToLevel );
-                    xpLoop++;
-                }
-                break;
-            case "Long":
-                while (xpLoop < LONG_EXP) //Possibly make into constant
-                {
-                    isLevelUp();
-                    mProgressBar.incrementProgressBy(1);
-                    currentExp +=1;
-                    mExperienceCounter.setText(currentExp + " / " + xpToLevel );
-                    xpLoop++;
-                }
-                break;
-            default: //just in case, do something
-                int randomXP = random.nextInt(15-5) + 5;
-                while(xpLoop < randomXP)// loops through giving xp
-                 {
-                    isLevelUp();
-                    mProgressBar.incrementProgressBy(1);
-                    currentExp +=1;
-                    mExperienceCounter.setText(currentExp + " / " + xpToLevel );
-                    xpLoop++;
-                }
-                break;
-        }
-        updateUser(currentLevel,currentExp);
-    }
 
 }

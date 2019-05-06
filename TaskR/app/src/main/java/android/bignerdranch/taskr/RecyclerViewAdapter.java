@@ -65,7 +65,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     Task currentTask = MainActivity.getTask(mIds.get(position));
                     currentTask.setCompleted(true);
                     MainActivity.updateTask(mIds.get(position), currentTask);
-                    Toast.makeText(mContext, "Task changed!", Toast.LENGTH_SHORT).show();
                     mContext.startActivity(new Intent(mContext, MainActivity.class)); // TODO: Needs to be fixed maybe
 
                 }
