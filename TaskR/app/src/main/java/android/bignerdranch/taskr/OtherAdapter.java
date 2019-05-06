@@ -22,15 +22,17 @@ public class OtherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private ArrayList<Integer> mPrimaryColors = new ArrayList<>();
     private ArrayList<Integer> mPrimaryDarkColors = new ArrayList<>();
     private ArrayList<Integer> mPrimaryAccentColors = new ArrayList<>();
+    private ArrayList<String> mDescriptions = new ArrayList<>();
     private Context mContext;
 
-    public OtherAdapter(Context context, ArrayList<String> themes, ArrayList<String> levels, ArrayList<Integer> primary, ArrayList<Integer> dark, ArrayList<Integer> accent) {
+    public OtherAdapter(Context context, ArrayList<String> themes, ArrayList<String> levels, ArrayList<Integer> primary, ArrayList<Integer> dark, ArrayList<Integer> accent, ArrayList<String> description) {
         mContext = context;
         mThemes = themes;
         mLevels = levels;
         mPrimaryColors = primary;
         mPrimaryDarkColors = dark;
         mPrimaryAccentColors = accent;
+        mDescriptions = description;
     }
 
     @NonNull
@@ -86,18 +88,21 @@ public class OtherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     final Integer rewardColorPrimary = mPrimaryColors.get(i);
                     final Integer rewardColorDark = mPrimaryDarkColors.get(i);
                     final Integer rewardColorAccent = mPrimaryAccentColors.get(i);
+                    final String rewardDescription = mDescriptions.get(i);
 
                     final TextView mTheme = (TextView) ((Activity)mContext).findViewById(R.id.rewardName);
                     final TextView mLevel = (TextView) ((Activity)mContext).findViewById(R.id.priceCost);
                     final ImageView mColorPrimary = (ImageView) ((Activity) mContext).findViewById(R.id.primary);
                     final ImageView mColorDark = (ImageView) ((Activity) mContext).findViewById(R.id.primarydark);
                     final ImageView mColorAccent = (ImageView) ((Activity) mContext).findViewById(R.id.acccent);
+                    final TextView mDescription = (TextView) ((Activity) mContext).findViewById(R.id.rewardDescription);
 
                     mTheme.setText(rewardName);
                     mLevel.setText(rewardLevel);
                     mColorPrimary.setBackgroundResource(rewardColorPrimary);
                     mColorDark.setBackgroundResource(rewardColorDark);
                     mColorAccent.setBackgroundResource(rewardColorAccent);
+                    mDescription.setText(rewardDescription);
 
                 }
             });
