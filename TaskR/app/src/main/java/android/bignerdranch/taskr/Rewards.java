@@ -233,7 +233,6 @@ public class Rewards extends AppCompatActivity {
     {
         int xpLoop = 0;
 
-
         if (difficulty.equals("Quick"))
         {
             while (xpLoop < QUICK_EXP) //Possibly make into constant
@@ -264,16 +263,7 @@ public class Rewards extends AppCompatActivity {
                 xpLoop++;
             }
         }
-        else
-        {
-            while (xpLoop < 2500) //if it fucks up...
-            {
-                isLevelUp();
-                mProgressBar.incrementProgressBy(1);
-                currentExp++;
-                xpLoop++;
-            }
-        }
+
         mExperienceCounter.setText(currentExp + " / " + xpToLevel );
         updateUser(currentLevel,currentExp);
     } //end AddEXP
