@@ -1,5 +1,6 @@
 package android.bignerdranch.taskr;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -189,9 +190,35 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     mDelete.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View view) {
-                        MainActivity.deleteTask(mIds.get(position));
-                        dialog.dismiss();
-                        mContext.startActivity(new Intent(mContext, MainActivity.class)); //TODO: Needs to be fixed maybe
+
+                        final AlertDialog.Builder mBuilder2 = new AlertDialog.Builder(mContext);
+                        LayoutInflater inflater2 = LayoutInflater.from(mContext);
+                        View mView2 = inflater2.inflate(R.layout.dialog_warning, null);
+
+                        Button mNo = (Button) mView2.findViewById(R.id.no);
+                        Button mYes = (Button) mView2.findViewById(R.id.yes);
+
+                        mBuilder2.setView(mView2);
+                        final AlertDialog dialog2 = mBuilder2.create();
+                        dialog2.show();
+
+                        mNo.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog2.dismiss();
+                            }
+                        });
+
+                        mYes.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                MainActivity.deleteTask(mIds.get(position));
+                                dialog2.dismiss();
+                                mContext.startActivity(new Intent(mContext, MainActivity.class)); //TODO: Needs to be fixed maybe
+                                //((Activity) mContext).recreate();
+                            }
+                        });
+
                     }
                 });
             }

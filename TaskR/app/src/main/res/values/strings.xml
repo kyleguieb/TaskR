@@ -21,6 +21,9 @@
     <string name="completed">Completed</string>
     <string name="themeChange">Theme Change</string>
     <string name="book">Sticker Book</string>
+    <string name="warning">Are you sure you want to delete task?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
     <string-array name="stickers_id">
         <item>@drawable/coolcrumpledpaper</item>
         <item>@drawable/computer_locked</item>
