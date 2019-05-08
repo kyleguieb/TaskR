@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private static Context mContext;
     private static SQLiteDatabase mDatabase;
     private static SQLiteDatabase mLevelAndExpDatabase;
+    private static TaskBaseHelper mTaskBaseInstance = null;
+    private static LevelAndExpBaseHelper mUserBaseInstance = null;
 
     // Vars for RecyclerView
     private ArrayList<UUID> mIds = new ArrayList<>();
@@ -84,6 +86,22 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public static TaskBaseHelper getInstanceTaskBase(Context context)
+    {
+        if (mTaskBaseInstance == null)
+            mTaskBaseInstance = new TaskBaseHelper(mContext);
+
+        return mTaskBaseInstance;
+    }
+
+    public static LevelAndExpBaseHelper getInstanceUserBase(Context context)
+    {
+        if (mUserBaseInstance == null)
+            mUserBaseInstance = new LevelAndExpBaseHelper(mContext);
+
+        return mUserBaseInstance;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,8 +109,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mContext = getApplicationContext();
-        mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();
-        mLevelAndExpDatabase = new LevelAndExpBaseHelper(mContext).getWritableDatabase();
+//        mDatabase = new TaskBaseHelper(mContext).getWritableDatabase();
+//        mLevelAndExpDatabase = new LevelAndExpBaseHelper(mContext).getWritableDatabase();
+
+        mDatabase = getInstanceTaskBase(mContext).getWritableDatabase();
+        mLevelAndExpDatabase = getInstanceUserBase(mContext).getWritableDatabase();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
