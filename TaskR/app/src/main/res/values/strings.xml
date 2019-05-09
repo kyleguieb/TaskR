@@ -28,11 +28,9 @@
         <item>@drawable/coolcrumpledpaper</item>
         <item>@drawable/computer_locked</item>
         <item>@drawable/image_locked</item>
-        <item>@drawable/coolcrumpledpaperlocked</item>
     </string-array>
     <string-array name="sticker_titles">
         <item>Crumpled Paper</item>
-        <item>Locked</item>
         <item>Locked</item>
         <item>Locked</item>
     </string-array>

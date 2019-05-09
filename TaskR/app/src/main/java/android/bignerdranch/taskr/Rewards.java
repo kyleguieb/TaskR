@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,9 +38,20 @@ public class Rewards extends AppCompatActivity {
     private ArrayList<Task> listOfTasks = MainActivity.getTasks();
 
     //Vars for grid
-    private GridView book;
-    private GridViewAdapter gridAdapter;
-
+//    private GridView book;
+//    private GridViewAdapter gridAdapter;
+    //Vars for stickers
+    public int global_sticker_counter = 0;
+    private ImageView mStickers;
+    private TextView mStickerNames;
+    private TextView mPages;
+    public int[] mImages = {
+            R.drawable.coolcrumpledpaper,
+            R.drawable.computer_locked,
+            R.drawable.image_locked
+    };
+    String name = (global_sticker_counter + 1) + " / " + mImages.length;
+    String[] stickerIDs;
 
     public static final double SCALE = 1.1; //Scale determines how fast to scale the xpToLevel.
     public static final int XP_BASE = 10;
@@ -86,7 +100,6 @@ public class Rewards extends AppCompatActivity {
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_rewards);
 
-
         initUser();
         xpToLevel =(int)Math.pow((XP_BASE * currentLevel), SCALE); //makes sure the xpToLevel is consistent every startup
 
@@ -105,9 +118,18 @@ public class Rewards extends AppCompatActivity {
         navigation.setSelectedItemId(R.id.navigation_rewards);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        book = (GridView) findViewById(R.id.bookGrid);
-        gridAdapter = new GridViewAdapter(this, R.layout.sticker_layout, getData());
-        book.setAdapter(gridAdapter);
+//        book = (GridView) findViewById(R.id.bookGrid);
+//        gridAdapter = new GridViewAdapter(this, R.layout.sticker_layout, getData());
+//        book.setAdapter(gridAdapter);
+
+        //Sticker book stuff
+        stickerIDs = getResources().getStringArray(R.array.sticker_titles);
+        mStickers = findViewById(R.id.sticker);
+        mStickers.setImageDrawable(getResources().getDrawable(mImages[global_sticker_counter]));
+        mPages =findViewById(R.id.pages);
+        mPages.setText(name);
+        mStickerNames = findViewById(R.id.sticker_Name);
+        mStickerNames.setText(stickerIDs[global_sticker_counter]);
 
         initTasks();
 
@@ -136,6 +158,9 @@ public class Rewards extends AppCompatActivity {
     public void defineButtons() {
         findViewById(R.id.themeChange).setOnClickListener(buttonClickListener);
         //findViewById(R.id.stickerBook).setOnClickListener(buttonClickListener);
+        findViewById(R.id.nextPage).setOnClickListener(buttonClickListener);
+        findViewById(R.id.previousPage).setOnClickListener(buttonClickListener);
+
     }
 
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
@@ -149,6 +174,30 @@ public class Rewards extends AppCompatActivity {
 //                case R.id.stickerBook:
 //                    startActivity(new Intent(Rewards.this, Stickers.class));
 //                    break;
+                case R.id.nextPage:
+                    if (global_sticker_counter == (mImages.length - 1)){
+                        global_sticker_counter = 0;
+                    } else {
+                        global_sticker_counter++;
+                    }
+                    mStickers.setImageDrawable(getResources().getDrawable(mImages[global_sticker_counter]));
+                    name = (global_sticker_counter + 1) + " / " + mImages.length;
+                    mPages.setText(name);
+                    mStickerNames.setText(stickerIDs[global_sticker_counter]);
+                    break;
+
+                case R.id.previousPage:
+                    if (global_sticker_counter == (mImages.length - 1)){
+                        global_sticker_counter = 0;
+                    } else {
+                        global_sticker_counter--;
+                    }
+                    mStickers.setImageDrawable(getResources().getDrawable(mImages[global_sticker_counter]));
+                    name = (global_sticker_counter + 1) + " / " + mImages.length;
+                    mPages.setText(name);
+                    mStickerNames.setText(stickerIDs[global_sticker_counter]);
+                    break;
+
             }
         }
     };
@@ -170,18 +219,19 @@ public class Rewards extends AppCompatActivity {
         }
     }
 
-    private ArrayList<ImageItem> getData() {
-        final ArrayList<ImageItem> imageItems = new ArrayList<>();
-        TypedArray imgs = getResources().obtainTypedArray(R.array.stickers_id);
-        String[] itemsArray = getResources().getStringArray(R.array.sticker_titles);
-
-        for (int i = 0; i < imgs.length(); i++) {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
-            imageItems.add(new ImageItem(bitmap, itemsArray[i]));
-        }
-
-        return imageItems;
-    }
+    //Used in GridView stuff
+//    private ArrayList<ImageItem> getData() {
+//        final ArrayList<ImageItem> imageItems = new ArrayList<>();
+//        TypedArray imgs = getResources().obtainTypedArray(R.array.stickers_id);
+//        String[] itemsArray = getResources().getStringArray(R.array.sticker_titles);
+//
+//        for (int i = 0; i < imgs.length(); i++) {
+//            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
+//            imageItems.add(new ImageItem(bitmap, itemsArray[i]));
+//        }
+//
+//        return imageItems;
+//    }
 
     private void initUser()
     {

@@ -104,21 +104,103 @@
         app:layout_constraintTop_toBottomOf="@+id/progressingBar"
         app:layout_constraintVertical_bias="0.545" />
 
-    <GridView
-        android:id="@+id/bookGrid"
-        android:layout_width="0dp"
+    <ImageButton
+        android:id="@+id/previousPage"
+        android:layout_width="53dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/colorPrimaryDark"
+        android:src="@drawable/left_arrow_icon"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.143"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sticker_Name"
+        app:layout_constraintVertical_bias="0.428" />
+
+    <ImageButton
+        android:id="@+id/nextPage"
+        android:layout_width="53dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="?attr/colorPrimaryDark"
+        android:src="@drawable/right_arrow_icon"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.859"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sticker_Name"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <TextView
+        android:id="@+id/pages"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:text="1/10"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toStartOf="@+id/nextPage"
+        app:layout_constraintStart_toEndOf="@+id/previousPage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.931" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="298dp"
+        android:layout_height="231dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/textview_border"
-        android:numColumns="3"
+        app:layout_constraintBottom_toTopOf="@+id/sticker_Name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/themeChange" />
 
+    <ImageView
+        android:id="@+id/sticker"
+        android:layout_width="290dp"
+        android:layout_height="225dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/sticker_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="28dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/pages"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
