@@ -24,15 +24,27 @@
     <string name="warning">Are you sure you want to delete task?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="ccp">Cool Crumpled Paper</string>
+    <string name="Psyduck">Psyduck</string>
+    <string name="Computer">Computer</string>
+    <string name="trash">Tilted Trash Can</string>
+    <string name="hydro">Homie Hydro Flask</string>
     <string-array name="stickers_id">
         <item>@drawable/coolcrumpledpaper</item>
         <item>@drawable/computer_locked</item>
         <item>@drawable/image_locked</item>
     </string-array>
     <string-array name="sticker_titles">
-        <item>Crumpled Paper</item>
         <item>Locked</item>
         <item>Locked</item>
+        <item>Locked</item>
+        <item>Locked</item>
+        <item>Locked</item>
+        <item>Cool Crumpled Paper</item>
+        <item>Homie Hydro Flask</item>
+        <item>Tilted Trash Can</item>
+        <item>Computer</item>
+        <item>Psyduck</item>
     </string-array>
     <string-array name="sort">
         <item>Date Created</item>

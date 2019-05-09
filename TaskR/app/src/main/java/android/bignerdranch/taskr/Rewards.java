@@ -46,9 +46,16 @@ public class Rewards extends AppCompatActivity {
     private TextView mStickerNames;
     private TextView mPages;
     public int[] mImages = {
-            R.drawable.coolcrumpledpaper,
+            R.drawable.coolcrumpledpaperlocked,
+            R.drawable.hydroflask_locked,
+            R.drawable.trashcan_locked,
             R.drawable.computer_locked,
-            R.drawable.image_locked
+            R.drawable.image_locked,
+            R.drawable.coolcrumpledpaper,
+            R.drawable.hydroflask,
+            R.drawable.trashcan,
+            R.drawable.computer,
+            R.drawable.image_unlocked
     };
     String name = (global_sticker_counter + 1) + " / " + mImages.length;
     String[] stickerIDs;
@@ -187,8 +194,8 @@ public class Rewards extends AppCompatActivity {
                     break;
 
                 case R.id.previousPage:
-                    if (global_sticker_counter == (mImages.length - 1)){
-                        global_sticker_counter = 0;
+                    if (global_sticker_counter == 0){
+                        global_sticker_counter = (mImages.length - 1);
                     } else {
                         global_sticker_counter--;
                     }
