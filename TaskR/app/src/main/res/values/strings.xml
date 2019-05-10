@@ -40,6 +40,8 @@
         <item>Locked</item>
         <item>Locked</item>
         <item>Locked</item>
+    </string-array>
+    <string-array name="stickerUnlockedTitles">
         <item>Cool Crumpled Paper</item>
         <item>Homie Hydro Flask</item>
         <item>Tilted Trash Can</item>

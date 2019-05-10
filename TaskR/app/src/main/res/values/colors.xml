@@ -10,6 +10,7 @@
     <color name="colorRed">#FF0000</color>
     <color name="colorBlue">#0000FF</color>
     <color name="colorEmptyList">#C4C3C9</color>
+    <color name="colorDisabled">#4c4c4c</color>
 
     <color name="mintColorPrimary">#76be2f</color>
     <color name="mintColorPrimaryDark">#289b23</color>

@@ -47,6 +47,17 @@ public class OtherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         final ViewHolder2 rewardHolder = (ViewHolder2) viewHolder;
 
+        if (Rewards.isUnlocked(mLevels.get(i))) {
+            rewardHolder.set_theme.setText(R.string.set);
+            rewardHolder.set_theme.setEnabled(true);
+            // Todo: Needs to be fixed
+            rewardHolder.set_theme.setBackgroundColor(R.attr.primaryDark);
+        } else {
+            rewardHolder.set_theme.setText(mLevels.get(i));
+            rewardHolder.set_theme.setEnabled(false);
+            rewardHolder.set_theme.setBackgroundColor(R.color.colorDisabled);
+        }
+
         rewardHolder.reward_theme.setText(mThemes.get(i));
         //rewardHolder.reward_level.setText(mLevels.get(i));
         rewardHolder.set_theme.setOnClickListener(new View.OnClickListener() {

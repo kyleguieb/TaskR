@@ -51,6 +51,9 @@ public class Rewards extends AppCompatActivity {
             R.drawable.trashcan_locked,
             R.drawable.computer_locked,
             R.drawable.image_locked,
+    };
+
+    public int[] mUnlocked = {
             R.drawable.coolcrumpledpaper,
             R.drawable.hydroflask,
             R.drawable.trashcan,
@@ -59,6 +62,9 @@ public class Rewards extends AppCompatActivity {
     };
     String name = (global_sticker_counter + 1) + " / " + mImages.length;
     String[] stickerIDs;
+    String[] stickerIDsUnlocked;
+    public String[] mStickerLevels = {"2","3","4","5","6"};
+
 
     public static final double SCALE = 1.1; //Scale determines how fast to scale the xpToLevel.
     public static final int XP_BASE = 10;
@@ -129,13 +135,22 @@ public class Rewards extends AppCompatActivity {
 //        gridAdapter = new GridViewAdapter(this, R.layout.sticker_layout, getData());
 //        book.setAdapter(gridAdapter);
 
+        // Todo: adjust sticker book for unlocking
         //Sticker book stuff
         stickerIDs = getResources().getStringArray(R.array.sticker_titles);
+        stickerIDsUnlocked = getResources().getStringArray(R.array.stickerUnlockedTitles);
+
         mStickers = findViewById(R.id.sticker);
-        mStickers.setImageDrawable(getResources().getDrawable(mImages[global_sticker_counter]));
         mPages =findViewById(R.id.pages);
-        mPages.setText(name);
         mStickerNames = findViewById(R.id.sticker_Name);
+
+        if (isUnlocked(mStickerLevels[0])) {
+            mImages[0] = mUnlocked[0];
+            stickerIDs[0] = stickerIDsUnlocked[0];
+        }
+
+        mStickers.setImageDrawable(getResources().getDrawable(mImages[global_sticker_counter]));
+        mPages.setText(name);
         mStickerNames.setText(stickerIDs[global_sticker_counter]);
 
         initTasks();
@@ -187,6 +202,12 @@ public class Rewards extends AppCompatActivity {
                     } else {
                         global_sticker_counter++;
                     }
+
+                    if (isUnlocked(mStickerLevels[global_sticker_counter])) {
+                        mImages[global_sticker_counter] = mUnlocked[global_sticker_counter];
+                        stickerIDs[global_sticker_counter] = stickerIDsUnlocked[global_sticker_counter];
+                    }
+
                     mStickers.setImageDrawable(getResources().getDrawable(mImages[global_sticker_counter]));
                     name = (global_sticker_counter + 1) + " / " + mImages.length;
                     mPages.setText(name);
@@ -199,6 +220,12 @@ public class Rewards extends AppCompatActivity {
                     } else {
                         global_sticker_counter--;
                     }
+
+                    if (isUnlocked(mStickerLevels[global_sticker_counter])) {
+                        mImages[global_sticker_counter] = mUnlocked[global_sticker_counter];
+                        stickerIDs[global_sticker_counter] = stickerIDsUnlocked[global_sticker_counter];
+                    }
+
                     mStickers.setImageDrawable(getResources().getDrawable(mImages[global_sticker_counter]));
                     name = (global_sticker_counter + 1) + " / " + mImages.length;
                     mPages.setText(name);
@@ -324,6 +351,10 @@ public class Rewards extends AppCompatActivity {
         mExperienceCounter.setText(currentExp + " / " + xpToLevel );
         updateUser(currentLevel,currentExp);
     } //end AddEXP
+
+    public static boolean isUnlocked(String levelReq) {
+        return currentLevel >= Integer.parseInt(levelReq);
+    }
 
 // OLD VERSION
 //    private void addExp()
