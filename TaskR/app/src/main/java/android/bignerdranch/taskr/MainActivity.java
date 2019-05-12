@@ -24,6 +24,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,7 +35,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.Calendar;
@@ -123,6 +131,24 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSort.setAdapter(adapter);
         //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for sorting
+
+        spinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sortOption = parent.getItemAtPosition(position).toString();
+
+                if (sortOption.equals("Date Created"))
+                    sortTasksByDateCreated();
+                else if (sortOption.equals("Date Due"))
+                    sortTasksByDateDue();
+                else if (sortOption.equals("Difficulty"))
+                    sortTasksByDifficulty();
+            }
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
 
         defineButtons();
 
@@ -241,7 +267,19 @@ public class MainActivity extends AppCompatActivity {
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             month = month + 1;
 
-                            String date = month + "/" + dayOfMonth + "/" + year;
+                            String monthString;
+
+                            String yearString = Integer.toString(year);
+
+                            if (month < 10)     //useful for sorting purposes later on
+                                monthString = "0" + Integer.toString(month);
+                            else
+                                monthString = Integer.toString(month);
+
+                            String dayOfMonthString = Integer.toString(dayOfMonth);
+
+
+                            String date = monthString + "/" + dayOfMonthString + "/" + yearString;
                             inputDate.setText(date);
 
                         }
@@ -329,6 +367,52 @@ public class MainActivity extends AppCompatActivity {
         return values;
     }
 
+    private void sortTasksByDateCreated()
+    {
+
+    }
+
+    private void sortTasksByDateDue()
+    {
+        Collections.sort(mDatesNTimes, new Comparator<String>() {
+            @Override
+            public int compare(String object1, String object2) {
+                return object1.compareTo(object2);
+            }
+        });
+
+        dateDueReinitializeRecyclerView();
+    }
+
+    private void dateDueReinitializeRecyclerView()  //reinitializes the recycler view if the tasks are resorted by dates due
+    {
+        //align mIds and mTaskTitles with mDateNTimes
+
+        ArrayList<UUID> newIdList = new ArrayList<>();
+        ArrayList<String> newTaskTitleList = new ArrayList<>();
+
+        for(int i = 0; i < mDatesNTimes.size(); i++)
+        {
+            for (int j = 0; j < mIds.size(); j++)
+            {
+                if (getTask(mIds.get(j)).getmDateAndTimeDue().equals(mDatesNTimes.get(i)))
+                {
+                    newIdList.add(mIds.get(j));
+                    newTaskTitleList.add(mTaskTitles.get(j));
+                }
+            }
+        }
+
+        mIds = newIdList;
+        mTaskTitles = newTaskTitleList;
+
+        initRecyclerView();
+    }
+
+    private void sortTasksByDifficulty()
+    {
+
+    }
 
     public static void addTask(Task c) {
         ContentValues values = getContentValues(c);
