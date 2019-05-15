@@ -49,9 +49,12 @@
         <item>Psyduck</item>
     </string-array>
     <string-array name="sort">
-        <item>Date Created</item>
+        <item>Sort By</item>
+        <item>Date Created - Oldest to Newest</item>
+        <item>Date Created - Newest to Oldest</item>
         <item>Date Due</item>
-        <item>Difficulty</item>
+        <item>Difficulty - Quick, Normal, Long</item>
+        <item>Difficulty - Long, Normal, Quick</item>
     </string-array>
     <string-array name="difficulty">
         <item>Difficulty</item>

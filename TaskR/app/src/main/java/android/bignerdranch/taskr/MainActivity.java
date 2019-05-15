@@ -27,6 +27,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -37,7 +38,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.Calendar;
@@ -54,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<UUID> mIds = new ArrayList<>();
     private ArrayList<String> mTaskTitles = new ArrayList<>();
     private ArrayList<String> mDatesNTimes = new ArrayList<>();
+    private ArrayList<String> mDatesCreated = new ArrayList<>();
+    private ArrayList<String> mDifficulties = new ArrayList<>();
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
 
@@ -127,6 +137,28 @@ public class MainActivity extends AppCompatActivity {
         spinnerSort.setAdapter(adapter);
         //spinner.setOnItemSelectedListener(this); //TODO: Needs to be finished for sorting
 
+        spinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sortOption = parent.getItemAtPosition(position).toString();
+
+                if (sortOption.equals("Date Created - Newest to Oldest"))
+                    sortTasksByDateCreatedNewestToOldest();
+                else if (sortOption.equals("Date Created - Oldest to Newest"))
+                    sortTasksByDateCreatedOldestToNewest();
+                else if (sortOption.equals("Date Due"))
+                    sortTasksByDateDue();
+                else if (sortOption.equals("Difficulty - Quick, Normal, Long"))
+                    sortTasksByDifficultyQuickNormalLong();
+                else if (sortOption.equals("Difficulty - Long, Normal, Quick"))
+                    sortTasksByDifficultyLongNormalQuick();
+            }
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
+
         defineButtons();
 
         initTasks();
@@ -175,6 +207,8 @@ public class MainActivity extends AppCompatActivity {
                 mIds.add(listOfTasks.get(i).getId());
                 mTaskTitles.add(listOfTasks.get(i).getmName());
                 mDatesNTimes.add(listOfTasks.get(i).getmDateAndTimeDue());
+                mDatesCreated.add(listOfTasks.get(i).getDateCreated());
+                mDifficulties.add(listOfTasks.get(i).getDifficulty());
             }
         }
 
@@ -244,7 +278,19 @@ public class MainActivity extends AppCompatActivity {
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             month = month + 1;
 
-                            String date = month + "/" + dayOfMonth + "/" + year;
+                            String monthString;
+
+                            String yearString = Integer.toString(year);
+
+                            if (month < 10)     //useful for sorting purposes later on
+                                monthString = "0" + Integer.toString(month);
+                            else
+                                monthString = Integer.toString(month);
+
+                            String dayOfMonthString = Integer.toString(dayOfMonth);
+
+
+                            String date = monthString + "/" + dayOfMonthString + "/" + yearString;
                             inputDate.setText(date);
 
                         }
@@ -332,6 +378,177 @@ public class MainActivity extends AppCompatActivity {
         return values;
     }
 
+    private void sortTasksByDateCreatedOldestToNewest()
+    {
+        Collections.sort(mDatesCreated, new Comparator<String>() {
+            @Override
+            public int compare(String object1, String object2) {
+                return object1.compareTo(object2);
+            }
+        });
+
+        dateCreatedReinitializeRecyclerView();
+    }
+
+    private void sortTasksByDateCreatedNewestToOldest()
+    {
+        Collections.sort(mDatesCreated, new Comparator<String>() {
+            @Override
+            public int compare(String object1, String object2) {
+                return object2.compareTo(object1);
+            }
+        });
+
+        dateCreatedReinitializeRecyclerView();
+    }
+
+    private void dateCreatedReinitializeRecyclerView()
+    {
+        ArrayList<UUID> newIdList = new ArrayList<>();
+        ArrayList<String> newTaskTitleList = new ArrayList<>();
+        ArrayList<String> newDatesNTimesList = new ArrayList<>();
+        ArrayList<String> newDifficultiesList = new ArrayList<>();
+
+        //to prevent double adding if multiple tasks were created on the same day
+        ArrayList<Boolean> addedArray = new ArrayList<>();
+
+        for (int i = 0; i < mIds.size(); i++)
+            addedArray.add(false);
+
+        for (int i = 0; i < mDatesCreated.size(); i++)
+        {
+            for (int j = 0; j < mIds.size(); j++)
+            {
+                if (!addedArray.get(j) && getTask(mIds.get(j)).getDateCreated().equals(mDatesCreated.get(i)))
+                {
+                    newIdList.add(mIds.get(j));
+                    newTaskTitleList.add(mTaskTitles.get(j));
+                    newDatesNTimesList.add(mDatesNTimes.get(j));
+                    newDifficultiesList.add(mDifficulties.get(j));
+                    addedArray.set(j, true);
+                }
+            }
+        }
+
+        mIds = newIdList;
+        mTaskTitles = newTaskTitleList;
+        mDatesNTimes = newDatesNTimesList;
+        mDifficulties = newDifficultiesList;
+
+        initRecyclerView();
+    }
+
+    private void sortTasksByDateDue()
+    {
+        Collections.sort(mDatesNTimes, new Comparator<String>() {
+            @Override
+            public int compare(String object1, String object2) {
+                return object1.compareTo(object2);
+            }
+        });
+
+        dateDueReinitializeRecyclerView();
+    }
+
+    private void dateDueReinitializeRecyclerView()  //reinitializes the recycler view if the tasks are resorted by dates due
+    {
+        //align mIds, mTaskTitles, and mDatesCreated with mDateNTimes
+
+        ArrayList<UUID> newIdList = new ArrayList<>();
+        ArrayList<String> newTaskTitleList = new ArrayList<>();
+        ArrayList<String> newDateCreatedList = new ArrayList<>();
+        ArrayList<String> newDifficultiesList = new ArrayList<>();
+
+        //to prevent double adding if multiple tasks were created on the same day
+        ArrayList<Boolean> addedArray = new ArrayList<>();
+
+        for (int i = 0; i < mIds.size(); i++)
+            addedArray.add(false);
+
+        for(int i = 0; i < mDatesNTimes.size(); i++)
+        {
+            for (int j = 0; j < mIds.size(); j++)
+            {
+                if (!addedArray.get(j) && getTask(mIds.get(j)).getmDateAndTimeDue().equals(mDatesNTimes.get(i)))
+                {
+                    newIdList.add(mIds.get(j));
+                    newTaskTitleList.add(mTaskTitles.get(j));
+                    newDateCreatedList.add(mDatesCreated.get(j));
+                    newDifficultiesList.add(mDifficulties.get(j));
+                    addedArray.set(j, true);
+                }
+            }
+        }
+
+        mIds = newIdList;
+        mTaskTitles = newTaskTitleList;
+        mDatesCreated = newDateCreatedList;
+        mDifficulties = newDifficultiesList;
+
+        initRecyclerView();
+    }
+
+    private void sortTasksByDifficultyQuickNormalLong()
+    {
+        Collections.sort(mDifficulties, new Comparator<String>() {
+            @Override
+            public int compare(String object1, String object2) {
+                return object2.compareTo(object1);
+            }
+        });
+
+        difficultyReinitializeRecyclerView();
+    }
+
+    private void sortTasksByDifficultyLongNormalQuick()
+    {
+        Collections.sort(mDifficulties, new Comparator<String>() {
+            @Override
+            public int compare(String object1, String object2) {
+                return object1.compareTo(object2);
+            }
+        });
+
+        difficultyReinitializeRecyclerView();
+    }
+
+    private void difficultyReinitializeRecyclerView()
+    {
+        //align mIds, mTaskTitles, and mDatesCreated with mDateNTimes
+
+        ArrayList<UUID> newIdList = new ArrayList<>();
+        ArrayList<String> newTaskTitleList = new ArrayList<>();
+        ArrayList<String> newDateCreatedList = new ArrayList<>();
+        ArrayList<String> newDatesNTimesList = new ArrayList<>();
+
+        //to prevent double adding if multiple tasks were created on the same day
+        ArrayList<Boolean> addedArray = new ArrayList<>();
+
+        for (int i = 0; i < mIds.size(); i++)
+            addedArray.add(false);
+
+        for(int i = 0; i < mDatesNTimes.size(); i++)
+        {
+            for (int j = 0; j < mIds.size(); j++)
+            {
+                if (!addedArray.get(j) && getTask(mIds.get(j)).getDifficulty().equals(mDifficulties.get(i)))
+                {
+                    newIdList.add(mIds.get(j));
+                    newTaskTitleList.add(mTaskTitles.get(j));
+                    newDateCreatedList.add(mDatesCreated.get(j));
+                    newDatesNTimesList.add(mDatesNTimes.get(j));
+                    addedArray.set(j, true);
+                }
+            }
+        }
+
+        mIds = newIdList;
+        mTaskTitles = newTaskTitleList;
+        mDatesCreated = newDateCreatedList;
+        mDatesNTimes = newDatesNTimesList;
+
+        initRecyclerView();
+    }
 
     public static void addTask(Task c) {
         ContentValues values = getContentValues(c);

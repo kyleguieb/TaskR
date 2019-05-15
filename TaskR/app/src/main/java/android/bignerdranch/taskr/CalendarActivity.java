@@ -84,7 +84,21 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
 
-                String date = (month + 1) + "/" + dayOfMonth + "/" + year;
+                month = month + 1;
+
+                String monthString;
+
+                String yearString = Integer.toString(year);
+
+                if (month < 10)     //useful for sorting purposes later on
+                    monthString = "0" + Integer.toString(month);
+                else
+                    monthString = Integer.toString(month);
+
+                String dayOfMonthString = Integer.toString(dayOfMonth);
+
+
+                String date = monthString + "/" + dayOfMonthString + "/" + yearString;
 
                 mIds.clear();
                 mTaskTitles.clear();
