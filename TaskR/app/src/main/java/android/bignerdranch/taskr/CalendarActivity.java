@@ -25,7 +25,7 @@ public class CalendarActivity extends AppCompatActivity {
     private String currentDay = Integer.toString(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
     private String currentYear = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
 
-    private String currentDate = currentMonth + "/" + currentDay + "/" + currentYear;
+    private String currentDate;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -55,6 +55,12 @@ public class CalendarActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (Integer.parseInt(currentMonth) < 10)
+            currentMonth = "0" + currentMonth;
+
+        currentDate= currentMonth + "/" + currentDay + "/" + currentYear;
+
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_calendar);
@@ -90,7 +96,7 @@ public class CalendarActivity extends AppCompatActivity {
 
                 String yearString = Integer.toString(year);
 
-                if (month < 10)     //useful for sorting purposes later on
+                if (month < 10)
                     monthString = "0" + Integer.toString(month);
                 else
                     monthString = Integer.toString(month);
