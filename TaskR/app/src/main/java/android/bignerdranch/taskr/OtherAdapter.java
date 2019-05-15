@@ -50,8 +50,6 @@ public class OtherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (Rewards.isUnlocked(mLevels.get(i))) {
             rewardHolder.set_theme.setText(R.string.set);
             rewardHolder.set_theme.setEnabled(true);
-            // Todo: Needs to be fixed
-            rewardHolder.set_theme.setBackgroundColor(R.attr.primaryDark);
         } else {
             rewardHolder.set_theme.setText(mLevels.get(i));
             rewardHolder.set_theme.setEnabled(false);
@@ -69,22 +67,31 @@ public class OtherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         Utils.changeToTheme((Activity)mContext, Utils.THEME_DEFAULT);
                         break;
                     case 1:
-                        Utils.changeToTheme((Activity)mContext, Utils.THEME_LILAC);
-                        break;
-                    case 2:
-                        Utils.changeToTheme((Activity)mContext, Utils.THEME_MINT);
-                        break;
-                    case 3:
                         Utils.changeToTheme((Activity)mContext, Utils.THEME_ECHO);
                         break;
-                    case 4:
+                    case 2:
                         Utils.changeToTheme((Activity)mContext, Utils.THEME_SNS);
                         break;
-                    case 5:
+                    case 3:
                         Utils.changeToTheme((Activity)mContext, Utils.THEME_QP);
                         break;
-                    case 6:
+                    case 4:
                         Utils.changeToTheme((Activity)mContext, Utils.THEME_WISHCRAFT);
+                        break;
+                    case 5:
+                        Utils.changeToTheme((Activity)mContext, Utils.THEME_LILAC);
+                        break;
+                    case 6:
+                        Utils.changeToTheme((Activity)mContext, Utils.THEME_MINT);
+                        break;
+                    case 7:
+                        Utils.changeToTheme((Activity)mContext, Utils.THEME_ICEBREAKER);
+                        break;
+                    case 8:
+                        Utils.changeToTheme((Activity)mContext, Utils.THEME_GO);
+                        break;
+                    case 9:
+                        Utils.changeToTheme((Activity)mContext, Utils.THEME_COFFEE);
                         break;
                 }
             }

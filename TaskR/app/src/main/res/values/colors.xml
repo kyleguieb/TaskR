@@ -36,5 +36,21 @@
     <color name="WCColorPrimaryDark">#b92051</color>
     <color name="WCColorAccent">#f7d7e1</color>
 
+    <color name="icebreakerColorPrimary">#90b2ec</color>
+    <color name="icebreakerColorPrimaryDark">#4e7ccc</color>
+    <color name="icebreakerColorAccent">#c6d8f6</color>
+
+    <color name="primarysColorPrimary">#fdbd04</color>
+    <color name="primarysColorPrimaryDark">#4285f4</color>
+    <color name="primarysColorAccent">#ea4335</color>
+
+    <color name="GOColorPrimary">#fdbd04</color>
+    <color name="GOColorPrimaryDark">#ac6e04</color>
+    <color name="GOColorAccent">#396994</color>
+
+    <color name="CoffeeColorPrimary">#865b33</color>
+    <color name="CoffeeColorPrimaryDark">#4d301b</color>
+    <color name="CoffeeColorAccent">#d9bd8e</color>
+
 
 </resources>

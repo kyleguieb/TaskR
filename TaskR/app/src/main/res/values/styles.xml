@@ -50,4 +50,25 @@
         <item name="colorAccent">@color/WCColorAccent</item>
     </style>
 
+    <style name="AppThemeIcebreaker" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/icebreakerColorPrimary</item>
+        <item name="colorPrimaryDark">@color/icebreakerColorPrimaryDark</item>
+        <item name="colorAccent">@color/icebreakerColorAccent</item>
+    </style>
+
+    <style name="AppThemeGoodOpportunity" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/GOColorPrimary</item>
+        <item name="colorPrimaryDark">@color/GOColorPrimaryDark</item>
+        <item name="colorAccent">@color/GOColorAccent</item>
+    </style>
+
+    <style name="AppThemeCoffee" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/CoffeeColorPrimary</item>
+        <item name="colorPrimaryDark">@color/CoffeeColorPrimaryDark</item>
+        <item name="colorAccent">@color/CoffeeColorAccent</item>
+    </style>
+
 </resources>

@@ -1,6 +1,8 @@
 package android.bignerdranch.taskr;
 
-import android.app.AlertDialog;
+import android.app.Activity;
+import android.content.res.TypedArray;
+import android.support.v7.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.bignerdranch.taskr.database.LevelAndExpBaseHelper;
@@ -21,6 +23,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -200,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.NewTask_floatingActionButton:
 
                     final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
-                    LayoutInflater inflater = LayoutInflater.from(mContext);
+                    LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
                     View mView = inflater.inflate(R.layout.dialog_create, null);
 
                     final EditText inputName = (EditText) mView.findViewById(R.id.newTitle);
