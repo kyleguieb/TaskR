@@ -58,6 +58,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.tasks_title.setText(mTitles.get(position));
         holder.tasks_date.setText(mDates.get(position));
 
+        if (MainActivity.getTask(mIds.get(position)).isCompleted()) {
+            //holder.tasks_checkbox.setVisibility(View.INVISIBLE);
+            holder.tasks_checkbox.setChecked(true);
+            //holder.tasks_checkbox.setEnabled(false);
+            holder.tasks_checkbox.setClickable(false);
+        }
+
         //TODO: Kyle, right here is where upon checking the box it does stuff
         holder.tasks_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -67,7 +74,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     currentTask.setCompleted(true);
                     MainActivity.updateTask(mIds.get(position), currentTask);
                     mContext.startActivity(new Intent(mContext, MainActivity.class)); // TODO: Needs to be fixed maybe
-
                 }
             }
         });
